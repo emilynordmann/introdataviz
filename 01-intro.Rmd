@@ -1,0 +1,151 @@
+# Introduction
+
+Use of the programming language R for data processing and statistical analysis by researchers is increasingly common with a GET THE STATS FROM THAT THING I SAW ABOUT R ON TWITTER increase since XXXX (REF). In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means (REF HERE ABOUT BAR CHARTS).
+
+Yet, the benefits of using R are hindered by its notoriously steep learning curve (REF - is there a ref?) and that that only a minority of psychology programmes currently teach programming skills (REF, PsyTeachR ref) with the majority of both undergraduate and postgraduate courses using proprietary point-and-click software such as SPSS or Microsoft Excel.
+
+In this paper we aim to provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience using R. We detail the rationale for using R for data visualisation, introduce the "grammar of graphics" that underlies data visualisation using the `ggplot` package, and provide a tutorial that walks the reader through how to replicate plots that are commonly available in point-and-click software such as histograms and boxplots, as well as showing how the code for these "basic" plots can be easily extended to less commonly available options such as violin-boxplots, raincloud plots, and heat-maps.
+
+## Why R for data visualisation?
+
+Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software - reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis (REFs) and we will not repeat these arguments here. However, there is an additional selfish benefit to reproducibility that is less frequently acknowledge compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.
+
+In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting to novice users of R, if one can survive the initial learning curve, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has led to news outlets such as the BBC (BBC Visual and Data Journalism, 2019) and the New York Times (Bertini & Sefaner, 2015) to adopt R as their preferred data visualisation tool.
+
+## A layered grammar of graphics
+
+There are multiple approaches to data visualisation in R; in this paper we will be using the popular package[^1] `ggplot2` (REF) which is part of the larger `tidyverse`[^2] collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics (Wilkinson, Anand, & Grossman, 2005) is a standardised way to describe the components of a graphic. `ggplot2` uses a layered grammar of graphics (Whickham, 2010), in which plots are built up in a series of layers. This approach may be familiar to users of MATLAB but can be unintuitive to those used to creating plots in Excel or SPSS.
+
+[^1]: The power of R is that it is extendable and open source - put simply, if a function doesn't exist or doesn't work very well, anyone can create a new **package** that contains data and code to allow you to perform new tasks. You may find it helpful to think of packages as additional apps that you need to download separately to extend the functionality beyond what comes with "Base R".
+
+[^2]: Because there are so many different ways to achieve the same thing in R, when Googling for help with R, it is useful to append the name of the package or approach you are using, e.g., "how to make a histogram ggplot2".
+
+Figure 1 displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a `geom`) that is desired for these variables is specified (layer 3) - in this case `geom_point()` is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).
+
+```{r layers, echo = FALSE, message = FALSE, fig.cap="Figure 1: Evolution of a layered plot"}
+library(patchwork)
+library(tidyverse)
+a <- ggplot() + labs(subtitle = "Layer 1")
+b <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width))+ labs(subtitle = "Layer 2")
+c <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + geom_point()+ labs(subtitle = "Layer 3")
+d <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")+ labs(subtitle = "Layer 4")
+e <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  labs(x = "My X Variable", y = "My Y Variable")+ labs(subtitle = "Layer 5")
+f <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  labs(x = "My X Variable", y = "My Y Variable", subtitle = "Layer 6")+
+  theme_minimal()
+a + b + c + d + e + f + plot_layout(nrow = 2)
+```
+
+Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or, one could remove the first geom to only visualise the line of best fit, simply by removing the layer that draws the data points (see Figure 2). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
+
+```{r remove-layer, echo =FALSE, fig.cap="Figure 2: Scatterplot with removed layer"}
+iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
+  geom_smooth(method = "lm") +
+  labs(x = "My X Variable", y = "My Y Variable")+
+  theme_minimal()
+```
+
+## Tidy data
+
+The final conceptual issue we will address is the use of tidy data. Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design Stroop test experiment. There are 6 variables:
+
+-   Participant ID
+
+-   Age
+
+-   A between-subject IV: Language group (monolingual/bilingual)
+
+-   A within-subject IV: Congruency (congruent/incongruent)
+
+-   Dependent variable 1: Reaction time (ms)
+
+-   Dependent variable 2: Accuracy
+
+In wide-format data, this would typically be formatted as in Table 1 where each participant's aggregated [^3] reaction time and accuracy for each level of the within-subject variable is split across multiple columns.
+
+[^3]: In this tutorial we have chosen to gloss over the data wrangling that must occur to get from the raw data to these aggregated values. This type of wrangling requires a more extensive tutorial than this paper can provide but, more importantly, it is still possible to use R for data visualisation having done these preparatory steps using existing workflows that newcomers to R are comfortable with. The aim of this paper is to bypass these initial, often problematic steps and focus on tangible outputs that may then encourage further mastery of reproducible methods.
+
+```{r wide-data, echo=FALSE}
+dat <- faux::sim_design(
+ within= list(
+   dv = c("RT", "acc"),
+   type = c("cong", "incon")),
+ between = list(language = c("mono", "bi")),
+ n = list(mono = 55, bi = 45),
+ mu = data.frame(
+   RT_cong = c(350, 360),
+   RT_incon = c(600, 450),
+   acc_cong = c(.95, .96),
+   acc_incon = c(.86, 87),
+   row.names = c("mono", "bi")
+ ),
+ sd = c(50, 50, .05, .05, 50,  50, .05, .05),
+ r = c(.5, .6, .3, .4, .5, .6),
+ plot = F
+) %>%
+  mutate(age = sample(18:60, size = 100, replace = T)) %>%
+  select(id, age, everything())
+
+head(dat)%>%
+  knitr::kable(digits = 2, align = "c")
+
+```
+
+This format is popular because it is intuitive to read and easy to enter data when all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single cell, for example in Table 1, RT_cong contains information related to both a DV and the level of an IV. Whickham (2014) provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure but for the purposes of this tutorial there are three rules a dataset must follow to be tidy:
+
+1.  Each variable forms a column
+
+2.  Each observation forms a row
+
+3.  Each type of observational unit forms a table
+
+Moving from using wide-form to tidy datasets can require a conceptual shift on the part of the researcher and one that can only come with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table 2 and 3. Because the two dependent variables are different types of observational unit, they are split into two tables. Additionally, each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). The benefits and flexibility of this format will become apparent as we progress through the tutorial.
+
+[^4]: That is to say, if you are new to R, know that many before you have struggled with this conceptual shift - it does get better, it just takes time and your preferred choice of cursing.
+
+```{r tidying, echo = FALSE}
+rt_dat <- dat %>%
+  pivot_longer(names_to = "Condition", 
+               values_to = "score",
+               cols = "RT_cong":"acc_incon") %>%
+  separate(Condition, into = c("DV", "Conds"), sep = "_") %>%
+  filter(DV == "RT") %>%
+  select(-DV) %>%
+  rename(RT = score)
+
+acc_dat <- dat %>%
+  pivot_longer(names_to = "Condition", 
+               values_to = "score",
+               cols = "RT_cong":"acc_incon") %>%
+  separate(Condition, into = c("DV", "Conds"), sep = "_") %>%
+  filter(DV == "acc") %>%
+  select(-DV) %>%
+  rename(acc = score)
+```
+
+```{r rt-table,echo = FALSE, fig.cap="Table 2: Tidy RT data"}
+head(rt_dat)%>%
+  knitr::kable(digits = 2, align = "c")
+```
+
+```{r acc-table, echo = FALSE, fig.cap="Table 3: Tidy accuracy data"}
+head(acc_dat)%>%
+  knitr::kable(digits = 2, align = "c")
+```
+
+## References
+
+So I don't know how to do references in Markdown so I'mma just dump them all here and hope that someone else deals with them :)
+
+[A Layered Grammar of Graphics (byrneslab.net)](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)
+
+[How the BBC Visual and Data Journalism team works with graphics in R \| by BBC Visual and Data Journalism \| BBC Visual and Data Journalism \| Medium](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)
+
+[56 \| Amanda Cox on Working With R, NYT Projects, Favorite Data -- Data Stories](https://datastori.es/ds-56-amanda-cox-nyt/)

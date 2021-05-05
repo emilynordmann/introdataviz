@@ -1,13 +1,13 @@
 --- 
-title: "Template Course"
-author: "PsyTeachR"
+title: "Data visualisation using R, for researchers who don’t use R"
+author: "Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "This is a template. Use it to start a new course book."
+description: "Abstract here."
 ---
 
 ```{r cite-packages, include = FALSE}
