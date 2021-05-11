@@ -43,18 +43,18 @@ f <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) +
 a + b + c + d + e + f + plot_layout(nrow = 2)
 ```
 
-Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or, one could remove the first geom to only visualise the line of best fit, simply by removing the layer that draws the data points (see Figure 2). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
+Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or, one could, for example, remove the first geom to only visualise the line of best fit, simply by removing the layer that draws the data points (see Figure 2). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
 
-```{r remove-layer, echo =FALSE, fig.cap="Figure 2: Scatterplot with removed layer"}
+```{r remove-layer, message = FALSE, echo =FALSE, fig.cap="Figure 2: Scatterplot with removed layer"}
 iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
   geom_smooth(method = "lm") +
   labs(x = "My X Variable", y = "My Y Variable")+
   theme_minimal()
 ```
 
-## Tidy data
+## Data structures
 
-The final conceptual issue we will address is the use of tidy data. Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design Stroop test experiment. There are 6 variables:
+The final conceptual issue we will address is the structure of datasets required to work with `ggplot()`. Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition. For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design Stroop test experiment. There are 6 variables:
 
 -   Participant ID
 
@@ -72,73 +72,301 @@ In wide-format data, this would typically be formatted as in Table 1 where each 
 
 [^3]: In this tutorial we have chosen to gloss over the data wrangling that must occur to get from the raw data to these aggregated values. This type of wrangling requires a more extensive tutorial than this paper can provide but, more importantly, it is still possible to use R for data visualisation having done these preparatory steps using existing workflows that newcomers to R are comfortable with. The aim of this paper is to bypass these initial, often problematic steps and focus on tangible outputs that may then encourage further mastery of reproducible methods.
 
-```{r wide-data, echo=FALSE}
-dat <- faux::sim_design(
- within= list(
-   dv = c("RT", "acc"),
-   type = c("cong", "incon")),
- between = list(language = c("mono", "bi")),
- n = list(mono = 55, bi = 45),
- mu = data.frame(
-   RT_cong = c(350, 360),
-   RT_incon = c(600, 450),
-   acc_cong = c(.95, .96),
-   acc_incon = c(.86, 87),
-   row.names = c("mono", "bi")
- ),
- sd = c(50, 50, .05, .05, 50,  50, .05, .05),
- r = c(.5, .6, .3, .4, .5, .6),
- plot = F
+```{r wide-data, echo=FALSE, message = FALSE}
+library(faux)
+set.seed(8675309)
+wide <- faux::sim_design(
+  within= list(
+    dv = c("rt", "acc"),
+    type = c("cong", "incon")),
+  between = list(language = c("mono", "bi")),
+  n = list(mono = 55, bi = 45),
+  mu = data.frame(
+    row.names = c("mono", "bi"),
+    rt_cong = c(350, 360),
+    rt_incon = c(600, 450),
+    acc_cong = c(0, 0), # will convert to binomial later
+    acc_incon = c(0, 0) # will convert to binomial later
+  ),
+  sd = c(50, 50, 1, 1, 50,  50, 1, 1),
+      # RTi, a_c, a_i
+  r = c( .5,  .6,  .3, # RTc
+              .4,  .5, # RTi
+                   .6), plot = FALSE # a_c
 ) %>%
-  mutate(age = sample(18:60, size = 100, replace = T)) %>%
+  mutate(
+    acc_cong = norm2binom(acc_cong, size = 100, prob = .95),
+    acc_incon = norm2binom(acc_incon, size = 100, prob = .85),
+    # generate age with correlations to RT and none to acc
+    age = rnorm_pre(data.frame(rt_cong, rt_incon, acc_cong, acc_incon), 
+                    mu = 25, sd = 10, r = c(0.3, 0.3, 0, 0)),
+    # truncate and round ages
+    age = norm2trunc(age, 17.51, 60.49) %>% round()
+  ) %>%
   select(id, age, everything())
 
-head(dat)%>%
+write.csv(file = "wide_data.csv", x = wide, row.names = FALSE)
+
+head(wide)%>%
   knitr::kable(digits = 2, align = "c")
 
 ```
 
-This format is popular because it is intuitive to read and easy to enter data when all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single cell, for example in Table 1, RT_cong contains information related to both a DV and the level of an IV. Whickham (2014) provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure but for the purposes of this tutorial there are three rules a dataset must follow to be tidy:
+This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single cell, for example in Table 1, RT_cong contains information related to both a DV and the level of an IV. Whickham (2014) provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
 
-1.  Each variable forms a column
-
-2.  Each observation forms a row
-
-3.  Each type of observational unit forms a table
-
-Moving from using wide-form to tidy datasets can require a conceptual shift on the part of the researcher and one that can only come with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table 2 and 3. Because the two dependent variables are different types of observational unit, they are split into two tables. Additionally, each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). The benefits and flexibility of this format will become apparent as we progress through the tutorial.
+Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table 2. Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
 
 [^4]: That is to say, if you are new to R, know that many before you have struggled with this conceptual shift - it does get better, it just takes time and your preferred choice of cursing.
 
 ```{r tidying, echo = FALSE}
-rt_dat <- dat %>%
-  pivot_longer(names_to = "Condition", 
-               values_to = "score",
-               cols = "RT_cong":"acc_incon") %>%
-  separate(Condition, into = c("DV", "Conds"), sep = "_") %>%
-  filter(DV == "RT") %>%
-  select(-DV) %>%
-  rename(RT = score)
+long <- pivot_longer(wide, 
+                     cols = rt_cong:acc_incon, 
+                     names_to = c("dv_type", "congruency"), 
+                     names_sep = "_", 
+                     values_to = "dv")
 
-acc_dat <- dat %>%
-  pivot_longer(names_to = "Condition", 
-               values_to = "score",
-               cols = "RT_cong":"acc_incon") %>%
-  separate(Condition, into = c("DV", "Conds"), sep = "_") %>%
-  filter(DV == "acc") %>%
-  select(-DV) %>%
-  rename(acc = score)
+dat <- pivot_wider(long, names_from = dv_type, values_from = dv)
 ```
 
-```{r rt-table,echo = FALSE, fig.cap="Table 2: Tidy RT data"}
-head(rt_dat)%>%
+```{r long,echo = FALSE, fig.cap="Table 2: Tidy RT data"}
+head(dat)%>%
   knitr::kable(digits = 2, align = "c")
 ```
 
-```{r acc-table, echo = FALSE, fig.cap="Table 3: Tidy accuracy data"}
-head(acc_dat)%>%
-  knitr::kable(digits = 2, align = "c")
+The benefits and flexibility of this format will (hopefully) become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that *anything that shares an axis should probably be in the same column*. For example, a simple bar chart of means for the reaction time DV would display the variable `congruency` on the x-axis with bars representing both the `cong` and `incon` data, therefore, these data should be in one column and not split.
+
+## Tutorial
+
+In this tutorial for each step we will explain the purpose of the code, provide the code to achieve that aim, and provide a plain English translation of what each line of code is doing. For each function, we will provide additional resources in the appendix that provide further instruction.
+
+The simulated dataset and all below code can be found in the online supplementary materials.
+
+## Data prep
+
+These preparatory steps can all be dealt with reproducibly using R and the additional resources section points to extra tutorials for doing so, however, performing these types of tasks in R can be difficult for new learners and the solutions and tools dependent on the idiosyncrasies of each dataset. For this reason, in this tutorial we encourage the reader to complete these steps using the method they are most comfortable with and to focus on the aim of data visualisation.
+
+### Data format
+
+The simulated Stroop data is provided in a `csv` file rather than e.g., `xslx`. Functions exist in R to read many other types of data files, however, you can convert an `xlsx` spreadsheet to `csv` by using the `Save As` function in Microsoft Excel. Note that `csv` files strip all formatting and only store data in a single sheet; you may wish to create a `csv` file that only contains the data you wish to visualise that is part of a larger workbook.
+
+### Variable names
+
+Ensuring that your variable names are consistent can greatly facilitate working in R. We recommend using short but informative variable names, for example `rt_cong` is preferred over `dv1_iv1` or `reaction_time_congruent_condition` because these are either hard to read or hard to type.
+
+It is also helpful to have a consistent naming scheme, particularly for variable names that require more than one word. Two popular options are `CamelCase` where each new word begins with a capital letter, or `snake_case` where all letters are lower case and words are separated by an underscore. For the purposes of naming variables, avoid using any spaces in variable names (e.g., `rt cong`) and consider the additional meaning of a separator beyond making the variable names easier to read. For example, `rt_cong`, `rt_incon`, `acc_cong`, and `acc_incon` all have the dv to the left of the separator and the level of the IV to the right. `rt_cong_condition` on the other hand has two separators but only one of them is meaningful and it is useful to be able to split variable names consistently. In this paper, we will use `snake_case` and lower case letters for all variable names so that we don't have to remember where to put the capital letters.
+
+### Data values
+
+A great benefit to using R rather than SPSS is that categorical data can be entered as text. In the tutorial dataset, language group is entered as `mono` or `bi` rather than numbers that require a code book and so is easier to read and avoids misinterpreting data due to coding errors. Before working with data in R, you may wish to convert any existing numerical codes to text labels, being mindful of the above rules regarding simplicity and consistency for variables names. Additionally, values must match exactly in order to be considered in the same category and R is case sensitive, i.e., `mono`, `Mono`, and `monolingual` would be classified as members of three separate categories.
+
+Finally, cells that represent missing data should be left empty rather than containing e.g., `NA`, `missing` or `0`. A complementary rule of thumb is that each variable should only contain one type of data, character or numeric, not both.
+
+## R prep
+
+We strongly encourage the use of R in combination with RStudio. R is the programming language whilst RStudio is a *integrated development environment* that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.
+
+Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`, you will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Copy the dataset to this folder. The files pane on the bottom right of RStudio show now display this folder and the files it contains - this is know as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
+
+This tutorial will require you to use the packages contained with the `tidyverse` collection. Additionally, we will also require use of `patchwork`. To install these packages, copy and paste the below code into the console (the left hand pane) and press enter to execute the code.
+
+```{r packages, eval = FALSE}
+package_list <- c("tidyverse", "patchwork")
+install.packages(package_list)
 ```
+
+Finally, so that you can save your code to return to later, open a new script `File - New File - R Script` and then save it using `File - Save`. R will default to saving the script in your project folder. This is where we will write all the tutorial code from now on. The reason that the install packages code is not included in the script is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script. R scripts treat anything you write in them as code by default. If you wish to write a comment with further information about your code (which we encourage you to do), you must use the hashtag sign to "comment it out".
+
+```{r comments, eval = FALSE}
+this_is_code
+# this is a comment
+```
+
+## Loading packages
+
+To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load them using library every time you start R.
+
+```{r load, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+```
+
+## Loading data
+
+To load the simulated data we use the function `read_csv()` from the `readr` tidyverse package.
+
+```{r load3, message=FALSE}
+dat <- read_csv("wide_data.csv")
+```
+
+This code has created an object *dat* that contains the data from the file `wide_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…doest not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive, have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder.
+
+To view the dataset, click `dat` in the environment pane or run `View(dat)` in the console. The environment pane also tells us that the object `dat` has 100 observations of 7 variables, and is a useful quick check to ensure one has loaded the right data.
+
+## Demographic information
+
+As displayed in Table 2 above, the process of transforming data to long-form can introduce some repetition (i.e., age and language group are repeated for each observation of the dependent variable). Because of this, it is useful to create a separate dataset that just contains demographic information where basic information about participants is stored and none of it is repeated.
+
+To do so we use the function `select()` from the `dplyr` tidyverse package.
+
+```{r select}
+demographics <- select(dat,id, age, language)
+```
+
+This code creates an object named `demographics` that contains just the columns specified. The first argument passed to select is always the object, or dataset, you wish to use as your base, in this case `dat`, and the remaining arguments are the columns you wish to retain.
+
+`select()` works by addition or subtraction, for example, the below code would also produce the same result by dropping the specified variables
+
+```{r select2}
+demographics2 <- select(dat, -rt_cong, -rt_incon, -acc_cong, -acc_incon)
+```
+
+Finally, if you have a dataset with a large number of columns you wish to select you can use the `first_variable:last_variable` notation. For example, this code selects all columns between and including `id`
+
+```{r select3}
+demographics3 <- select(dat, id:language)
+```
+
+We can then calculate and plot some basic descriptive information about the demographics of our sample. The code below introduces the `%>%` operator, otherwise known as the *pipe,* and can mostly useful be translated as "*and then"*. For example, the below code can be read as:
+
+-   Start with the object `demographics` *and then;*
+
+-   Group it by the variable `language` *and then;*
+
+-   Count the number of observations in each group
+
+```{r demo_stats}
+demographics %>%
+  group_by(language) %>%
+  count()
+```
+
+This will produce the number of observations in each group of the variable `language`. If you just wanted the total number of observations, you could remove the `group_by()` line which would perform the operation on the whole dataset, rather than by groups:
+
+```{r demo_stats2}
+demographics %>%
+  count()
+```
+
+Similarly, we may wish to calculate the mean age (and SD) of the sample and we can do so using the function `summarise()` from the `dplyr` tidyverse package.
+
+```{r age1}
+demographics %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+This code starts with the `demographic` dataset, and then produces summary data in the form of a variable named `mean_age` that contains the result of calculating the mean of the variable `age.` It then creates `sd_age` which does the same but for standard deviation. The above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the `<-` notation.
+
+```{r age2}
+age_stats <- demographics %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+Finally, the `group_by()` function will work in the same way when calculating summary statistics - the output of the function that is called after `group_by()` will be produced for each level of the grouping variable.
+
+```{r demo3}
+demographics %>%
+  group_by(language) %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+## Bar chart of counts
+
+For the first plot, we will make a simple bar chart of counts that shows the number of participants in each `language` group.
+
+```{r bar1}
+ggplot(data = demographics, mapping = aes(x = language)) +
+  geom_bar()
+
+```
+
+The first line of code sets up the first layer and base of the plot.
+
+-   `data` specifies which data source to use for the plot
+
+-   `mapping` specifies which variables to map to which aesthetics (`aes`) of the plot
+
+-   `x` specifies which variable
+
+The second line of code draws the plot, and is connected to the base code with `+` in this case, we ask for `geom_bar()`. Each `geom`, or type of plot, has an associated default statistic, for bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts, when given an `x` variable, `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
+
+### Argument names
+
+Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering `?function_name` into the console. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:
+
+```{r bar2, eval = FALSE}
+ggplot(demographics, aes(language)) +
+  geom_bar()
+```
+
+One of the barriers to learning R is that many of the "helpful" examples and solutions you will find online do not include argument names and so for novice learners are completely opaque. In this tutorial, we will include the argument names the first time a function is used, however, we will then remove some argument names to facilitate knowledge transfer to the help available online.
+
+## Histogram
+
+The code to plot a histogram `age` is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with `age` on the x-axis:
+
+```{r histogram1}
+ggplot(demographics, aes(x = age)) +
+  geom_histogram()
+```
+
+By default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divides the x-axis into is 30, but we may wish to pick a more appropriate value for our dataset. If we want one bar = one year we can adjust `binwidth = 1`.
+
+```{r histogram2}
+ggplot(demographics, aes(x = age)) +
+  geom_histogram(binwidth = 1)
+```
+
+## Visual improvements part 1
+
+So far we have made basic plots with the default visual appearance, before we return to the larger dataset we will introduce some simple visual customisation options.
+
+### Editing axis names and labels
+
+To edit axis names and labels we can use `scale_` functions. There are a number of different scale functions and which one you use depends on which axis you wish to edit (e.g., x, y) and the type of data it represents (discrete, continuous).
+
+For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. Each axis has its own function, and its own layer:
+
+```{r bar3}
+ggplot(demographics, aes(language)) +
+  geom_bar() +
+  scale_x_discrete(name = "Language group", 
+                   labels = c("Bilingual", "Monolingual")) +
+  scale_y_continuous(name = "Number of participants",
+                     breaks = c(0,10,20,30,40,50))
+```
+
+-   `name` controls the overall name of the axis
+
+-   `labels` controls the names of the conditions with a discrete variable. Note that the conditions are combined within `c(),` are each enclosed within their own parenthesis, and are in the order displayed on the plot.
+
+-   `breaks` controls the tick marks.
+
+### Adding a theme
+
+`ggplot` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis label to the histogram, but also applies `theme_minimal()`.
+
+```{r histogram3}
+ggplot(demographics, aes(age)) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_minimal()
+
+```
+
+#### Activities
+
+Before you move on try the following:
+
+-   Add a layer that edits the name of the y-axis histogram label to `Number of participants`.
+
+-   Remove `theme_minimal()` and instead apply one of the other available themes (start typing `theme_` and the auto-complete will show you the available options).
+
+Other things
+
+-   p + notation explain what it means, use of layers
 
 ## References
 
@@ -149,3 +377,5 @@ So I don't know how to do references in Markdown so I'mma just dump them all her
 [How the BBC Visual and Data Journalism team works with graphics in R \| by BBC Visual and Data Journalism \| BBC Visual and Data Journalism \| Medium](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)
 
 [56 \| Amanda Cox on Working With R, NYT Projects, Favorite Data -- Data Stories](https://datastori.es/ds-56-amanda-cox-nyt/)
+
+## Additional resources
