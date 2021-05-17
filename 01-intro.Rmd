@@ -1,11 +1,22 @@
 ---
 title: "Data visulisation using R, for researchers who don't use R"
-author: "Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa Debruine"
+author: "Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine"
 date: "11/05/2021"
-output: html_document
+bibliography: book.bib
 ---
 
-# Introduction
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  out.width = "100%",
+  fig.cap = "**CAPTION THIS**"
+)
+library(knitr)
+```
+
+## Introduction
 
 Use of the programming language R for data processing and statistical analysis by researchers is increasingly common with a GET THE STATS FROM THAT THING I SAW ABOUT R ON TWITTER increase since XXXX (REF). In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means (REF HERE ABOUT BAR CHARTS).
 
@@ -13,61 +24,51 @@ Yet, the benefits of using R are hindered by its notoriously steep learning curv
 
 In this paper we aim to provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience using R. We detail the rationale for using R for data visualisation, introduce the "grammar of graphics" that underlies data visualisation using the `ggplot` package, and provide a tutorial that walks the reader through how to replicate plots that are commonly available in point-and-click software such as histograms and boxplots, as well as showing how the code for these "basic" plots can be easily extended to less commonly available options such as violin-boxplots, raincloud plots, and heat-maps.
 
-## Why R for data visualisation?
+### Why R for data visualisation?
 
-Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software - reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis (REFs) and we will not repeat these arguments here. However, there is an additional selfish benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.
+Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software -- reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis (REFs) and we will not repeat these arguments here. However, there is an additional selfish benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.
 
-In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting to novice users of R, if one can survive the initial learning curve, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has led to news outlets such as the BBC (BBC Visual and Data Journalism, 2019) and the New York Times (Bertini & Sefaner, 2015) to adopt R as their preferred data visualisation tool.
+In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting to novice users of R, if one can survive the initial learning curve, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has led to news outlets such as the BBC [@BBC-R] and the New York Times [@NYT-R] to adopt R as their preferred data visualisation tool.
 
-## A layered grammar of graphics
+### A layered grammar of graphics
 
-There are multiple approaches to data visualisation in R; in this paper we will be using the popular package[^1] `ggplot2` (REF) which is part of the larger `tidyverse`[^2] collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics (Wilkinson, Anand, & Grossman, 2005) is a standardised way to describe the components of a graphic. `ggplot2` uses a layered grammar of graphics (Whickham, 2010), in which plots are built up in a series of layers. This approach may be familiar to users of MATLAB but can be unintuitive to those used to creating plots in Excel or SPSS.
+There are multiple approaches to data visualisation in R; in this paper we will be using the popular package[^1] `ggplot2` [@ggplot2] which is part of the larger `tidyverse`[^2] [@tidyverse] collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics [@wilkinson2005graph] is a standardised way to describe the components of a graphic. `ggplot2` uses a layered grammar of graphics [@wickham2010layered], in which plots are built up in a series of layers. This approach may be familiar to users of MATLAB but can be unintuitive to those used to creating plots in Excel or SPSS.
 
-[^1]: The power of R is that it is extendable and open source - put simply, if a function doesn't exist or doesn't work very well, anyone can create a new **package** that contains data and code to allow you to perform new tasks. You may find it helpful to think of packages as additional apps that you need to download separately to extend the functionality beyond what comes with "Base R".
+[^1]: The power of R is that it is extendable and open source - put simply, if a function doesn't exist or is difficult to use, anyone can create a new **package** that contains data and code to allow you to perform new tasks. You may find it helpful to think of packages as additional apps that you need to download separately to extend the functionality beyond what comes with "Base R".
 
 [^2]: Because there are so many different ways to achieve the same thing in R, when Googling for help with R, it is useful to append the name of the package or approach you are using, e.g., "how to make a histogram ggplot2".
 
-Figure 1 displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a `geom`) that is desired for these variables is specified (layer 3) - in this case `geom_point()` is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).
+Figure\ \@ref(fig:layers) displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a `geom`) that is desired for these variables is specified (layer 3) - in this case `geom_point()` is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).
 
-```{r layers, echo = FALSE, message = FALSE, fig.cap="Figure 1: Evolution of a layered plot"}
+```{r layers, echo = FALSE, message = FALSE, fig.cap="Evolution of a layered plot"}
 library(patchwork)
 library(tidyverse)
 a <- ggplot() + labs(subtitle = "Layer 1")
-b <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width))+ labs(subtitle = "Layer 2")
-c <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + geom_point()+ labs(subtitle = "Layer 3")
-d <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")+ labs(subtitle = "Layer 4")
-e <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + 
-  geom_smooth(method = "lm") +
-  labs(x = "My X Variable", y = "My Y Variable")+ labs(subtitle = "Layer 5")
-f <- iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + 
-  geom_smooth(method = "lm") +
-  labs(x = "My X Variable", y = "My Y Variable", subtitle = "Layer 6")+
-  theme_minimal()
+b <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + labs(subtitle = "Layer 2")
+c <- b + geom_point() + labs(subtitle = "Layer 3")
+d <- c + geom_smooth(method = "lm") + labs(subtitle = "Layer 4")
+e <- d + labs(x = "Sepal Length (mm)", y = "Sepal Width (mm)") + labs(subtitle = "Layer 5")
+f <- e + theme_minimal(base_family = "Times") + labs(subtitle = "Layer 6")
+
 a + b + c + d + e + f + plot_layout(nrow = 2)
 ```
 
-Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom to only visualise the line of best fit, simply by removing the layer that draws the data points (see Figure 2). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
+Importantly, each layer is independent and independently customisable. For example, the size, color and position of each component can be adjusted, or one could, for example, remove the first geom to only visualise the line of best fit, simply by removing the layer that draws the data points (Figure \ \@ref(fig:remove-layer)). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
 
-```{r remove-layer, message = FALSE, echo =FALSE, fig.cap="Figure 2: Scatterplot with removed layer"}
+```{r remove-layer, message=FALSE, echo=FALSE, fig.cap="Plot with scatterplot layer removed."}
 iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
   geom_smooth(method = "lm") +
-  labs(x = "My X Variable", y = "My Y Variable")+
+  labs(x = "Sepal Length (mm)", y = "Sepal Width (mm)")+
   theme_minimal()
 ```
-
-## Tutorial
 
 In this tutorial for each step we will explain the purpose of the code, provide the code to achieve that aim, and provide a plain English translation of what each line of code is doing. For each function, we will provide additional resources in the appendix that provide further instruction.
 
 The simulated dataset and all below code can be found in the online supplementary materials.
 
-## Data prep
+## Preparing your data
 
-These preparatory steps can all be dealt with reproducibly using R and the additional resources section points to extra tutorials for doing so, however, performing these types of tasks in R can be difficult for new learners and the solutions and tools dependent on the idiosyncrasies of each dataset. For this reason, in this tutorial we encourage the reader to complete these steps using the method they are most comfortable with and to focus on the aim of data visualisation.
+Before you start visualizing your data, you need to get the data into an appropriate format. These preparatory steps can all be dealt with reproducibly using R and the additional resources section points to extra tutorials for doing so. However, performing these types of tasks in R can be difficult for new learners and the solutions and tools are dependent on the idiosyncrasies of each dataset. For this reason, in this tutorial we encourage the reader to complete these steps using the method they are most comfortable with and to focus on the aim of data visualisation.
 
 ### Data format
 
@@ -75,23 +76,23 @@ The simulated Stroop data is provided in a `csv` file rather than e.g., `xslx`. 
 
 ### Variable names
 
-Ensuring that your variable names are consistent can greatly facilitate working in R. We recommend using short but informative variable names, for example `rt_cong` is preferred over `dv1_iv1` or `reaction_time_congruent_condition` because these are either hard to read or hard to type.
+Ensuring that your variable names are consistent can make it much easier to work in R. We recommend using short but informative variable names, for example `rt_cong` is preferred over `dv1_iv1` or `reaction_time_congruent_condition` because these are either hard to read or hard to type.
 
-It is also helpful to have a consistent naming scheme, particularly for variable names that require more than one word. Two popular options are `CamelCase` where each new word begins with a capital letter, or `snake_case` where all letters are lower case and words are separated by an underscore. For the purposes of naming variables, avoid using any spaces in variable names (e.g., `rt cong`) and consider the additional meaning of a separator beyond making the variable names easier to read. For example, `rt_cong`, `rt_incon`, `acc_cong`, and `acc_incon` all have the dv to the left of the separator and the level of the IV to the right. `rt_cong_condition` on the other hand has two separators but only one of them is meaningful and it is useful to be able to split variable names consistently. In this paper, we will use `snake_case` and lower case letters for all variable names so that we don't have to remember where to put the capital letters.
+It is also helpful to have a consistent naming scheme, particularly for variable names that require more than one word. Two popular options are `CamelCase` where each new word begins with a capital letter, or `snake_case` where all letters are lower case and words are separated by an underscore. For the purposes of naming variables, avoid using any spaces in variable names (e.g., `rt cong`) and consider the additional meaning of a separator beyond making the variable names easier to read. For example, `rt_cong`, `rt_incon`, `acc_cong`, and `acc_incon` all have the DV to the left of the separator and the level of the IV to the right. `rt_cong_condition` on the other hand has two separators but only one of them is meaningful and it is useful to be able to split variable names consistently. In this paper, we will use `snake_case` and lower case letters for all variable names so that we don't have to remember where to put the capital letters.
 
-When working with your own data, you can rename columns in Excel but there are also instructions for how to do this in R in the additional resources.
+When working with your own data, you can rename columns in Excel, but there are also instructions for how to do this in R in the additional resources.
 
 ### Data values
 
-A great benefit to using R rather than SPSS is that categorical data can be entered as text. In the tutorial dataset, language group is entered as `mono` or `bi` rather than numbers that require a code book and so is easier to read and avoids misinterpreting data due to coding errors. Before working with data in R, you may wish to convert any existing numerical codes to text labels, being mindful of the above rules regarding simplicity and consistency for variables names. Additionally, values must match exactly in order to be considered in the same category and R is case sensitive, i.e., `mono`, `Mono`, and `monolingual` would be classified as members of three separate categories.
+A great benefit to using R rather than SPSS is that categorical data can be entered as text. In the tutorial dataset, language group is entered as 1 or 2, so we can show you below how to recode numeric values into factors with labels, which also sets the order of display for graphs. However, we recommend recording meaningful labels rather than numbers to avoid misinterpreting data due to coding errors. Note that values must match *exactly* in order to be considered in the same category and R is case sensitive, so "mono", "Mono", and "monolingual" would be classified as members of three separate categories.
 
-Finally, cells that represent missing data should be left empty rather than containing e.g., `NA`, `missing` or `0`. A complementary rule of thumb is that each column should only contain one type of data, such as words or numbers, not both.
+Finally, cells that represent missing data should be left empty rather than containing values like `NA`, `missing` or `0`. A complementary rule of thumb is that each column should only contain one type of data, such as words or numbers, not both.
 
-## R prep
+## Setting up R and RStudio
 
-We strongly encourage the use of RStudio to write code in R. R is the programming language whilst RStudio is a *integrated development environment* that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.
+We strongly encourage the use of RStudio to write code in R. R is the programming language whilst RStudio is an *integrated development environment* that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.
 
-Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`, you will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Copy the dataset to this folder. The files pane on the bottom right of RStudio show now display this folder and the files it contains - this is know as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
+Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Copy the dataset to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is know as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
 
 This tutorial will require you to use the packages contained with the `tidyverse` collection. Additionally, we will also require use of `patchwork`. To install these packages, copy and paste the below code into the console (the left hand pane) and press enter to execute the code.
 
@@ -108,9 +109,9 @@ this_is_code
 # this is a comment
 ```
 
-## Loading packages
+### Loading packages
 
-To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load them using library every time you start R. When you load the tidyverse, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.
+To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load any packages you want to use with `library()` every time you start R. When you load the tidyverse, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.
 
 ```{r load, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -119,29 +120,102 @@ library(patchwork)
 
 ## Loading data
 
-For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design Stroop test experiment. There are 6 variables:
+For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design Stroop test experiment. There are 100 rows (1 for each subject) and 7 variables:
 
--   Participant ID
+- Participant information:
+    -   `id`: Participant ID
+    -   `age`: Age
+- 1 between-subject IV:
+    -   `language`:  Language group (1 = monolingual/2 = bilingual)
+- 4 columns for the 2 dependent variables for RT and accuracy, crossed by the within-subject IV of condition:
+    -   `rt`_cong`: Reaction time (ms) for congruent trials
+    -   `rt`_incon`: Reaction time (ms) for incongruent trials
+    -   `acc_cong`: Accuracy for congruent trials
+    -   `acc_incon`: Accuracy for incongruent trials
 
--   Age
+```{r data-sim, echo = FALSE}
+# simulate data reproducibly
+suppressPackageStartupMessages(library(faux))
+faux_options(plot = FALSE)
+set.seed(8675309)
 
--   A between-subject IV: Language group (monolingual/bilingual)
+wide <- sim_design(
+  within= list(
+    dv = c("rt", "acc"),
+    type = c("cong", "incon")),
+  between = list(language = c("1", "2")),
+  n = list("1" = 55, "2" = 45),
+  mu = data.frame(
+    row.names = c("1", "2"),
+    rt_cong = c(350, 360),
+    rt_incon = c(600, 450),
+    acc_cong = c(0, 0), # will convert to binomial later
+    acc_incon = c(0, 0) # will convert to binomial later
+  ),
+  sd = c(50, 50, 1, 1, 50,  50, 1, 1),
+      # RTi, a_c, a_i
+  r = c( .5,  .6,  .3, # RTc
+              .4,  .5, # RTi
+                   .6) # a_c
+) %>%
+  mutate(
+    acc_cong = norm2binom(acc_cong, size = 100, prob = .95),
+    acc_incon = norm2binom(acc_incon, size = 100, prob = .85),
+    # generate age with correlations to rt and none to acc
+    age = rnorm_pre(data.frame(rt_cong, rt_incon, acc_cong, acc_incon), 
+                    mu = 25, sd = 10, r = c(0.3, 0.3, 0, 0)),
+    # truncate and round ages
+    age = norm2trunc(age, 17.51, 60.49) %>% round()
+  ) %>%
+  select(id, age, everything())
 
--   A within-subject IV: Congruency (congruent/incongruent)
+# long <- pivot_longer(wide, 
+#                      cols = rt_cong:acc_incon, 
+#                      names_to = c("DV_type", "condition"), 
+#                      names_sep = "_", 
+#                      values_to = "DV")
+# 
+# dat <- pivot_wider(long, names_from = DV_type, values_from = DV)
+write_csv(wide, "stroop_data.csv")
+```
 
--   Dependent variable 1: Reaction time (ms)
-
--   Dependent variable 2: Accuracy
 
 To load the simulated data we use the function `read_csv()` from the `readr` tidyverse package.
 
 ```{r load3, message=FALSE}
-dat <- read_csv("stroop_data.csv")
+dat <- read_csv(file = "stroop_data.csv")
 ```
 
-This code has created an object *dat* that contains the data from the file `stroop_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…doest not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error `could not find function` it means you have either not loaded the correct package, or you have made a typo in the function name.
+This code has created an object *dat* that contains the data from the file `stroop_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…does not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error `could not find function` it means you have either not loaded the correct package, or you have made a typo in the function name.
 
 To view the dataset, click `dat` in the environment pane or run `View(dat)` in the console. The environment pane also tells us that the object `dat` has 100 observations of 7 variables, and is a useful quick check to ensure one has loaded the right data.
+
+### Handling numeric factors
+
+The factor `language` is coded as 1 and 2, but you probably want to use the labels "monolingual" and "bilingual" for tables and plots. The code below shows how to recode numeric codes into labels. The `mutate()` function makes new columns in a data table, or overwrites a column, and the `factor()` function translates the language column into a factor with the labels "monolingual" and "bilingual"). You can also use the `factor()` function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.
+
+```{r}
+dat <- dat %>%
+  mutate(language = factor(
+    x = language, # column to translate
+    levels = c(1, 2), # values of the original data in preferred order
+    labels = c("monolingual", "bilingual") # labels for display
+  ))
+```
+
+### Argument names
+
+**NOTE: moved up from bar to first relevant use of arguments**
+
+Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering `?function_name` into the console. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:
+
+```{r arg-names, eval = FALSE}
+dat <- dat %>%
+  mutate(language = factor(language, c(1, 2), c("monolingual", "bilingual")))
+```
+
+One of the barriers to learning R is that many of the "helpful" examples and solutions you will find online do not include argument names and so for novice learners are completely opaque. In this tutorial, we will include the argument names the first time a function is used, however, we will remove some argument names from subsequent examples to facilitate knowledge transfer to the help available online.
+
 
 ## Demographic information
 
@@ -174,7 +248,7 @@ dat %>%
             sd_age = sd(age))
 ```
 
-This code starts with the `demographic` dataset, and then produces summary data in the form of a column named `mean_age` that contains the result of calculating the mean of the variable `age.` It then creates `sd_age` which does the same but for standard deviation. Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the `<-` notation:.
+This code produces summary data in the form of a column named `mean_age` that contains the result of calculating the mean of the variable `age.` It then creates `sd_age` which does the same but for standard deviation. Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the `<-` notation and print it later by typing the object name.
 
 ```{r age2}
 age_stats <- dat %>%
@@ -191,14 +265,14 @@ dat %>%
             sd_age = sd(age))
 ```
 
+
 ## Bar chart of counts
 
 For our first plot, we will make a simple bar chart of counts that shows the number of participants in each `language` group.
 
-```{r bar1}
+```{r bar1, fig.cap = "Bar chart of counts."}
 ggplot(data = dat, mapping = aes(x = language)) +
   geom_bar()
-
 ```
 
 The first line of code sets up the first layer and base of the plot.
@@ -209,31 +283,34 @@ The first line of code sets up the first layer and base of the plot.
 
 -   `x` specifies which variable to put on the x-axis
 
-The second line of code draws the plot, and is connected to the base code with `+` in this case, we ask for `geom_bar()`. Each `geom`, or type of plot, has an associated default statistic, for bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts, when given an `x` variable, `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
+The second line of code draws the plot, and is connected to the base code with `+`. In this case, we ask for `geom_bar()`. Each `geom`, or type of plot, has an associated default statistic. For bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts, when given an `x` variable, `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
 
-### Argument names
+**ADDED: maybe too much?**
 
-Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering `?function_name` into the console. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:
+If your data already have the counts that you want to plot, you can set `stat="identity"` inside of `geom_bar()` to use that number instead of counting rows. Notice that we are now omitting the names of the arguments `data` and `mapping` in the `ggplot()` function.
 
-```{r bar2, eval = FALSE}
-ggplot(dat, aes(language)) +
-  geom_bar()
+```{r bar-precalc, fig.cap = "Bar chart of pre-calculated counts."}
+count_dat <- dat %>%
+  group_by(language) %>%
+  count()
+
+ggplot(count_dat, aes(x = language, y = n)) +
+  geom_bar(stat="identity")
 ```
 
-One of the barriers to learning R is that many of the "helpful" examples and solutions you will find online do not include argument names and so for novice learners are completely opaque. In this tutorial, we will include the argument names the first time a function is used, however, we will remove some argument names from subsequent examples to facilitate knowledge transfer to the help available online.
 
 ## Histogram
 
 The code to plot a histogram `age` is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with `age` on the x-axis:
 
-```{r histogram1}
+```{r histogram1, fig.cap = "Histogram of ages."}
 ggplot(dat, aes(x = age)) +
   geom_histogram()
 ```
 
-By default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divides the x-axis into is 30, but we may wish to pick a more appropriate value for our dataset. If we want one bar = one year we can adjust `binwidth = 1`.
+By default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divides the x-axis into is 30, but we may wish to pick a more appropriate value for our dataset. If we want one bar to equal one year, we can adjust `binwidth = 1`.
 
-```{r histogram2}
+```{r histogram2, fig.cap = "Histogram of ages where each bin covers one year."}
 ggplot(dat, aes(x = age)) +
   geom_histogram(binwidth = 1)
 ```
@@ -244,11 +321,11 @@ So far we have made basic plots with the default visual appearance, before we mo
 
 ### Editing axis names and labels
 
-To edit axis names and labels we can use `scale_` functions. There are a number of different scale functions and which one you use depends on which axis you wish to edit (e.g., x, y) and the type of data it represents (discrete, continuous).
+To edit axis names and labels we can use `scale_` functions. There are a number of different scale functions and which one you use depends on which aesthetic you wish to edit (e.g., x, y, fill, color) and the type of data it represents (discrete, continuous).
 
 For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. Each axis has its own function, and its own layer:
 
-```{r bar3}
+```{r bar3, fig.cap = "Bar chart with custom axis labels."}
 ggplot(dat, aes(language)) +
   geom_bar() +
   scale_x_discrete(name = "Language group", 
@@ -263,26 +340,47 @@ ggplot(dat, aes(language)) +
 
 -   `breaks` controls the tick marks on the axis.
 
+### Changing colors
+
+**ADDED**
+
+You can control colors used to display the bars by setting `fill` (internal color)  and `color` (outline color) inside the geom function. This methods is only for changing **all** the bars; we will show you later how to set fill or color separately for different groups.
+
+```{r histogram-fill-color, fig.cap="Histogram with custom colors for bar fill and line colors."}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "white", color = "black") +
+  scale_x_continuous(name = "Participant age (years)")
+```
+
 ### Adding a theme
 
-`ggplot` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis label to the histogram, but also applies `theme_minimal()`. Each part of a theme can be independently customised which may be necessary, for example, if you have journal guidelines on fonts etc. for publication. There are further instructions for how to do this in the additional resources.
+`ggplot` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis label to the histogram, but also applies `theme_minimal()`. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the additional resources.
 
-```{r histogram3}
+```{r histogram-theme, fig.cap="Histogram with a custom theme."}
 ggplot(dat, aes(age)) +
-  geom_histogram(binwidth = 1) +
+  geom_histogram(binwidth = 1, fill = "white", color = "black") +
   scale_x_continuous(name = "Participant age (years)") +
   theme_minimal()
 ```
+**ADDED**
 
-#### Activities 1
+You can set the theme globally so that all subsequent plots use a theme.
+
+```{r}
+theme_set( theme_minimal() )
+```
+
+### Activities 1
 
 Before you move on try the following:
 
 -   Add a layer that edits the **name** of the y-axis histogram label to `Number of participants`.
 
+-   Change the color of the bars in the bar chart to red.
+
 -   Remove `theme_minimal()` and instead apply one of the other available themes (start typing `theme_` and the auto-complete will show you the available options).
 
-## Data structures
+## Data format
 
 Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition.
 
@@ -290,70 +388,73 @@ The simulated Stroop data is currently in wide-format (see Table 1) where each p
 
 [^3]: In this tutorial we have chosen to gloss over the data wrangling that must occur to get from the raw data to these aggregated values. This type of wrangling requires a more extensive tutorial than this paper can provide but, more importantly, it is still possible to use R for data visualisation having done these preparatory steps using existing workflows that newcomers to R are comfortable with. The aim of this paper is to bypass these initial, often problematic steps and focus on tangible outputs that may then encourage further mastery of reproducible methods.
 
-```{r wide-data, echo=FALSE, message = FALSE}
-head(dat)%>%
-  knitr::kable(digits = 2, align = "c")
-
+```{r wide-data, echo=FALSE}
+head(dat) %>% kable(digits = 2, caption="Data in wide format.")
 ```
 
-This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single cell, for example in Table 1, `rt_cong` contains information related to both a DV and the level of an IV. Whickham (2014) provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
+This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single cell, for example in Table\ \@ref(tab:wide-data), `rt_cong` contains information related to both a DV and the level of an IV. Wickham [-@wickham2014tidy] provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
 
-Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table 2. Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
+Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table\ \@ref(tab:long). Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
 
 [^4]: That is to say, if you are new to R, know that many before you have struggled with this conceptual shift - it does get better, it just takes time and your preferred choice of cursing.
 
 ```{r tidying, echo = FALSE}
 long <- pivot_longer(dat, 
                      cols = rt_cong:acc_incon, 
-                     names_to = c("dv_type", "congruency"), 
+                     names_to = c("dv_type", "condition"), 
                      names_sep = "_", 
                      values_to = "dv")
 
- long2 <- pivot_wider(long, names_from = dv_type, values_from = dv)
+long2 <- pivot_wider(long, names_from = dv_type, values_from = dv)
 ```
 
-```{r long,echo = FALSE, fig.cap="Table 2: Tidy RT data"}
-head(long2)%>%
-  knitr::kable(digits = 2, align = "c")
+```{r long, echo = FALSE}
+head(long2) %>% kable(digits = 2, caption = "Data in the correct format for visualization.")
 ```
 
-The benefits and flexibility of this format will (hopefully) become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that *anything that shares an axis should probably be in the same column*. For example, a simple bar chart of means for the reaction time DV would display the variable `congruency` on the x-axis with bars representing both the `cong` and `incon` data, therefore, these data should be in one column and not split.
+The benefits and flexibility of this format will (hopefully) become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that *anything that shares an axis should probably be in the same column*. For example, a simple bar chart of means for the reaction time DV would display the variable `condition` on the x-axis with bars representing both the `cong` and `incon` data, therefore, these data should be in one column and not split.
 
-## Transforming data
+### Transforming data
 
 We have chosen a 2 x 2 design with two DVs as we anticipate that this is a design many researchers will be familiar with and may also have existing datasets with a similar structure. However, it is worth highlighting that trial-and-error is part of the process of learning how to apply these functions to new datasets and structures. Data visualisation can be a useful way to scaffold learning these data transformations because they can provide a concrete visual check as to whether you have done what you intended to do with your data.
 
-### Step 1: `pivot_longer()`
+#### Step 1: `pivot_longer()`
 
-The first step is to use the function `pivot_longer()` to transform the data to long-form. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the newly created object `long` with the original `dat` before reading on.
+The first step is to use the function `pivot_longer()` to transform the data to long-form. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the newly created object `long` (Table\ \@ref(tab:long-example)) with the original `dat` Table\ \@ref(tab:wide-data) before reading on.
 
 ```{r long1}
 long <- pivot_longer(data = dat, 
                      cols = rt_cong:acc_incon, 
                      names_sep = "_", 
-                     names_to = c("dv_type", "congruency"),
+                     names_to = c("dv_type", "condition"),
                      values_to = "dv")
 ```
+
 
 -   As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case `dat`. This argument name is often dropped in examples.
 
 -   `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table 1 and 2, you can see that `id`, `age`, and `language` all remain, it is the columns that contain the measurements of the DVs that change. Therefore `cols` specifies that the columns we want to transform are `rt_cong` to `acc_incon` which will select those four columns.
 
--   `names_sep` specifies how to split up the variable name in cases where it has multiple components. This is when taking care to name your variables consistently and meaningfully pays off. Because the word to the left of the separator (`_`) is always the dv type and the word to the right is always the condition of the within-subject IV, it becomes easy to automatically split the columns.
+-   `names_sep` specifies how to split up the variable name in cases where it has multiple components. This is when taking care to name your variables consistently and meaningfully pays off. Because the word to the left of the separator (`_`) is always the DV type and the word to the right is always the condition of the within-subject IV, it is easy to automatically split the columns.
 
--   `names_to` specifies the names of the new columns that will be created, there are two, one for the text to the left of the separator, and one for the text to the right of the separator.
+-   `names_to` specifies the names of the new columns that will be created. There are two: one for the text to the left of the separator, and one for the text to the right of the separator.
 
 -   Finally, `values_to` names the new column that will contain the measurements, in this case we'll call it `dv`. At this point you may find it helpful to go back and compare `dat` and `long` again to see how each argument matches up with the output of the table.
 
-### Step 2: `pivot_wider()`
+```{r long-example, echo = FALSE}
+head(long) %>% kable(digits = 2, caption = "Data in long format.")
+```
+
+#### Step 2: `pivot_wider()`
 
 Because we have two DVs, we need to perform an additional step. In the current long-form dataset, the column `dv` contains both reaction time and accuracy measures and keeping in mind the rule of thumb that *anything that shares an axis should probably be in the same column,* this creates a problem because we cannot plot two different units of measurement on the same axis. To fix this we need to use the function `pivot_wider()`. Again, we would encourage you at this point to compare `long` and `dat_long` with the below code to try and map the connections before reading on.
 
-```{r long2}
+```{r}
 dat_long <- pivot_wider(long, 
                         names_from = "dv_type", 
                         values_from = "dv")
 ```
+
 
 -   The first argument is again the dataset you wish to work from, in this case `long`. We have removed the argument name `data` in this example.
 
@@ -363,76 +464,79 @@ dat_long <- pivot_wider(long,
 
 This final long-form data should looks as follows:
 
-```{r}
-head(dat_long)%>%
-  knitr::kable(digits = 2, align = "c")
+**REDUNDANT WITH TABLE 2**
+
+```{r dat-long-example, echo = FALSE}
+head(dat_long) %>% kable(digits = 2, caption = "Data in the format required for visualization.")
 ```
 
-We have purposefully used a more complex dataset with two DVs for this tutorial, however, if you are working with a dataset with only one DV, note that only step 1 of this process would be necessary, potentially with the removal of the `names_sep` argument. Finally, be careful not to calculate demographic descriptive statistics from this long-form dataset - because the process of transformation has introduced some repetition for these variables, the wide-form dataset where 1 row = 1 participant should be used for demographic information.
+We have purposefully used a more complex dataset with two DVs for this tutorial. If you are working with a dataset with only one DV, note that only step 1 of this process would be necessary, potentially with the removal of the `names_sep` argument. Finally, be careful not to calculate demographic descriptive statistics from this long-form dataset. Because the process of transformation has introduced some repetition for these variables, the wide-form dataset where 1 row = 1 participant should be used for demographic information.
 
 ## Histogram 2
 
-Now that we have the experimental data in long-form we can begin to create some useful visualisations. First, to demonstrate how code recipes can be reused and adapted we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (`dat_long`) , the binwidths of the histograms, the `x` variable to display (`rt`/`acc`) and the name of the x-axis.
+Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (`dat_long`), the binwidths of the histograms, the `x` variable to display (`rt`/`acc`), and the name of the x-axis.
 
-```{r histogram4}
+```{r histogram-rt, fig.cap="Histogram of reaction times."}
 ggplot(dat_long, aes(x = rt)) +
-  geom_histogram(binwidth = ) +
-  scale_x_continuous(name = "Reaction time (ms)") +
-  theme_minimal()
+  geom_histogram(binwidth = 10, fill = "white", color = "black") +
+  scale_x_continuous(name = "Reaction time (ms)")
+```
 
+```{r histogram-acc, fig.cap="Histogram of accuracy scores."}
 ggplot(dat_long, aes(x = acc)) +
-  geom_histogram(binwidth = 1) +
-  scale_x_continuous(name = "Accuracy (0-100)") +
-  theme_minimal()
+  geom_histogram(binwidth = 1, fill = "white", color = "black") +
+  scale_x_continuous(name = "Accuracy (0-100)")
 ```
 
 ## Density plots
 
 The layer system makes it easy to create new types of plots by adapting existing recipes. For example, rather than creating a histogram, we can create a smoothed density plot by calling `geom_density()` rather than `geom_histogram()`. The rest of the code remains identical.
 
-```{r density1}
+```{r density-rt, fig.cap="Density plot of reaction time."}
 ggplot(dat_long, aes(x = rt)) +
   geom_density()+
-  scale_x_continuous(name = "Reaction time (ms)") +
-  theme_minimal()
+  scale_x_continuous(name = "Reaction time (ms)")
 ```
 
-## Grouped density plots
+### Grouped density plots
 
-Density plots are most useful for comparing the distributions of different groups of data. Because the dataset is now in long-format, it makes it easier to map another variable to the plot. In addition to mapping `rt` to the x-axis, we specify `fill` to fill the visualisation of each level of another variable with different colours. Just like with the x and y-axis scale functions, we can edit the names and labels of our fill axis by adding on another layer.
+Density plots are most useful for comparing the distributions of different groups of data. Because the dataset is now in long format, it makes it easier to map another variable to the plot. In addition to mapping `rt` to the x-axis, we specify the `fill` aesthetic to fill the visualisation of each level of the `condition` variable with different colors. Just like with the x and y-axis scale functions, we can edit the names and labels of our fill aesthetic by adding on another `scale_*_*()` layer.
 
-```{r}
-ggplot(dat_long, aes(x = rt, fill = congruency)) +
+```{r density-grouped, fig.cap="Density plot of reaction times grouped by condition."}
+ggplot(dat_long, aes(x = rt, fill = condition)) +
   geom_density()+
   scale_x_continuous(name = "Reaction time (ms)") +
-  theme_minimal() +
   scale_fill_discrete(name = "Condition",
                       labels = c("Congruent", "Incongruent"))
 ```
+
+**ADDED** 
+
+Note that the `fill` here is set inside the `aes()` function, which tells ggplot to set the fill differently for each value in the `condition` column. You cannot specify which color here (e.g., `fill="red"`), like you could when you set `fill` inside the `geom_*()` function before.
 
 ## Scatterplots
 
 Scatterplots are created by calling `geom_point()` and require both an `x` and `y` variable to be specified in the mapping.
 
-```{r}
+```{r point-plot, fig.cap="Point plot of reaction time versus age."}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point()
 ```
 
 A line of best fit can be added with an additional layer that calls the function `geom_smooth()`. The default is to draw a LOESS or curved regression line, however, a linear line of best fit can be specified using `method = "lm"`. By default, `geom_smooth()` will also draw a confidence envelope around the regression line, this can be removed by adding `se = FALSE` to `geom_point()`.
 
-```{r}
+```{r smooth-plot, fig.cap="Line of best fit for reaction time versus age."}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
 
-## Grouped scatterplots
+### Grouped scatterplots
 
-Similar to the density plot, the scatterplot can also be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `colour` rather than fill and the relevant `scale_` function is added.
+Similar to the density plot, the scatterplot can also be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `color` rather than `fill` and the relevant `scale_*_*()` function is added.
 
-```{r}
-ggplot(dat_long, mapping = aes(x = rt, y = age, colour = congruency)) +
+```{r scatter-grouped, fig.cap="Grouped scatter plot of reaction time versus age by condition."}
+ggplot(dat_long, aes(x = rt, y = age, color = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
   scale_color_discrete(name = "Condition",
@@ -441,18 +545,18 @@ ggplot(dat_long, mapping = aes(x = rt, y = age, colour = congruency)) +
 
 ## Visual improvements 2
 
-### Accessible colour schemes
+### Accessible color schemes
 
-One of the drawbacks of using `ggplot` for visualisation is that the default colour scheme is not accessible (or visually appealing) - the red and green default palette is difficult for colour-blind people to differentiate, and also does not display well in grey scale. You can specify exact custom colours for your plots, however, one easy option is to use the `viridis` scale functions. These take the same arguments as their default sister functions for updating axis names and labels but display plots in contrasting colours that can be read by colour-blind people and that also print in grey scale. The `viridis` scale functions provide a number of different options for which colour scheme is used - try setting `option` to any letter from A - E to see the different sets.
+One of the drawbacks of using `ggplot` for visualisation is that the default color scheme is not accessible (or visually appealing). The red and green default palette is difficult for color-blind people to differentiate, and also does not display well in grey scale. You can specify exact custom colors for your plots, but one easy option is to use the `viridis` scale functions. These take the same arguments as their default sister functions for updating axis names and labels, but display plots in contrasting colors that can be read by color-blind people and that also print well in grey scale. The `viridis` scale functions provide a number of different options for the color -- try setting `option` to any letter from A - E to see the different sets.
 
-```{r}
-ggplot(dat_long, mapping = aes(x = rt, y = age, colour = congruency)) +
+```{r viridis, fig.cap="Use the viridis color scheme for accessibility."}
+ggplot(dat_long, aes(x = rt, y = age, color = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
+  # use "viridis_d" instead of "discrete" for better colors
   scale_color_viridis_d(name = "Condition",
-                      labels = c("Congruent", "Incongruent"),
-                      option = "E") +
-  theme_bw()
+                        labels = c("Congruent", "Incongruent"),
+                        option = "E")
 ```
 
 ### Activities 2
@@ -461,29 +565,29 @@ Before you move on try the following:
 
 -   Use `fill` to created grouped histograms that display the distributions for `rt` for each `language` group separately and also edit the fill axis labels. Try adding `position = "dodge"` to `geom_histogram()` to see what happens.
 
--   Use `scale_` functions to edit the name of the x and y-axis on the scatterplot
+-   Use `scale_*_*()` functions to edit the name of the x and y-axis on the scatterplot
 
 -   Use `se = FALSE` to remove the confidence envelope from the scatterplots
 
 -   Remove `method = "lm"` from `geom_smooth()` to produce a curved regression line.
 
--   Replace the default `scale_fill_` on the grouped density plot with the colour-blind friendly version.
+-   Replace the default `scale_fill_*()` on the grouped density plot with the color-blind friendly version.
 
 ## Boxplots
 
-As with `geom_point()`, boxplots also require an x and y-variable to be specified, however, in this case, `x` must be a discrete, or categorical variable, whilst `y` must be continuous.
+As with `geom_point()`, boxplots also require an x and y-variable to be specified. In this case, `x` must be a discrete, or categorical variable, whilst `y` must be continuous.
 
-```{r boxplot1}
-ggplot(dat_long, aes(x = congruency, y = acc)) +
+```{r boxplot1, fig.cap="Basic boxplot."}
+ggplot(dat_long, aes(x = condition, y = acc)) +
   geom_boxplot()
 ```
 
-## Grouped boxplots
+### Grouped boxplots
 
 As with histograms and density plots, `fill` can be used to create grouped boxplots:
 
 ```{r boxplot2}
-ggplot(dat_long, aes(x = congruency, y = acc, fill = language)) +
+ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
   geom_boxplot() +
   scale_fill_viridis_d(option = "D",
                        name = "Group",
@@ -494,12 +598,12 @@ ggplot(dat_long, aes(x = congruency, y = acc, fill = language)) +
   scale_y_continuous(name = "Accuracy")
 ```
 
-## Violin-plots
+## Violin plots
 
-Violin-plots display the distribution of a dataset and are so-called because with a normally distributed dataset, the shape they make will look something like a violin. They are essentially a mirrored histogram on its side and can be created by calling `geom_violin()`. Note that the below code is identical to the code used to draw the boxplots above, except for the call to `geom_violin()` rather than `geom_boxplot().`
+Violin plots display the distribution of a dataset and can be created by calling `geom_violin()`. They are so-called because the shape they make sometimes looks something like a violin. They are essentially a mirrored density plot on its side. Note that the below code is identical to the code used to draw the boxplots above, except for the call to `geom_violin()` rather than `geom_boxplot().`
 
-```{r violin1}
-ggplot(dat_long, aes(x = congruency, y = acc, fill = language)) +
+```{r violin1, fig.cap="Violin plot."}
+ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
   geom_violin() +
   scale_fill_viridis_d(option = "D",
                        name = "Group",
@@ -516,41 +620,42 @@ Commonly, rather than visualising distributions of raw data researchers will wis
 
 Rather than calling a specified geom, we call `stat_summary()`.
 
--   `fun` specifies the summary function we wish to use, in this case, `mean`
+-   `fun` specifies the a summary function that gives us the y-value we want to plot, in this case, `mean`
 
 -   `geom` specifies what shape or plot we want to use to display the summary. For the first layer we will specify `bar`.
 
-```{r badbar1}
-ggplot(dat_long, aes(x = congruency, y = rt)) +
+```{r badbar1, fig.cap="Bar plot of means."}
+ggplot(dat_long, aes(x = condition, y = rt)) +
   stat_summary(fun = "mean", geom = "bar")
 ```
 
 To add the error bars, another layer is added with a second call to `stat_summary`. This time, the function represents the type of error bars we wish to draw, you can choose from `mean_se` for standard error, `mean_cl_normal` for confidence intervals, or `mean_sdl` for standard deviation. `width` controls the width of the error bars - try changing the value to see what happens.
 
-NOTE FOR TEAM: CAN ANYONE GIVE A GOOD EXPLANATION OF WHY YOU HAVE TO USE FUN.DATA NOT FUN FOR THE ERROR BARS?
+-   `fun.data` specifies the a summary function that gives us the y-values we want to plot plus their minimum and maximum values, in this case, `mean_se`
 
-```{r badbar2}
-ggplot(dat_long, aes(x = congruency, y = rt)) +
+```{r badbar2, fig.cap="Bar plot of means with error bars representing SE."}
+ggplot(dat_long, aes(x = condition, y = rt)) +
   stat_summary(fun = "mean", geom = "bar") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2)
 ```
 
 ## Violin-boxplot
 
-The power of the layered system is further highlighted by the ability to combine different types of plots. For example, rather than using a bar chart with error bars, one can easily create a single plot that include a violin plot, boxplot, and the mean with error bars. This plot requires just two extra lines of code to produce than the bar plot with error bars, yet the amount of information displayed is vastly superior.
+The power of the layered system is further highlighted by the ability to combine different types of plots. For example, rather than using a bar chart with error bars, one can easily create a single plot that includes a violin plot, boxplot, and the mean with error bars. This plot requires just two extra lines of code to produce than the bar plot with error bars, yet the amount of information displayed is vastly superior.
 
-```{r viobox1}
-ggplot(dat_long, aes(x = congruency, y= rt)) +
+```{r viobox1, fig.cap="Violin-boxplot with mean dot and standard error bars."}
+ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_violin() +
-  geom_boxplot(width = .2) +
+  # remove the median line with fatten = NULL
+  geom_boxplot(width = .2, fatten = NULL) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1)
 ```
 
 It is important to note that the order of the layers matters. For example, if we call `geom_boxplot()` followed by `geom_violin()`, we get the following mess:
 
-```{r viobox1b}
-ggplot(dat_long, aes(x = congruency, y= rt)) +
+```{r viobox1b, fig.cap="Plot with the geoms in the wrong order."}
+ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_boxplot() +  
   geom_violin() +
   stat_summary(fun = "mean", geom = "point") +
@@ -559,22 +664,22 @@ ggplot(dat_long, aes(x = congruency, y= rt)) +
 
 ## Grouped violin-boxplots
 
-As with previous plots, another variable can be mapped to `fill` for the violin-boxplot, however, simply adding `fill` to the mapping causes the different components of the plot to become misaligned:
+As with previous plots, another variable can be mapped to `fill` for the violin-boxplot, however, simply adding `fill` to the mapping causes the different components of the plot to become misaligned because they have different default positions:
 
-```{r viobox2}
-ggplot(dat_long, aes(x = congruency, y= rt, fill = language)) +
+```{r viobox2, fig.cap="Grouped violin-boxplots without repositioning."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
-  geom_boxplot(width = .2) +
+  geom_boxplot(width = .2, fatten = NULL) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1)
 ```
 
 To rectify this we need to adjust the argument `position` for each of the misaligned layers. `position_dodge()` instructs R to move (dodge) the position of the plot component by the specified value - what value you need can sometimes take trial and error.
 
-```{r viobox3}
-ggplot(dat_long, aes(x = congruency, y= rt, fill = language)) +
+```{r viobox3, fig.cap="Grouped violin-boxplots with repositioning."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
-  geom_boxplot(width = .2, position = position_dodge(.9)) +
+  geom_boxplot(width = .2, fatten = NULL, position = position_dodge(.9)) +
   stat_summary(fun = "mean", geom = "point", 
                position = position_dodge(.9)) +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
@@ -584,12 +689,12 @@ ggplot(dat_long, aes(x = congruency, y= rt, fill = language)) +
 
 ## Visual improvements 3
 
-Combining multiple type of plots can present an issue with the colours, particularly when the viridis scheme is used - in the below example it is hard to make out the black lines of the boxplot and the mean/errorbars.
+Combining multiple type of plots can present an issue with the colors, particularly when the viridis scheme is used - in the below example it is hard to make out the black lines of the boxplot and the mean/errorbars.
 
-```{r viobox4}
-ggplot(dat_long, aes(x = congruency, y= rt, fill = language)) +
+```{r viobox4, fig.cap="A color scheme that makes lines difficult to see."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
-  geom_boxplot(width = .2, position = position_dodge(.9)) +
+  geom_boxplot(width = .2, fatten = NULL, position = position_dodge(.9)) +
   stat_summary(fun = "mean", geom = "point", 
                position = position_dodge(.9)) +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1,
@@ -598,24 +703,24 @@ ggplot(dat_long, aes(x = congruency, y= rt, fill = language)) +
   theme_minimal()
 ```
 
-There are a number of solutions to this problem. First, we can change the colour of individual geoms by adding `colour = "colour"` to each relevant geom:
+There are a number of solutions to this problem. First, we can change the color of individual geoms by adding `color = "color"` to each relevant geom:
 
-```{r viobox5}
-ggplot(dat_long, aes(x = congruency, y= rt, fill = congruency)) +
+```{r viobox5, fig.cap="Manually changing the line colors."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = condition)) +
   geom_violin() +
-  geom_boxplot(width = .2, colour = "red") +
-  stat_summary(fun = "mean", geom = "point", colour = "red") +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1, colour = "red") +
+  geom_boxplot(width = .2, fatten = NULL, color = "grey") +
+  stat_summary(fun = "mean", geom = "point", color = "grey") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1, color = "grey") +
   scale_fill_viridis_d(option = "E") +
   theme_minimal()
 ```
 
-We can also keep the original colours but adjust the transparency of each layer using `alpha`, again, the exact values needed can take trial and error:
+We can also keep the original colors but adjust the transparency of each layer using `alpha`. Again, the exact values needed can take trial and error:
 
-```{r viobox6}
-ggplot(dat_long, aes(x = congruency, y= rt, fill = congruency)) +
+```{r viobox6, fig.cap="Using transparency on the fill color."}
+ggplot(dat_long, aes(x = condition, y= rt, fill = condition)) +
   geom_violin(alpha = .4) +
-  geom_boxplot(width = .2, alpha = .5) +
+  geom_boxplot(width = .2, fatten = NULL, alpha = .5) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
   scale_fill_viridis_d(option = "E") +
@@ -627,41 +732,52 @@ ggplot(dat_long, aes(x = congruency, y= rt, fill = congruency)) +
 Before you go on, do the following:
 
 -   Review all the code you have run so far. Try to identify the commonalities between each plot's code and the bits of the code you might change if you were using a different dataset.
+
 -   Take a moment to recognise the complexity of the code you are now able to read.
--   In `stat_summary`, try changing `fun` to `median.`
+
+-   In `stat_summary` for geom = "point", try changing `fun` to `median`
+
+-   In `stat_summary` for geom = "errorbar", try changing `fun.data` to `mean_cl_normal` (for 95% CI)
+
 -   Go back to the grouped density plots and try changing the transparency with `alpha`.
 
 ## Interaction plots
 
 Interaction plots are commonly used to help display or interpret a factorial design. Just like with the bar chart of means, interaction plots represent data summaries and so they are built up with a series of calls to `stat_summary()`.
 
--   `shape` acts much like `fill` in previous plots, except that rather than producing different colour fills for each level of the IV, the data points are given different shapes.
+-   `shape` acts much like `fill` in previous plots, except that rather than producing different color fills for each level of the IV, the data points are given different shapes.
 
-I DON'T KNOW WHY THIS CODE ISN'T LETTING ME ADJUST THE VIRIDIS COLOUR OPTION, WHEN I CHANGE IT NOTHING HAPPENS
+-   `size` lets you change the size of lines and points. You usually don't want different groups to be different sizes, so this option is set inside the relevant `geom_*()` function, not inside the `aes()` function.
 
-```{r}
-ggplot(dat_long, aes(x = congruency, y = rt, 
+-   `scale_color_manual()` works much like `scale_color_discrete()` except that it lets you specifiy the color values manually.
+
+I DON'T KNOW WHY THIS CODE ISN'T LETTING ME ADJUST THE VIRIDIS color OPTION, WHEN I CHANGE IT NOTHING HAPPENS
+LISA - it changes for me, but this might be a place to introduce scale_color_manual() ?
+
+```{r ixn-plot, fig.cap="Interaction plot."}
+ggplot(dat_long, aes(x = condition, y = rt, 
+                     shape = language,
                      group = language,
-                     colour = language)) +
-  stat_summary(fun = "mean", geom = "point") +
+                     color = language)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
   stat_summary(fun = "mean", geom = "line") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
-  scale_colour_viridis_d(option = "E") +
+  scale_color_manual(values = c("blue", "darkorange")) +
   theme_classic()
 ```
 
 `ggplot` will scale the axis start and end points to the data. If you wish to adjust these, you can use the `scale_` functions, for example, the below code specifies the `limits` (start and end points) of the y-axis should be 0 - 750 ms.
 
 ```{r}
-ggplot(dat_long, aes(x = congruency, y = rt, 
+ggplot(dat_long, aes(x = condition, y = rt, 
                      group = language,
-                     colour = language)) +
+                     color = language)) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun = "mean", geom = "line") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
-  scale_colour_viridis_d(option = "E") +
+  scale_color_manual(values = c("blue", "darkorange")) +
   theme_classic() +
-  scale_y_continuous(limits = c(0,750))
+  scale_y_continuous(limits = c(0, 750))
 ```
 
 -   Raincloud plots
@@ -670,14 +786,8 @@ ggplot(dat_long, aes(x = congruency, y = rt,
 -   Facets
 -   p + notation explain what it means, use of layers
 
-References
-
-So I don't know how to do references in Markdown so I'mma just dump them all here and hope that someone else deals with them :)
-
-[A Layered Grammar of Graphics (byrneslab.net)](https://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf)
-
-[How the BBC Visual and Data Journalism team works with graphics in R \| by BBC Visual and Data Journalism \| BBC Visual and Data Journalism \| Medium](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)
-
-[56 \| Amanda Cox on Working With R, NYT Projects, Favorite Data -- Data Stories](https://datastori.es/ds-56-amanda-cox-nyt/)
 
 ## Additional resources
+
+
+## References

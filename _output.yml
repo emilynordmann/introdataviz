@@ -1,3 +1,8 @@
+bookdown::html_document2:
+  toc: true
+  toc_float: true
+  number_sections: false
+  df_print: kable
 bookdown::gitbook: 
   default: true
   smart: false
@@ -10,7 +15,7 @@ bookdown::gitbook:
       collapse: section
       scroll_highlight: yes
       before: |
-        <li><a href="./">Book Template</a></li>
+        <li><a href="./">Intro Viz</a></li>
       after: |
         <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
             target="blank"><img alt="Creative Commons License" 
