@@ -1,8 +1,3 @@
-bookdown::html_document2:
-  toc: true
-  toc_float: true
-  number_sections: false
-  df_print: kable
 bookdown::gitbook: 
   default: true
   smart: false

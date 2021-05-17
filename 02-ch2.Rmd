@@ -1,0 +1,219 @@
+# Chapter 2
+
+## Loading packages
+
+To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load any packages you want to use with `library()` every time you start R. When you load the tidyverse, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.
+
+```{r load, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(patchwork)
+```
+
+## Loading data
+
+To load the simulated data we use the function `read_csv()` from the `readr` tidyverse package.
+
+```{r load3, message=FALSE}
+dat <- read_csv(file = "stroop_data.csv")
+```
+
+This code has created an object `dat` that contains the data from the file `stroop_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…does not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error `could not find function` it means you have either not loaded the correct package, or you have made a typo in the function name.
+
+To view the dataset, click `dat` in the environment pane or run `View(dat)` in the console. The environment pane also tells us that the object `dat` has 100 observations of 7 variables, and is a useful quick check to ensure one has loaded the right data.
+
+## Handling numeric factors
+
+Another useful check is to use the functions `summary()` and `str()` (structure) to check what kind of data R thinks is in each column. Run the below code and look at the output of each, comparing it with what you know about the simulated dataset:
+
+```{r check, eval = FALSE}
+summary(dat)
+str(dat)        
+```
+
+Because the factor `language` is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels. The `mutate()` function makes new columns in a data table, or overwrites a column, and the `factor()` function translates the language column into a factor with the labels "monolingual" and "bilingual"). You can also use the `factor()` function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.
+
+```{r}
+dat <- dat %>%
+  mutate(language = factor(
+    x = language, # column to translate
+    levels = c(1, 2), # values of the original data in preferred order
+    labels = c("monolingual", "bilingual") # labels for display
+  ))
+```
+
+## Argument names
+
+Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering `?function_name` into the console, although be aware that learning to read the help documentation in R is a skill in itself. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:
+
+```{r arg-names, eval = FALSE}
+dat <- dat %>%
+  mutate(language = factor(language, 
+                           c(1, 2), 
+                           c("monolingual", "bilingual")))
+```
+
+One of the barriers to learning R is that many of the "helpful" examples and solutions you will find online do not include argument names and so for novice learners are completely opaque. In this tutorial, we will include the argument names the first time a function is used, however, we will remove some argument names from subsequent examples to facilitate knowledge transfer to the help available online.
+
+
+## Demographic information
+
+We can calculate and plot some basic descriptive information about the demographics of our sample using the imported dataset without any additional wrangling. The code below uses the `%>%` operator, otherwise known as the *pipe,* and can mostly useful be translated as "*and then"*. For example, the below code can be read as:
+
+-   Start with the dataset `dat` *and then;*
+
+-   Group it by the variable `language` *and then;*
+
+-   Count the number of observations in each group
+
+```{r demo_stats}
+dat %>%
+  group_by(language) %>%
+  count()
+```
+
+`group_by()` does not result in surface level changes to the dataset, rather, it changes the underlying structure so that if groups are specified, whatever function is called next is peformed separately on each level of rhe grouping variable. The above code therefore counts the number of observations in each group of the variable `language`. If you just need the total number of observations, you could remove the `group_by()` line which would perform the operation on the whole dataset, rather than by groups:
+
+```{r demo_stats2}
+dat %>%
+  count()
+```
+
+Similarly, we may wish to calculate the mean age (and SD) of the sample and we can do so using the function `summarise()` from the `dplyr` tidyverse package.
+
+```{r age1}
+dat %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+This code produces summary data in the form of a column named `mean_age` that contains the result of calculating the mean of the variable `age.` It then creates `sd_age` which does the same but for standard deviation. Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the `<-` notation and print it later by typing the object name.
+
+```{r age2}
+age_stats <- dat %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+Finally, the `group_by()` function will work in the same way when calculating summary statistics - the output of the function that is called after `group_by()` will be produced for each level of the grouping variable.
+
+```{r demo3}
+dat %>%
+  group_by(language) %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age))
+```
+
+
+## Bar chart of counts
+
+For our first plot, we will make a simple bar chart of counts that shows the number of participants in each `language` group.
+
+```{r bar1, fig.cap = "Bar chart of counts."}
+ggplot(data = dat, mapping = aes(x = language)) +
+  geom_bar()
+```
+
+The first line of code sets up the first layer and base of the plot.
+
+-   `data` specifies which data source to use for the plot
+
+-   `mapping` specifies which variables to map to which aesthetics (`aes`) of the plot. Aesthetic mappings describe how variables in the data are mapped to visual properties (aesthetics) of geoms.
+
+-   `x` specifies which variable to put on the x-axis
+
+The second line of code draws the plot, and is connected to the base code with `+`. In this case, we ask for `geom_bar()`. Each `geom`, or type of plot, has an associated default statistic. For bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts, when given an `x` variable, `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
+
+If your data already have the counts that you want to plot, you can set `stat="identity"` inside of `geom_bar()` to use that number instead of counting rows. Notice that we are now omitting the names of the arguments `data` and `mapping` in the `ggplot()` function.
+
+```{r bar-precalc, fig.cap = "Bar chart of pre-calculated counts."}
+count_dat <- dat %>%
+  group_by(language) %>%
+  count()
+
+ggplot(count_dat, aes(x = language, y = n)) +
+  geom_bar(stat="identity")
+```
+
+
+## Histogram
+
+The code to plot a histogram `age` is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with `age` on the x-axis:
+
+```{r histogram1, fig.cap = "Histogram of ages."}
+ggplot(dat, aes(x = age)) +
+  geom_histogram()
+```
+
+By default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divides the x-axis into is 30, but we may wish to pick a more appropriate value for our dataset. If we want one bar to equal one year, we can adjust `binwidth = 1`.
+
+```{r histogram2, fig.cap = "Histogram of ages where each bin covers one year."}
+ggplot(dat, aes(x = age)) +
+  geom_histogram(binwidth = 1)
+```
+
+## Customisation 1
+
+So far we have made basic plots with the default visual appearance, before we move on to the experimental data we will introduce some simple visual customisation options.
+
+### Editing axis names and labels
+
+To edit axis names and labels we can use `scale_` functions. There are a number of different scale functions and which one you use depends on which aesthetic you wish to edit (e.g., x, y, fill, color) and the type of data it represents (discrete, continuous).
+
+For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. Each axis has its own function, and its own layer:
+
+```{r bar3, fig.cap = "Bar chart with custom axis labels."}
+ggplot(dat, aes(language)) +
+  geom_bar() +
+  scale_x_discrete(name = "Language group", 
+                   labels = c("Monolingual", "Bilingual")) +
+  scale_y_continuous(name = "Number of participants",
+                     breaks = c(0,10,20,30,40,50))
+```
+
+-   `name` controls the overall name of the axis
+
+-   `labels` controls the names of the conditions with a discrete variable.
+
+-   `c()` is a function that you will see in many different contexts and is used to combine multiple values. In this case, the labels we want to apply are combined within `c()` by enclosing each word within their own parenthesis, and are in the order displayed on the plot.
+
+-   `breaks` controls the tick marks on the axis. Again because there are multiple values, they are enclosed within `c()` although because they are numeric and not text, they do not need quotation marks. 
+
+### Changing colors
+
+You can control colours used to display the bars by setting `fill` (internal colour)  and `colour` (outline colour) inside the geom function. This methods is only for changing **all** the bars; we will show you later how to set fill or color separately for different groups.
+
+```{r histogram-fill-color, fig.cap="Histogram with custom colors for bar fill and line colors."}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "white", colour = "black") +
+  scale_x_continuous(name = "Participant age (years)")
+```
+
+### Adding a theme
+
+`ggplot` has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis label to the histogram, but also applies `theme_minimal()`. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the additional resources.
+
+```{r histogram-theme, fig.cap="Histogram with a custom theme."}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_minimal()
+```
+
+You can set the theme globally so that all subsequent plots use a theme.
+
+```{r}
+theme_set(theme_minimal())
+```
+
+If you wished to return to the default theme, change the above to specify `theme_grey()`.
+
+## Activities 1
+
+Before you move on try the following:
+
+-   Add a layer that edits the **name** of the y-axis histogram label to `Number of participants`.
+
+-   Change the colour of the bars in the bar chart to red.
+
+-   Remove `theme_minimal()` and instead apply one of the other available themes (start typing `theme_` and the auto-complete will show you the available options).
+
