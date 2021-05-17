@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Chapter 3 | Data visulisation using R, for researchers who don’t use R</title>
-  <meta name="description" content="Chapter 3 Chapter 3 | Data visulisation using R, for researchers who don’t use R" />
+  <title>Chapter 3 Chapter 3 | Data visualisation using R, for researchers who don’t use R</title>
+  <meta name="description" content="Abstract here." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Chapter 3 | Data visulisation using R, for researchers who don’t use R" />
+  <meta property="og:title" content="Chapter 3 Chapter 3 | Data visualisation using R, for researchers who don’t use R" />
   <meta property="og:type" content="book" />
   
   
-  
+  <meta property="og:description" content="Abstract here." />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Chapter 3 | Data visulisation using R, for researchers who don’t use R" />
+  <meta name="twitter:title" content="Chapter 3 Chapter 3 | Data visualisation using R, for researchers who don’t use R" />
   
-  
+  <meta name="twitter:description" content="Abstract here." />
   
 
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-11-05" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -142,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Intro Viz</a></li>
 
 <li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#why-r-for-data-visualisation"><i class="fa fa-check"></i><b>1.1</b> Why R for data visualisation?</a></li>
@@ -239,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data visulisation using R, for researchers who don’t use R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data visualisation using R, for researchers who don’t use R</a>
           </h1>
         </div>
 
@@ -324,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_cong</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(2014)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
+<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_cong</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(<a href="chapter-5.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
 <p>Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For our example dataset, adhering to these rules would produce Table <a href="chapter-3.html#tab:long">3.2</a>. Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.</p>
 <table>
 <caption><span id="tab:long">Table 3.2: </span>Data in the correct format for visualization.</caption>

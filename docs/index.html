@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Chapter 5 | Data visualisation using R, for researchers who don’t use R</title>
+  <title>Data visualisation using R, for researchers who don’t use R</title>
   <meta name="description" content="Abstract here." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Chapter 5 | Data visualisation using R, for researchers who don’t use R" />
+  <meta property="og:title" content="Data visualisation using R, for researchers who don’t use R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Chapter 5 | Data visualisation using R, for researchers who don’t use R" />
+  <meta name="twitter:title" content="Data visualisation using R, for researchers who don’t use R" />
   
   <meta name="twitter:description" content="Abstract here." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-4.html"/>
 
+<link rel="next" href="introduction.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -217,7 +217,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
 <ul>
-<li class="chapter" data-level="5.2" data-path="05-ch5.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
+<li class="chapter" data-level="5.2" data-path="index.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
 <ul>
 <li class="chapter" data-level="5.2.1" data-path="chapter-5.html"><a href="chapter-5.html#renaming-variables"><i class="fa fa-check"></i><b>5.2.1</b> Renaming variables</a></li>
 <li class="chapter" data-level="5.2.2" data-path="chapter-5.html"><a href="chapter-5.html#custom-themes"><i class="fa fa-check"></i><b>5.2.2</b> Custom themes</a></li>
@@ -248,113 +248,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-5" class="section level1" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Chapter 5</h1>
-<div id="interaction-plots" class="section level2" number="5.1">
-<h2><span class="header-section-number">5.1</span> Interaction plots</h2>
-<p>Interaction plots are commonly used to help display or interpret a factorial design. Just like with the bar chart of means, interaction plots represent data summaries and so they are built up with a series of calls to <code>stat_summary()</code>.</p>
-<ul>
-<li><p><code>shape</code> acts much like <code>fill</code> in previous plots, except that rather than producing different colour fills for each level of the IV, the data points are given different shapes.</p></li>
-<li><p><code>size</code> lets you change the size of lines and points. You usually don’t want different groups to be different sizes, so this option is set inside the relevant <code>geom_*()</code> function, not inside the <code>aes()</code> function.</p></li>
-<li><p><code>scale_color_manual()</code> works much like <code>scale_color_discrete()</code> except that it lets you specify the colour values manually.</p></li>
-</ul>
-<p>I DON’T KNOW WHY THIS CODE ISN’T LETTING ME ADJUST THE VIRIDIS color OPTION, WHEN I CHANGE IT NOTHING HAPPENS
-LISA - it changes for me, but this might be a place to introduce scale_color_manual() ?</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="chapter-5.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, </span>
-<span id="cb57-2"><a href="chapter-5.html#cb57-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">shape =</span> language,</span>
-<span id="cb57-3"><a href="chapter-5.html#cb57-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group =</span> language,</span>
-<span id="cb57-4"><a href="chapter-5.html#cb57-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> language)) <span class="sc">+</span></span>
-<span id="cb57-5"><a href="chapter-5.html#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb57-6"><a href="chapter-5.html#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="sc">+</span></span>
-<span id="cb57-7"><a href="chapter-5.html#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb57-8"><a href="chapter-5.html#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkorange&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb57-9"><a href="chapter-5.html#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:ixn-plot"></span>
-<img src="05-ch5_files/figure-html/ixn-plot-1.png" alt="Interaction plot." width="100%" />
-<p class="caption">
-Figure 5.1: Interaction plot.
-</p>
+<div id="header">
+<h1 class="title">Data visualisation using R, for researchers who don’t use R</h1>
+<p class="author"><em>Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine</em></p>
+<p class="date"><em>2021-05-17</em></p>
 </div>
-<p><code>ggplot</code> will scale the axis start and end points to the data. If you wish to adjust these, you can use the <code>scale_</code> functions, for example, the below code specifies the <code>limits</code> (start and end points) of the y-axis should be 0 - 750 ms.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="chapter-5.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, </span>
-<span id="cb58-2"><a href="chapter-5.html#cb58-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">group =</span> language,</span>
-<span id="cb58-3"><a href="chapter-5.html#cb58-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> language)) <span class="sc">+</span></span>
-<span id="cb58-4"><a href="chapter-5.html#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-5"><a href="chapter-5.html#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>) <span class="sc">+</span></span>
-<span id="cb58-6"><a href="chapter-5.html#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb58-7"><a href="chapter-5.html#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;darkorange&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb58-8"><a href="chapter-5.html#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb58-9"><a href="chapter-5.html#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">750</span>))</span></code></pre></div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="05-ch5_files/figure-html/unnamed-chunk-2-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
-<p class="caption">
-Figure 5.2: <strong>CAPTION THIS FIGURE!!</strong>
-</p>
-</div>
-<ul>
-<li>Raincloud plots</li>
-<li>Heatmaps</li>
-<li>Saving plots</li>
-<li>Facets with scatterplot -</li>
-<li>p + notation explain what it means, use of layers</li>
-<li>Getting rid of legends</li>
-</ul>
-<p>ridge
-Alluvial
-raincloud
-split-violin</p>
+<div id="overview" class="section level1 unnumbered">
+<h1>Overview</h1>
+<p>Please cite this book as:</p>
 
 </div>
-</div>
-
-
-
-<h2><span class="header-section-number">2</span> Additional resources</h2>
-<div id="renaming-variables" class="section level3" number="5.2.1">
-<h3><span class="header-section-number">2.1</span> Renaming variables</h3>
-</div>
-<div id="custom-themes" class="section level3" number="5.2.2">
-<h3><span class="header-section-number">2.2</span> Custom themes</h3>
-</div>
-<div id="pivot-longer-examples" class="section level3" number="5.2.3">
-<h3><span class="header-section-number">2.3</span> Pivot longer examples</h3>
-<p>With faux simulation code</p>
-
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-NYT-R" class="csl-entry">
-Bertini, Enrico, and Moritz Stefaner. 2015. <span>“Amanda Cox on Working with r, NYT Projects, Favorite Data [Podcast].”</span> <em>Data Stories</em>. <a href="https://datastori.es/ds-56-amanda-cox-nyt/">https://datastori.es/ds-56-amanda-cox-nyt/</a>.
-</div>
-<div id="ref-BBC-R" class="csl-entry">
-Visual, BBC, and Data Journalism. 2019. <span>“How the BBC Visual and Data Journalism Team Works with Graphics in r.”</span> <em>Medium</em>. <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535</a>.
-</div>
-<div id="ref-wickham2010layered" class="csl-entry">
-Wickham, Hadley. 2010. <span>“A Layered Grammar of Graphics.”</span> <em>Journal of Computational and Graphical Statistics</em> 19 (1): 3–28.
-</div>
-<div id="ref-ggplot2" class="csl-entry">
-———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="https://ggplot2.tidyverse.org">https://ggplot2.tidyverse.org</a>.
-</div>
-<div id="ref-tidyverse" class="csl-entry">
-———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
-</div>
-<div id="ref-wickham2014tidy" class="csl-entry">
-Wickham, Hadley, and others. 2014. <span>“Tidy Data.”</span> <em>Journal of Statistical Software</em> 59 (10): 1–23.
-</div>
-<div id="ref-wilkinson2005graph" class="csl-entry">
-Wilkinson, Leland, Anushka Anand, and Robert Grossman. 2005. <span>“Graph-Theoretic Scagnostics.”</span> In <em>IEEE Symposium on Information Visualization (InfoVis 05)</em>, 157–58. IEEE Computer Society.
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
 <div class="psyteachr_footer">
   
 </div>
@@ -465,8 +368,8 @@ window.onload = function() {
           </div>
         </div>
       </div>
-<a href="chapter-4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
+<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
