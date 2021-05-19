@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-05-17" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -214,15 +214,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>5</b> Chapter 5</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="chapter-5.html"><a href="chapter-5.html#interaction-plots"><i class="fa fa-check"></i><b>5.1</b> Interaction plots</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
+<li class="chapter" data-level="5.2" data-path="chapter-5.html"><a href="chapter-5.html#combined-interaction-plots"><i class="fa fa-check"></i><b>5.2</b> Combined interaction plots</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5.html"><a href="chapter-5.html#facets"><i class="fa fa-check"></i><b>5.3</b> Facets</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5.html"><a href="chapter-5.html#saving-plots"><i class="fa fa-check"></i><b>5.4</b> Saving plots</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5.html"><a href="chapter-5.html#exporting-plots"><i class="fa fa-check"></i><b>5.5</b> Exporting plots</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5.html"><a href="chapter-5.html#multiple-plots"><i class="fa fa-check"></i><b>5.6</b> Multiple plots</a>
 <ul>
-<li class="chapter" data-level="5.2" data-path="01-ch1.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="chapter-5.html"><a href="chapter-5.html#renaming-variables"><i class="fa fa-check"></i><b>5.2.1</b> Renaming variables</a></li>
-<li class="chapter" data-level="5.2.2" data-path="chapter-5.html"><a href="chapter-5.html#custom-themes"><i class="fa fa-check"></i><b>5.2.2</b> Custom themes</a></li>
-<li class="chapter" data-level="5.2.3" data-path="chapter-5.html"><a href="chapter-5.html#pivot-longer-examples"><i class="fa fa-check"></i><b>5.2.3</b> Pivot longer examples</a></li>
+<li class="chapter" data-level="5.6.1" data-path="chapter-5.html"><a href="chapter-5.html#combining-two-plots"><i class="fa fa-check"></i><b>5.6.1</b> Combining two plots</a></li>
+<li class="chapter" data-level="5.6.2" data-path="chapter-5.html"><a href="chapter-5.html#combining-three-or-more-plots"><i class="fa fa-check"></i><b>5.6.2</b> Combining three or more plots</a></li>
 </ul></li>
+<li class="chapter" data-level="5.7" data-path="chapter-5.html"><a href="chapter-5.html#customisation-part-4"><i class="fa fa-check"></i><b>5.7</b> Customisation part 4</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="additional-resources.html"><a href="additional-resources.html#renaming-variables"><i class="fa fa-check"></i><b>A.1</b> Renaming variables</a></li>
+<li class="chapter" data-level="A.2" data-path="additional-resources.html"><a href="additional-resources.html#custom-themes"><i class="fa fa-check"></i><b>A.2</b> Custom themes</a></li>
+<li class="chapter" data-level="A.3" data-path="additional-resources.html"><a href="additional-resources.html#pivot-longer-examples"><i class="fa fa-check"></i><b>A.3</b> Pivot longer examples</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -256,11 +268,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="why-r-for-data-visualisation" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Why R for data visualisation?</h2>
 <p>Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software – reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis (REFs) and we will not repeat these arguments here. However, there is an additional selfish benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.</p>
-<p>In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting to novice users of R, if one can survive the initial learning curve, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has led to news outlets such as the BBC <span class="citation">(<a href="chapter-5.html#ref-BBC-R" role="doc-biblioref">Visual and Journalism 2019</a>)</span> and the New York Times <span class="citation">(<a href="chapter-5.html#ref-NYT-R" role="doc-biblioref">Bertini and Stefaner 2015</a>)</span> to adopt R as their preferred data visualisation tool.</p>
+<p>In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting to novice users of R, if one can survive the initial learning curve, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has led to news outlets such as the BBC <span class="citation">(<a href="additional-resources.html#ref-BBC-R" role="doc-biblioref">Visual and Journalism 2019</a>)</span> and the New York Times <span class="citation">(<a href="additional-resources.html#ref-NYT-R" role="doc-biblioref">Bertini and Stefaner 2015</a>)</span> to adopt R as their preferred data visualisation tool.</p>
 </div>
 <div id="a-layered-grammar-of-graphics" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> A layered grammar of graphics</h2>
-<p>There are multiple approaches to data visualisation in R; in this paper we will be using the popular package<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <code>ggplot2</code> <span class="citation">(<a href="chapter-5.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> which is part of the larger <code>tidyverse</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <span class="citation">(<a href="chapter-5.html#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span> collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics <span class="citation">(<a href="chapter-5.html#ref-wilkinson2005graph" role="doc-biblioref">Wilkinson, Anand, and Grossman 2005</a>)</span> is a standardised way to describe the components of a graphic. <code>ggplot2</code> uses a layered grammar of graphics <span class="citation">(<a href="chapter-5.html#ref-wickham2010layered" role="doc-biblioref">Wickham 2010</a>)</span>, in which plots are built up in a series of layers. This approach may be familiar to users of MATLAB but can be unintuitive to those used to creating plots in Excel or SPSS.</p>
+<p>There are multiple approaches to data visualisation in R; in this paper we will be using the popular package<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <code>ggplot2</code> <span class="citation">(<a href="additional-resources.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> which is part of the larger <code>tidyverse</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <span class="citation">(<a href="additional-resources.html#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span> collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics <span class="citation">(<a href="additional-resources.html#ref-wilkinson2005graph" role="doc-biblioref">Wilkinson, Anand, and Grossman 2005</a>)</span> is a standardised way to describe the components of a graphic. <code>ggplot2</code> uses a layered grammar of graphics <span class="citation">(<a href="additional-resources.html#ref-wickham2010layered" role="doc-biblioref">Wickham 2010</a>)</span>, in which plots are built up in a series of layers. This approach may be familiar to users of MATLAB but can be unintuitive to those used to creating plots in Excel or SPSS.</p>
 <p>Figure <a href="introduction.html#fig:layers">1.1</a> displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a <code>geom</code>) that is desired for these variables is specified (layer 3) - in this case <code>geom_point()</code> is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).</p>
 <div class="figure" style="text-align: center"><span id="fig:layers"></span>
 <img src="01-ch1_files/figure-html/layers-1.png" alt="Evolution of a layered plot" width="100%" />

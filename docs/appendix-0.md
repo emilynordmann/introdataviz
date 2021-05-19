@@ -1,11 +1,11 @@
 # (APPENDIX) Appendices {-} 
 
-## Additional resources
+# Additional resources
 
-### Renaming variables
+## Renaming variables
 
-### Custom themes
+## Custom themes
 
-### Pivot longer examples
+## Pivot longer examples
 
 With faux simulation code

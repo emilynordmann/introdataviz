@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-05-17" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -214,15 +214,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>5</b> Chapter 5</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="chapter-5.html"><a href="chapter-5.html#interaction-plots"><i class="fa fa-check"></i><b>5.1</b> Interaction plots</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
+<li class="chapter" data-level="5.2" data-path="chapter-5.html"><a href="chapter-5.html#combined-interaction-plots"><i class="fa fa-check"></i><b>5.2</b> Combined interaction plots</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5.html"><a href="chapter-5.html#facets"><i class="fa fa-check"></i><b>5.3</b> Facets</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5.html"><a href="chapter-5.html#saving-plots"><i class="fa fa-check"></i><b>5.4</b> Saving plots</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5.html"><a href="chapter-5.html#exporting-plots"><i class="fa fa-check"></i><b>5.5</b> Exporting plots</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5.html"><a href="chapter-5.html#multiple-plots"><i class="fa fa-check"></i><b>5.6</b> Multiple plots</a>
 <ul>
-<li class="chapter" data-level="5.2" data-path="04-ch4.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="chapter-5.html"><a href="chapter-5.html#renaming-variables"><i class="fa fa-check"></i><b>5.2.1</b> Renaming variables</a></li>
-<li class="chapter" data-level="5.2.2" data-path="chapter-5.html"><a href="chapter-5.html#custom-themes"><i class="fa fa-check"></i><b>5.2.2</b> Custom themes</a></li>
-<li class="chapter" data-level="5.2.3" data-path="chapter-5.html"><a href="chapter-5.html#pivot-longer-examples"><i class="fa fa-check"></i><b>5.2.3</b> Pivot longer examples</a></li>
+<li class="chapter" data-level="5.6.1" data-path="chapter-5.html"><a href="chapter-5.html#combining-two-plots"><i class="fa fa-check"></i><b>5.6.1</b> Combining two plots</a></li>
+<li class="chapter" data-level="5.6.2" data-path="chapter-5.html"><a href="chapter-5.html#combining-three-or-more-plots"><i class="fa fa-check"></i><b>5.6.2</b> Combining three or more plots</a></li>
 </ul></li>
+<li class="chapter" data-level="5.7" data-path="chapter-5.html"><a href="chapter-5.html#customisation-part-4"><i class="fa fa-check"></i><b>5.7</b> Customisation part 4</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="additional-resources.html"><a href="additional-resources.html#renaming-variables"><i class="fa fa-check"></i><b>A.1</b> Renaming variables</a></li>
+<li class="chapter" data-level="A.2" data-path="additional-resources.html"><a href="additional-resources.html#custom-themes"><i class="fa fa-check"></i><b>A.2</b> Custom themes</a></li>
+<li class="chapter" data-level="A.3" data-path="additional-resources.html"><a href="additional-resources.html#pivot-longer-examples"><i class="fa fa-check"></i><b>A.3</b> Pivot longer examples</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -305,7 +317,7 @@ Figure 4.3: Violin plot.
 <p>Commonly, rather than visualising distributions of raw data researchers will wish to visualise the mean using a bar chart with error bars. Although this is one of the most common data visualisations, it is perhaps the least intuitive for novice learners of R to achieve in <code>ggplot</code>. We present this code here because it is a common visualisation, however, we would urge you to use a better visualisation that provides more transparency about the distribution of the raw data such as the violin-boxplots we will present in the next section.</p>
 <p>Rather than calling a specified geom, we call <code>stat_summary()</code>.</p>
 <ul>
-<li><p><code>fun</code> specifies the a summary function that gives us the y-value we want to plot, in this case, <code>mean</code></p></li>
+<li><p><code>fun</code> specifies the summary function that gives us the y-value we want to plot, in this case, <code>mean</code></p></li>
 <li><p><code>geom</code> specifies what shape or plot we want to use to display the summary. For the first layer we will specify <code>bar</code>.</p></li>
 </ul>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="chapter-4.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt)) <span class="sc">+</span></span>
@@ -318,7 +330,7 @@ Figure 4.4: Bar plot of means.
 </div>
 <p>To add the error bars, another layer is added with a second call to <code>stat_summary</code>. This time, the function represents the type of error bars we wish to draw, you can choose from <code>mean_se</code> for standard error, <code>mean_cl_normal</code> for confidence intervals, or <code>mean_sdl</code> for standard deviation. <code>width</code> controls the width of the error bars - try changing the value to see what happens.</p>
 <ul>
-<li><code>fun.data</code> specifies the a summary function that gives us the y-values we want to plot plus their minimum and maximum values, in this case, <code>mean_se</code></li>
+<li><code>fun.data</code> specifies the summary function that gives us the y-values we want to plot plus their minimum and maximum values, in this case, <code>mean_se</code></li>
 </ul>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapter-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt)) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="chapter-4.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;bar&quot;</span>) <span class="sc">+</span></span>
@@ -333,15 +345,15 @@ Figure 4.5: Bar plot of means with error bars representing SE.
 <div id="violin-boxplot" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Violin-boxplot</h2>
 <p>The power of the layered system is further highlighted by the ability to combine different types of plots. For example, rather than using a bar chart with error bars, one can easily create a single plot that includes a violin plot, boxplot, and the mean with error bars. This plot requires just two extra lines of code to produce than the bar plot with error bars, yet the amount of information displayed is vastly superior.</p>
+<ul>
+<li><code>fatten = NULL</code> removes the median line from the boxplot, which can make it easier to see the mean and error bars. Including this argument will result in the warning message <code>Removed 1 rows containing missing values (geom_segment)</code> and is not a cause for concern. Removing this argument will reinstate the median line.</li>
+</ul>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="chapter-4.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt)) <span class="sc">+</span></span>
 <span id="cb44-2"><a href="chapter-4.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
 <span id="cb44-3"><a href="chapter-4.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># remove the median line with fatten = NULL</span></span>
 <span id="cb44-4"><a href="chapter-4.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
 <span id="cb44-5"><a href="chapter-4.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
 <span id="cb44-6"><a href="chapter-4.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:viobox1"></span>
 <img src="04-ch4_files/figure-html/viobox1-1.png" alt="Violin-boxplot with mean dot and standard error bars." width="100%" />
 <p class="caption">
@@ -349,11 +361,11 @@ Figure 4.6: Violin-boxplot with mean dot and standard error bars.
 </p>
 </div>
 <p>It is important to note that the order of the layers matters. For example, if we call <code>geom_boxplot()</code> followed by <code>geom_violin()</code>, we get the following mess:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapter-4.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt)) <span class="sc">+</span></span>
-<span id="cb46-2"><a href="chapter-4.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>  </span>
-<span id="cb46-3"><a href="chapter-4.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb46-4"><a href="chapter-4.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="chapter-4.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="chapter-4.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="chapter-4.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>  </span>
+<span id="cb45-3"><a href="chapter-4.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb45-4"><a href="chapter-4.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="chapter-4.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox1b"></span>
 <img src="04-ch4_files/figure-html/viobox1b-1.png" alt="Plot with the geoms in the wrong order." width="100%" />
 <p class="caption">
@@ -363,18 +375,11 @@ Figure 4.7: Plot with the geoms in the wrong order.
 <div id="grouped-violin-boxplots" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Grouped violin-boxplots</h3>
 <p>As with previous plots, another variable can be mapped to <code>fill</code> for the violin-boxplot, however, simply adding <code>fill</code> to the mapping causes the different components of the plot to become misaligned because they have different default positions:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapter-4.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
-<span id="cb47-2"><a href="chapter-4.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb47-3"><a href="chapter-4.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb47-4"><a href="chapter-4.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
-<span id="cb47-5"><a href="chapter-4.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="chapter-4.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="chapter-4.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="chapter-4.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="chapter-4.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="chapter-4.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox2"></span>
 <img src="04-ch4_files/figure-html/viobox2-1.png" alt="Grouped violin-boxplots without repositioning." width="100%" />
 <p class="caption">
@@ -382,20 +387,13 @@ Figure 4.8: Grouped violin-boxplots without repositioning.
 </p>
 </div>
 <p>To rectify this we need to adjust the argument <code>position</code> for each of the misaligned layers. <code>position_dodge()</code> instructs R to move (dodge) the position of the plot component by the specified value - what value you need can sometimes take trial and error.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="chapter-4.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
-<span id="cb49-2"><a href="chapter-4.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb49-3"><a href="chapter-4.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb49-4"><a href="chapter-4.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
-<span id="cb49-5"><a href="chapter-4.html#cb49-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb49-6"><a href="chapter-4.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb49-7"><a href="chapter-4.html#cb49-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapter-4.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
+<span id="cb47-2"><a href="chapter-4.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb47-3"><a href="chapter-4.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb47-4"><a href="chapter-4.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
+<span id="cb47-5"><a href="chapter-4.html#cb47-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb47-6"><a href="chapter-4.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb47-7"><a href="chapter-4.html#cb47-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox3"></span>
 <img src="04-ch4_files/figure-html/viobox3-1.png" alt="Grouped violin-boxplots with repositioning." width="100%" />
 <p class="caption">
@@ -407,56 +405,43 @@ Figure 4.9: Grouped violin-boxplots with repositioning.
 <div id="customisation-part-3" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Customisation part 3</h2>
 <p>Combining multiple type of plots can present an issue with the colors, particularly when the viridis scheme is used - in the below example it is hard to make out the black lines of the boxplot and the mean/errorbars.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="chapter-4.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
-<span id="cb51-2"><a href="chapter-4.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb51-3"><a href="chapter-4.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb51-4"><a href="chapter-4.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
-<span id="cb51-5"><a href="chapter-4.html#cb51-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb51-6"><a href="chapter-4.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
-<span id="cb51-7"><a href="chapter-4.html#cb51-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
-<span id="cb51-8"><a href="chapter-4.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
-<span id="cb51-9"><a href="chapter-4.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chapter-4.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="chapter-4.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb48-3"><a href="chapter-4.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="chapter-4.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, </span>
+<span id="cb48-5"><a href="chapter-4.html#cb48-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb48-6"><a href="chapter-4.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>,</span>
+<span id="cb48-7"><a href="chapter-4.html#cb48-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="chapter-4.html#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
+<span id="cb48-9"><a href="chapter-4.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox4"></span>
 <img src="04-ch4_files/figure-html/viobox4-1.png" alt="A color scheme that makes lines difficult to see." width="100%" />
 <p class="caption">
 Figure 4.10: A color scheme that makes lines difficult to see.
 </p>
 </div>
-<p>There are a number of solutions to this problem. First, we can change the color of individual geoms by adding <code>color = "color"</code> to each relevant geom:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="chapter-4.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb53-2"><a href="chapter-4.html#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb53-3"><a href="chapter-4.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-4"><a href="chapter-4.html#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-5"><a href="chapter-4.html#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-6"><a href="chapter-4.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
-<span id="cb53-7"><a href="chapter-4.html#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
+<p>There are a number of solutions to this problem. First, we can change the color of individual geoms by adding <code>colour = "colour"</code> to each relevant geom:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="chapter-4.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="chapter-4.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="chapter-4.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="chapter-4.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="chapter-4.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-6"><a href="chapter-4.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-7"><a href="chapter-4.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox5"></span>
 <img src="04-ch4_files/figure-html/viobox5-1.png" alt="Manually changing the line colors." width="100%" />
 <p class="caption">
 Figure 4.11: Manually changing the line colors.
 </p>
 </div>
-<p>We can also keep the original colors but adjust the transparency of each layer using <code>alpha</code>. Again, the exact values needed can take trial and error:</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="chapter-4.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb55-2"><a href="chapter-4.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb55-3"><a href="chapter-4.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
-<span id="cb55-4"><a href="chapter-4.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
-<span id="cb55-5"><a href="chapter-4.html#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb55-6"><a href="chapter-4.html#cb55-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
-<span id="cb55-7"><a href="chapter-4.html#cb55-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<pre><code>## Warning: Removed 1 rows containing missing values (geom_segment).
-
-## Warning: Removed 1 rows containing missing values (geom_segment).</code></pre>
+<p>We can also keep the original colours but adjust the transparency of each layer using <code>alpha</code>. Again, the exact values needed can take trial and error:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chapter-4.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="chapter-4.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="chapter-4.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb50-4"><a href="chapter-4.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">&quot;mean&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-5"><a href="chapter-4.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">&quot;mean_se&quot;</span>, <span class="at">geom =</span> <span class="st">&quot;errorbar&quot;</span>, <span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="chapter-4.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>) <span class="sc">+</span></span>
+<span id="cb50-7"><a href="chapter-4.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:viobox6"></span>
 <img src="04-ch4_files/figure-html/viobox6-1.png" alt="Using transparency on the fill color." width="100%" />
 <p class="caption">

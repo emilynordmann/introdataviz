@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-05-17" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -214,15 +214,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>5</b> Chapter 5</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="chapter-5.html"><a href="chapter-5.html#interaction-plots"><i class="fa fa-check"></i><b>5.1</b> Interaction plots</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
+<li class="chapter" data-level="5.2" data-path="chapter-5.html"><a href="chapter-5.html#combined-interaction-plots"><i class="fa fa-check"></i><b>5.2</b> Combined interaction plots</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5.html"><a href="chapter-5.html#facets"><i class="fa fa-check"></i><b>5.3</b> Facets</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5.html"><a href="chapter-5.html#saving-plots"><i class="fa fa-check"></i><b>5.4</b> Saving plots</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5.html"><a href="chapter-5.html#exporting-plots"><i class="fa fa-check"></i><b>5.5</b> Exporting plots</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5.html"><a href="chapter-5.html#multiple-plots"><i class="fa fa-check"></i><b>5.6</b> Multiple plots</a>
 <ul>
-<li class="chapter" data-level="5.2" data-path="03-ch3.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="chapter-5.html"><a href="chapter-5.html#renaming-variables"><i class="fa fa-check"></i><b>5.2.1</b> Renaming variables</a></li>
-<li class="chapter" data-level="5.2.2" data-path="chapter-5.html"><a href="chapter-5.html#custom-themes"><i class="fa fa-check"></i><b>5.2.2</b> Custom themes</a></li>
-<li class="chapter" data-level="5.2.3" data-path="chapter-5.html"><a href="chapter-5.html#pivot-longer-examples"><i class="fa fa-check"></i><b>5.2.3</b> Pivot longer examples</a></li>
+<li class="chapter" data-level="5.6.1" data-path="chapter-5.html"><a href="chapter-5.html#combining-two-plots"><i class="fa fa-check"></i><b>5.6.1</b> Combining two plots</a></li>
+<li class="chapter" data-level="5.6.2" data-path="chapter-5.html"><a href="chapter-5.html#combining-three-or-more-plots"><i class="fa fa-check"></i><b>5.6.2</b> Combining three or more plots</a></li>
 </ul></li>
+<li class="chapter" data-level="5.7" data-path="chapter-5.html"><a href="chapter-5.html#customisation-part-4"><i class="fa fa-check"></i><b>5.7</b> Customisation part 4</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="additional-resources.html"><a href="additional-resources.html#renaming-variables"><i class="fa fa-check"></i><b>A.1</b> Renaming variables</a></li>
+<li class="chapter" data-level="A.2" data-path="additional-resources.html"><a href="additional-resources.html#custom-themes"><i class="fa fa-check"></i><b>A.2</b> Custom themes</a></li>
+<li class="chapter" data-level="A.3" data-path="additional-resources.html"><a href="additional-resources.html#pivot-longer-examples"><i class="fa fa-check"></i><b>A.3</b> Pivot longer examples</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -325,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_cong</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(<a href="chapter-5.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
+<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_cong</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(<a href="additional-resources.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
 <p>Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For our example dataset, adhering to these rules would produce Table <a href="chapter-3.html#tab:long">3.2</a>. Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.</p>
 <table>
 <caption><span id="tab:long">Table 3.2: </span>Data in the correct format for visualization.</caption>
