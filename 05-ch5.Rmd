@@ -19,6 +19,7 @@ long <- pivot_longer(dat,
 dat_long <- pivot_wider(long, 
                         names_from = "dv_type", 
                         values_from = "dv")
+theme_set(theme_grey())
 ```
 # Chapter 5
 
@@ -44,33 +45,18 @@ ggplot(dat_long, aes(x = condition, y = rt,
   theme_classic()
 ``` 
 
-`ggplot` will scale the axis start and end points to the data. If you wish to adjust these, you can use the `scale_` functions, for example, the below code specifies the `limits` (start and end points) of the y-axis should be 0 - 750 ms.
-
-```{r}
-ggplot(dat_long, aes(x = condition, y = rt, 
-                     group = language,
-                     color = language,
-                     shape = language)) +
-  stat_summary(fun = "mean", geom = "point") +
-  stat_summary(fun = "mean", geom = "line") +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
-  scale_color_manual(values = c("blue", "darkorange")) +
-  theme_classic() +
-  scale_y_continuous(limits = c(0, 750))
-```
-
 ## Combined interaction plots
 
 A more complex interaction plot can be produced that takes advantage of the layers to visualise not only the  overall interaction, but the change across conditions for each participant.
 
 This code is more complex than all prior code because it does not use a universal mapping of the plot aesthetics. In our code so far, the aesthetic mapping (`aes`) of the plot has been specified in the first line of code as all layers have used the same mapping, however, is is also possible for each layer to use a different mapping. 
 
-* The first call to `ggplot()` sets up the default mappings of the plot,  `x`, `y` and `group` variable.
-`geom_point()`  overrides the default mapping by setting its own `colour` to draw the data points from each language group in a different colour. `alpha` is set to a low value to aid readability.
+* The first call to `ggplot()` sets up the default mappings of the plot that will be used unless otherwised specified - the  `x`, `y` and `group` variable.
+* `geom_point()`  overrides the default mapping by setting its own `colour` to draw the data points from each language group in a different colour. `alpha` is set to a low value to aid readability.
 * Similarly, `geom_line()` overrides the default grouping varibale so that a line is drawn to connect the individual data points for each *participant* (`group = id`) rather than each language group, and also sets the colours.
-* Finally, the calls to `stat_summary()` remain largely as they were, with the exception of setting `colour = "black"` and `size = 2` so that the overall means and errorbars can be more easily distinguished from the individual data points. 
+* Finally, the calls to `stat_summary()` remain largely as they were, with the exception of setting `colour = "black"` and `size = 2` so that the overall means and errorbars can be more easily distinguished from the individual data points. Because they do not specify an individual mapping, they use the defaults (e.g., the lines are connected by language group).
 
-```{r}
+```{r fig.cap="Interaction plot with by-participant data"}
 ggplot(dat_long, aes(x = condition, y = rt, group = language, shape = language)) +
   geom_point(aes(colour = language),alpha = .2) +
   geom_line(aes(group = id, colour = language), alpha = .2) +
@@ -86,18 +72,18 @@ So far we have produced single plots that display all the desired variables in o
 
 * Rather than using `colour = condition` to produce different colours for each level of `condition`, this variable is instead passed to `facet_wrap()`.
 
-```{r}
+```{r warning = FALSE, fig.cap="Faceted scatterplot"}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  facet_wrap(~condition) 
+  facet_wrap(~condition) +
   scale_color_discrete(name = "Condition",
                       labels = c("Congruent", "Incongruent"))
 ```
 
 As another example, we can use `facet_wrap()` as an alternative to the grouped violin-boxplot (see Figure X) in which the variable `language` is passed to `facet_wrap()` rather than `fill`. 
 
-```{r warning = FALSE}
+```{r warning = FALSE, fig.cap="Facted violin-boxplot"}
 ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_violin() +
   geom_boxplot(width = .2, fatten = NULL) +
@@ -109,14 +95,16 @@ ggplot(dat_long, aes(x = condition, y= rt)) +
 
 Finally, note that editing the labels for faceted variables uses a different, and quite frankly altogether opaque and confusing, syntax calling on the `labeller` function.
 
-```{r warning = FALSE}
+```{r warning = FALSE, fig.cap="Faceted violin-boxplot with updated labels"}
 ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_violin() +
   geom_boxplot(width = .2, fatten = NULL) +
   stat_summary(fun = "mean", geom = "point") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1) +
   facet_wrap(~language, 
-             labeller = labeller(language = (c(monolingual = "Monolingual participants", bilingual = "Bilingual participants")))) +
+             labeller = labeller(
+               language = (c(monolingual = "Monolingual participants",
+                             bilingual = "Bilingual participants")))) +
   theme_minimal()
 ```
 
@@ -157,14 +145,18 @@ As well as creating separate plots for each level of a variable using `facet_wra
 
 Two plots can be combined side-by-side or stacked on top of each other. These combined plots could also be saved to an object and then passed to `ggsave`.
 
-```{r}
+```{r fig.cap= "Side-by-side plots with patchwork"}
 p1 + p2 # side-by-side
+```
+
+```{r fig.cap="Stacked plots with patchwork"}
 p1 / p2 # stacked
 ```
 
+
 ### Combining three or more plots
 
-Three or more plots can be combined in a number of ways and the `patchwork` syntax is relatively easy to grasp with a few examples and a bit of trial and error. First, save the complex interaction plot and faceted violin-boxplot to `p5` and `p6`.
+Three or more plots can be combined in a number of ways and the `patchwork` syntax is relatively easy to grasp with a few examples and a bit of trial and error. First, we save the complex interaction plot and faceted violin-boxplot to objects named `p5` and `p6`.
 
 ```{r}
 p5 <- ggplot(dat_long, aes(x = condition, y = rt, group = language, shape = language)) +
@@ -197,9 +189,9 @@ p6 | p1 / p5
 
 ### Axis labels
 
-Previously when we have edited the main axis labels we used the `scale_` functions to do so. These functions are useful to know because they allow you to customise each aspect of the scale, for example, the breaks and limits. However, if you only need to change the main axis label, there is a quicker way to do so using `labs()`. The below code edits the axis labels for the histogram saved in `p1`. The title and subtitle do not conform to APA standards, however, for presentations etc. they can be useful.
+Previously when we  edited the main axis labels we used the `scale_` functions to do so. These functions are useful to know because they allow you to customise each aspect of the scale, for example, the breaks and limits. However, if you only need to change the main axis `name`, there is a quicker way to do so using `labs()`. The below code edits the axis labels for the histogram saved in `p1`. The title and subtitle do not conform to APA standards (more on APA formatting in the additional resources), however, for presentations and social media they can be useful.
 
-```{r}
+```{r "Plot with edited labels and title"}
 p5 + labs(x = "Congruency of stimuli",
           y = "Reaction time (ms)",
           title = "Language group by congruency interaction plot",
@@ -214,7 +206,7 @@ So far when we have produced plots with colours, the colours were meaningful in 
 
 The below code adds `fill = language` to the faceted violin-boxplots, in addition to adjusting `alpha` and using the viridis colour palette.
 
-```{r}
+```{r warning=FALSE, fig.cap="Violin-boxplot with redundant legend"}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin(alpha = .4) +
   geom_boxplot(width = .2, fatten = NULL, alpha = .6) +
@@ -226,9 +218,9 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   scale_fill_viridis_d(option = "E")
 ```
 
-Specifying a `fill` variable has led to R producing a legend for this variable. However, given that the use of colour is not meaningful, this is a waste of plot space. You can remove this legend with the `guides` function.
+Specifying a `fill` variable means that by default, R has produced a legend for that variable. However, given that the use of colour is not meaningful, this is a waste of plot space (it provides no more information than what is represented already by the x-axis). You can remove this legend with the `guides` function.
 
-```{r}
+```{r warning=FALSE, fig.cap="Plot with suppressed redundant legend"}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin(alpha = .4) +
   geom_boxplot(width = .2, fatten = NULL, alpha = .6) +
@@ -241,10 +233,5 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   guides(fill = FALSE)
 ```
 
--   Heatmaps
 
 
-ridge
-Alluvial
-raincloud
-split-violin
