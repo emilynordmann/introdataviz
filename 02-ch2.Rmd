@@ -1,3 +1,7 @@
+```{r echo = FALSE}
+theme_set(theme_grey())
+```
+
 # Chapter 2
 
 ## Loading packages
@@ -30,7 +34,10 @@ summary(dat)
 str(dat)        
 ```
 
-Because the factor `language` is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels. The `mutate()` function makes new columns in a data table, or overwrites a column, and the `factor()` function translates the language column into a factor with the labels "monolingual" and "bilingual"). You can also use the `factor()` function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.
+Because the factor `language` is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels. 
+
+* `mutate()` makes new columns in a data table, or overwrites a column;
+* `factor()` translates the language column into a factor with the labels "monolingual" and "bilingual"). You can also use the `factor()` function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.
 
 ```{r}
 dat <- dat %>%
@@ -65,25 +72,46 @@ We can calculate and plot some basic descriptive information about the demograph
 
 -   Count the number of observations in each group
 
-```{r demo_stats}
+```{r demo_stats, eval =FALSE}
 dat %>%
   group_by(language) %>%
   count()
 ```
 
+```{r demo_statsb, echo  =FALSE}
+dat %>%
+  group_by(language) %>%
+  count() %>%
+  knitr::kable(align = "c")
+```
+
+
 `group_by()` does not result in surface level changes to the dataset, rather, it changes the underlying structure so that if groups are specified, whatever function is called next is peformed separately on each level of rhe grouping variable. The above code therefore counts the number of observations in each group of the variable `language`. If you just need the total number of observations, you could remove the `group_by()` line which would perform the operation on the whole dataset, rather than by groups:
 
-```{r demo_stats2}
+```{r demo_stats2, eval=FALSE}
 dat %>%
   count()
 ```
 
+```{r demo_stats2b, echo = FALSE}
+dat %>%
+  count() %>%
+  knitr::kable(align = "c")
+```
+
 Similarly, we may wish to calculate the mean age (and SD) of the sample and we can do so using the function `summarise()` from the `dplyr` tidyverse package.
 
-```{r age1}
+```{r age1, eval = FALSE}
 dat %>%
   summarise(mean_age = mean(age),
             sd_age = sd(age))
+```
+
+```{r age1b, echo = FALSE}
+dat %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age)) %>%
+  knitr::kable(align = "c", digits = 2)
 ```
 
 This code produces summary data in the form of a column named `mean_age` that contains the result of calculating the mean of the variable `age.` It then creates `sd_age` which does the same but for standard deviation. Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the `<-` notation and print it later by typing the object name.
@@ -96,13 +124,20 @@ age_stats <- dat %>%
 
 Finally, the `group_by()` function will work in the same way when calculating summary statistics - the output of the function that is called after `group_by()` will be produced for each level of the grouping variable.
 
-```{r demo3}
+```{r demo3, eval=FALSE}
 dat %>%
   group_by(language) %>%
   summarise(mean_age = mean(age),
             sd_age = sd(age))
 ```
 
+```{r demo3b, echo=FALSE}
+dat %>%
+  group_by(language) %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age)) %>%
+    knitr::kable(align = "c", digits = 2)
+```
 
 ## Bar chart of counts
 
@@ -201,7 +236,7 @@ ggplot(dat, aes(age)) +
 
 You can set the theme globally so that all subsequent plots use a theme.
 
-```{r}
+```{r eval = FALSE}
 theme_set(theme_minimal())
 ```
 
@@ -213,7 +248,40 @@ Before you move on try the following:
 
 -   Add a layer that edits the **name** of the y-axis histogram label to `Number of participants`.
 
+`r hide("Solution")`
+```{r eval=FALSE}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_minimal() +
+  scale_y_continuous(name = "Number of participants")
+```
+`r unhide()`
+
 -   Change the colour of the bars in the bar chart to red.
 
--   Remove `theme_minimal()` and instead apply one of the other available themes (start typing `theme_` and the auto-complete will show you the available options).
+`r hide("Solution")`
+```{r eval=FALSE}
+ggplot(data = dat, mapping = aes(x = language)) +
+  geom_bar(fill = "red")
+```
+`r unhide()`
+
+-   Remove `theme_minimal()` from the histogram and instead apply one of the other available themes (start typing `theme_` and the auto-complete will show you the available options).
+
+`r hide("Solution")`
+```{r eval=FALSE}
+#multiple options here e.g., theme_classic()
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_classic()
+
+# theme_bw()
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_bw()
+```
+`r unhide()`
 

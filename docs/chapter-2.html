@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-05-17" />
+<meta name="date" content="2021-05-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -214,15 +214,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>5</b> Chapter 5</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="chapter-5.html"><a href="chapter-5.html#interaction-plots"><i class="fa fa-check"></i><b>5.1</b> Interaction plots</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path=""><a href="#appendix-appendices"><i class="fa fa-check"></i>(APPENDIX) Appendices</a>
+<li class="chapter" data-level="5.2" data-path="chapter-5.html"><a href="chapter-5.html#combined-interaction-plots"><i class="fa fa-check"></i><b>5.2</b> Combined interaction plots</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-5.html"><a href="chapter-5.html#facets"><i class="fa fa-check"></i><b>5.3</b> Facets</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-5.html"><a href="chapter-5.html#saving-plots"><i class="fa fa-check"></i><b>5.4</b> Saving plots</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-5.html"><a href="chapter-5.html#exporting-plots"><i class="fa fa-check"></i><b>5.5</b> Exporting plots</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-5.html"><a href="chapter-5.html#multiple-plots"><i class="fa fa-check"></i><b>5.6</b> Multiple plots</a>
 <ul>
-<li class="chapter" data-level="5.2" data-path="02-ch2.html"><a href="#additional-resources"><i class="fa fa-check"></i><b>5.2</b> Additional resources</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="chapter-5.html"><a href="chapter-5.html#renaming-variables"><i class="fa fa-check"></i><b>5.2.1</b> Renaming variables</a></li>
-<li class="chapter" data-level="5.2.2" data-path="chapter-5.html"><a href="chapter-5.html#custom-themes"><i class="fa fa-check"></i><b>5.2.2</b> Custom themes</a></li>
-<li class="chapter" data-level="5.2.3" data-path="chapter-5.html"><a href="chapter-5.html#pivot-longer-examples"><i class="fa fa-check"></i><b>5.2.3</b> Pivot longer examples</a></li>
+<li class="chapter" data-level="5.6.1" data-path="chapter-5.html"><a href="chapter-5.html#combining-two-plots"><i class="fa fa-check"></i><b>5.6.1</b> Combining two plots</a></li>
+<li class="chapter" data-level="5.6.2" data-path="chapter-5.html"><a href="chapter-5.html#combining-three-or-more-plots"><i class="fa fa-check"></i><b>5.6.2</b> Combining three or more plots</a></li>
 </ul></li>
+<li class="chapter" data-level="5.7" data-path="chapter-5.html"><a href="chapter-5.html#customisation-part-4"><i class="fa fa-check"></i><b>5.7</b> Customisation part 4</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
+<li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
+<li class="appendix"><span><b>Appendices</b></span></li>
+<li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="additional-resources.html"><a href="additional-resources.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>A.1</b> Adding lines to plots</a></li>
+<li class="chapter" data-level="A.2" data-path="additional-resources.html"><a href="additional-resources.html#zooming-in-and-out"><i class="fa fa-check"></i><b>A.2</b> Zooming in and out</a></li>
+<li class="chapter" data-level="A.3" data-path="additional-resources.html"><a href="additional-resources.html#setting-the-axis-values"><i class="fa fa-check"></i><b>A.3</b> Setting the axis values</a></li>
+<li class="chapter" data-level="A.4" data-path="additional-resources.html"><a href="additional-resources.html#lot-more-random-stuff"><i class="fa fa-check"></i><b>A.4</b> Lot more random stuff</a></li>
+<li class="chapter" data-level="A.5" data-path="additional-resources.html"><a href="additional-resources.html#setting-a-lab-theme"><i class="fa fa-check"></i><b>A.5</b> Setting A Lab Theme</a></li>
+<li class="chapter" data-level="A.6" data-path="additional-resources.html"><a href="additional-resources.html#additional-links"><i class="fa fa-check"></i><b>A.6</b> Additional Links</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -268,7 +284,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another useful check is to use the functions <code>summary()</code> and <code>str()</code> (structure) to check what kind of data R thinks is in each column. Run the below code and look at the output of each, comparing it with what you know about the simulated dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span>
 <span id="cb5-2"><a href="chapter-2.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)        </span></code></pre></div>
-<p>Because the factor <code>language</code> is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels. The <code>mutate()</code> function makes new columns in a data table, or overwrites a column, and the <code>factor()</code> function translates the language column into a factor with the labels “monolingual” and “bilingual”). You can also use the <code>factor()</code> function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.</p>
+<p>Because the factor <code>language</code> is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels.</p>
+<ul>
+<li><code>mutate()</code> makes new columns in a data table, or overwrites a column;</li>
+<li><code>factor()</code> translates the language column into a factor with the labels “monolingual” and “bilingual”). You can also use the <code>factor()</code> function to set the display order of a column that contains words. Otherwise, they will display in alphabetical order.</li>
+</ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-2.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="chapter-2.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(</span>
 <span id="cb6-3"><a href="chapter-2.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> language, <span class="co"># column to translate</span></span>
@@ -296,47 +316,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-2.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="chapter-2.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
 <span id="cb8-3"><a href="chapter-2.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 2
-## # Groups:   language [2]
-##   language        n
-##   &lt;fct&gt;       &lt;int&gt;
-## 1 monolingual    55
-## 2 bilingual      45</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">language</th>
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">monolingual</td>
+<td align="center">55</td>
+</tr>
+<tr class="even">
+<td align="center">bilingual</td>
+<td align="center">45</td>
+</tr>
+</tbody>
+</table>
 <p><code>group_by()</code> does not result in surface level changes to the dataset, rather, it changes the underlying structure so that if groups are specified, whatever function is called next is peformed separately on each level of rhe grouping variable. The above code therefore counts the number of observations in each group of the variable <code>language</code>. If you just need the total number of observations, you could remove the <code>group_by()</code> line which would perform the operation on the whole dataset, rather than by groups:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-2.html#cb10-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="chapter-2.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 1
-##       n
-##   &lt;int&gt;
-## 1   100</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-2.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="chapter-2.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">100</td>
+</tr>
+</tbody>
+</table>
 <p>Similarly, we may wish to calculate the mean age (and SD) of the sample and we can do so using the function <code>summarise()</code> from the <code>dplyr</code> tidyverse package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-2.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="chapter-2.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb12-3"><a href="chapter-2.html#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 2
-##   mean_age sd_age
-##      &lt;dbl&gt;  &lt;dbl&gt;
-## 1     29.9   8.00</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-2.html#cb10-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="chapter-2.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb10-3"><a href="chapter-2.html#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">mean_age</th>
+<th align="center">sd_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">29.87</td>
+<td align="center">8</td>
+</tr>
+</tbody>
+</table>
 <p>This code produces summary data in the form of a column named <code>mean_age</code> that contains the result of calculating the mean of the variable <code>age.</code> It then creates <code>sd_age</code> which does the same but for standard deviation. Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the <code>&lt;-</code> notation and print it later by typing the object name.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-2.html#cb14-1" aria-hidden="true" tabindex="-1"></a>age_stats <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="chapter-2.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb14-3"><a href="chapter-2.html#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-2.html#cb11-1" aria-hidden="true" tabindex="-1"></a>age_stats <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="chapter-2.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb11-3"><a href="chapter-2.html#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
 <p>Finally, the <code>group_by()</code> function will work in the same way when calculating summary statistics - the output of the function that is called after <code>group_by()</code> will be produced for each level of the grouping variable.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-2.html#cb15-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="chapter-2.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="chapter-2.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb15-4"><a href="chapter-2.html#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
-<pre><code>## # A tibble: 2 x 3
-##   language    mean_age sd_age
-##   &lt;fct&gt;          &lt;dbl&gt;  &lt;dbl&gt;
-## 1 monolingual     31.2   7.30
-## 2 bilingual       28.3   8.58</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-2.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="chapter-2.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="chapter-2.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb12-4"><a href="chapter-2.html#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">language</th>
+<th align="center">mean_age</th>
+<th align="center">sd_age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">monolingual</td>
+<td align="center">31.18</td>
+<td align="center">7.30</td>
+</tr>
+<tr class="even">
+<td align="center">bilingual</td>
+<td align="center">28.27</td>
+<td align="center">8.58</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="bar-chart-of-counts" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Bar chart of counts</h2>
 <p>For our first plot, we will make a simple bar chart of counts that shows the number of participants in each <code>language</code> group.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> language)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="chapter-2.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-2.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> language)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="chapter-2.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar1"></span>
 <img src="02-ch2_files/figure-html/bar1-1.png" alt="Bar chart of counts." width="100%" />
 <p class="caption">
@@ -351,12 +417,12 @@ Figure 2.1: Bar chart of counts.
 </ul>
 <p>The second line of code draws the plot, and is connected to the base code with <code>+</code>. In this case, we ask for <code>geom_bar()</code>. Each <code>geom</code>, or type of plot, has an associated default statistic. For bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a <code>y</code> variable when making a bar plot of counts, when given an <code>x</code> variable, <code>geom_bar()</code> will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the <code>language</code> variable.</p>
 <p>If your data already have the counts that you want to plot, you can set <code>stat="identity"</code> inside of <code>geom_bar()</code> to use that number instead of counting rows. Notice that we are now omitting the names of the arguments <code>data</code> and <code>mapping</code> in the <code>ggplot()</code> function.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a>count_dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="chapter-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="chapter-2.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
-<span id="cb18-4"><a href="chapter-2.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="chapter-2.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(count_dat, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb18-6"><a href="chapter-2.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-2.html#cb14-1" aria-hidden="true" tabindex="-1"></a>count_dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="chapter-2.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="chapter-2.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
+<span id="cb14-4"><a href="chapter-2.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="chapter-2.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(count_dat, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb14-6"><a href="chapter-2.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar-precalc"></span>
 <img src="02-ch2_files/figure-html/bar-precalc-1.png" alt="Bar chart of pre-calculated counts." width="100%" />
 <p class="caption">
@@ -367,8 +433,8 @@ Figure 2.2: Bar chart of pre-calculated counts.
 <div id="histogram" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Histogram</h2>
 <p>The code to plot a histogram <code>age</code> is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with <code>age</code> on the x-axis:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="chapter-2.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-2.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="chapter-2.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:histogram1"></span>
 <img src="02-ch2_files/figure-html/histogram1-1.png" alt="Histogram of ages." width="100%" />
@@ -377,8 +443,8 @@ Figure 2.3: Histogram of ages.
 </p>
 </div>
 <p>By default <code>geom_histogram()</code> divides the x-axis into “bins” and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message <code>stat_bin() using bins = 30. Pick better value with binwidth</code>. This means that the default number of bins <code>geom_histogram()</code> divides the x-axis into is 30, but we may wish to pick a more appropriate value for our dataset. If we want one bar to equal one year, we can adjust <code>binwidth = 1</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-2.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb21-2"><a href="chapter-2.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="chapter-2.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:histogram2"></span>
 <img src="02-ch2_files/figure-html/histogram2-1.png" alt="Histogram of ages where each bin covers one year." width="100%" />
 <p class="caption">
@@ -393,12 +459,12 @@ Figure 2.4: Histogram of ages where each bin covers one year.
 <h3><span class="header-section-number">2.8.1</span> Editing axis names and labels</h3>
 <p>To edit axis names and labels we can use <code>scale_</code> functions. There are a number of different scale functions and which one you use depends on which aesthetic you wish to edit (e.g., x, y, fill, color) and the type of data it represents (discrete, continuous).</p>
 <p>For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. Each axis has its own function, and its own layer:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-2.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(language)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="chapter-2.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="chapter-2.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Language group&quot;</span>, </span>
-<span id="cb22-4"><a href="chapter-2.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Monolingual&quot;</span>, <span class="st">&quot;Bilingual&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="chapter-2.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of participants&quot;</span>,</span>
-<span id="cb22-6"><a href="chapter-2.html#cb22-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(language)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="chapter-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="chapter-2.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Language group&quot;</span>, </span>
+<span id="cb18-4"><a href="chapter-2.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Monolingual&quot;</span>, <span class="st">&quot;Bilingual&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="chapter-2.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of participants&quot;</span>,</span>
+<span id="cb18-6"><a href="chapter-2.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar3"></span>
 <img src="02-ch2_files/figure-html/bar3-1.png" alt="Bar chart with custom axis labels." width="100%" />
 <p class="caption">
@@ -415,9 +481,9 @@ Figure 2.5: Bar chart with custom axis labels.
 <div id="changing-colors" class="section level3" number="2.8.2">
 <h3><span class="header-section-number">2.8.2</span> Changing colors</h3>
 <p>You can control colours used to display the bars by setting <code>fill</code> (internal colour) and <code>colour</code> (outline colour) inside the geom function. This methods is only for changing <strong>all</strong> the bars; we will show you later how to set fill or color separately for different groups.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-2.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="chapter-2.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb23-3"><a href="chapter-2.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="chapter-2.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="chapter-2.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:histogram-fill-color"></span>
 <img src="02-ch2_files/figure-html/histogram-fill-color-1.png" alt="Histogram with custom colors for bar fill and line colors." width="100%" />
 <p class="caption">
@@ -428,10 +494,10 @@ Figure 2.6: Histogram with custom colors for bar fill and line colors.
 <div id="adding-a-theme" class="section level3" number="2.8.3">
 <h3><span class="header-section-number">2.8.3</span> Adding a theme</h3>
 <p><code>ggplot</code> has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis label to the histogram, but also applies <code>theme_minimal()</code>. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the additional resources.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chapter-2.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="chapter-2.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-3"><a href="chapter-2.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="chapter-2.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-2.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="chapter-2.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="chapter-2.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-4"><a href="chapter-2.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:histogram-theme"></span>
 <img src="02-ch2_files/figure-html/histogram-theme-1.png" alt="Histogram with a custom theme." width="100%" />
 <p class="caption">
@@ -439,7 +505,7 @@ Figure 2.7: Histogram with a custom theme.
 </p>
 </div>
 <p>You can set the theme globally so that all subsequent plots use a theme.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-2.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="chapter-2.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span></code></pre></div>
 <p>If you wished to return to the default theme, change the above to specify <code>theme_grey()</code>.</p>
 </div>
 </div>
@@ -447,10 +513,47 @@ Figure 2.7: Histogram with a custom theme.
 <h2><span class="header-section-number">2.9</span> Activities 1</h2>
 <p>Before you move on try the following:</p>
 <ul>
-<li><p>Add a layer that edits the <strong>name</strong> of the y-axis histogram label to <code>Number of participants</code>.</p></li>
-<li><p>Change the colour of the bars in the bar chart to red.</p></li>
-<li><p>Remove <code>theme_minimal()</code> and instead apply one of the other available themes (start typing <code>theme_</code> and the auto-complete will show you the available options).</p></li>
+<li>Add a layer that edits the <strong>name</strong> of the y-axis histogram label to <code>Number of participants</code>.</li>
 </ul>
+<div class="solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="chapter-2.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href="chapter-2.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="chapter-2.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="chapter-2.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-5"><a href="chapter-2.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of participants&quot;</span>)</span></code></pre></div>
+</div>
+<ul>
+<li>Change the colour of the bars in the bar chart to red.</li>
+</ul>
+<div class="solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="chapter-2.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> language)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="chapter-2.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+</div>
+<ul>
+<li>Remove <code>theme_minimal()</code> from the histogram and instead apply one of the other available themes (start typing <code>theme_</code> and the auto-complete will show you the available options).</li>
+</ul>
+<div class="solution">
+<button>
+Solution
+</button>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="chapter-2.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#multiple options here e.g., theme_classic()</span></span>
+<span id="cb24-2"><a href="chapter-2.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="chapter-2.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="chapter-2.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="chapter-2.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb24-6"><a href="chapter-2.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="chapter-2.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># theme_bw()</span></span>
+<span id="cb24-8"><a href="chapter-2.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="chapter-2.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="chapter-2.html#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Participant age (years)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="chapter-2.html#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+</div>
 
 </div>
 </div>

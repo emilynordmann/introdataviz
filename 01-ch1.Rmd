@@ -30,6 +30,8 @@ long <- pivot_longer(dat,
 dat_long <- pivot_wider(long, 
                         names_from = "dv_type", 
                         values_from = "dv")
+theme_set(theme_grey())
+
 ```
 
 # Introduction

@@ -9,17 +9,16 @@ dat <- dat %>%
     levels = c(1, 2), # values of the original data in preferred order
     labels = c("monolingual", "bilingual") # labels for display
   ))
+theme_set(theme_grey())
 ```
 
 # Chapter 3
-
-Again, this title doesn't work.
 
 ## Data formats
 
 To visualise the experimental reaction time and accuracy data using `ggplot` we first need to perform some data wrangling, and it is this step that can cause friction with novice users of R. Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition.
 
-The simulated Stroop data is currently in wide-format (see Table 1) where each participant's aggregated [^3] reaction time and accuracy for each level of the within-subject variable is split across multiple columns.
+The simulated Stroop data is currently in wide-format (see Table\ \@ref(tab:wide-data)) where each participant's aggregated [^3] reaction time and accuracy for each level of the within-subject variable is split across multiple columns.
 
 [^3]: In this tutorial we have chosen to gloss over the data wrangling that must occur to get from the raw data to these aggregated values. This type of wrangling requires a more extensive tutorial than this paper can provide but, more importantly, it is still possible to use R for data visualisation having done these preparatory steps using existing workflows that newcomers to R are comfortable with. The aim of this paper is to bypass these initial, often problematic steps and focus on tangible outputs that may then encourage further mastery of reproducible methods.
 
@@ -47,11 +46,11 @@ long2 <- pivot_wider(long, names_from = dv_type, values_from = dv)
 head(long2) %>% knitr::kable(digits = 2, caption = "Data in the correct format for visualization.")
 ```
 
-The benefits and flexibility of this format will (hopefully) become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that *anything that shares an axis should probably be in the same column*. For example, a simple bar chart of means for the reaction time DV would display the variable `condition` on the x-axis with bars representing both the `cong` and `incon` data, therefore, these data should be in one column and not split.
+The benefits and flexibility of this format will hopefully become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that *anything that shares an axis should probably be in the same column*. For example, a simple bar chart of means for the reaction time DV would display the variable `condition` on the x-axis with bars representing both the `cong` and `incon` data, therefore, these data should be in one column and not split.
 
 ## Transforming data
 
-We have chosen a 2 x 2 design with two DVs as we anticipate that this is a design many researchers will be familiar with and may also have existing datasets with a similar structure. However, it is worth highlighting that trial-and-error is part of the process of learning how to apply these functions to new datasets and structures. Data visualisation can be a useful way to scaffold learning these data transformations because they can provide a concrete visual check as to whether you have done what you intended to do with your data.
+We have chosen a 2 x 2 design with two DVs as we anticipate that this is a design many researchers will be familiar with and may also have existing datasets with a similar structure. However, it is worth normalising that trial-and-error is part of the process of learning how to apply these functions to new datasets and structures. Data visualisation can be a useful way to scaffold learning these data transformations because they can provide a concrete visual check as to whether you have done what you intended to do with your data.
 
 ### Step 1: `pivot_longer()`
 
@@ -68,7 +67,7 @@ long <- pivot_longer(data = dat,
 
 -   As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case `dat`. This argument name is often dropped in examples.
 
--   `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table 1 and 2, you can see that `id`, `age`, and `language` all remain, it is the columns that contain the measurements of the DVs that change. The colon notation `first_column:last_column` is used to select all variables from the first column specified to the second.  In our code, `cols` specifies that the columns we want to transform are `rt_cong` to `acc_incon`.
+-   `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table\ \@ref(tab:long-example) and Table\ \@ref(tab:wide-data), you can see that `id`, `age`, and `language` all remain, it is the columns that contain the measurements of the DVs that change. The colon notation `first_column:last_column` is used to select all variables from the first column specified to the second.  In our code, `cols` specifies that the columns we want to transform are `rt_cong` to `acc_incon`.
 
 -   `names_sep` specifies how to split up the variable name in cases where it has multiple components. This is when taking care to name your variables consistently and meaningfully pays off. Because the word to the left of the separator (`_`) is always the DV type and the word to the right is always the condition of the within-subject IV, it is easy to automatically split the columns.
 
@@ -97,13 +96,7 @@ dat_long <- pivot_wider(long,
 
 -   Finally, `values_from` specifies the values to fill the new columns with. In this case, the new columns `rt` and `acc` will be filled with the values that were in `dv`. Again, it can be helpful to compare each dataset with the code to see how it aligns.
 
-This final long-form data should looks as follows:
-
-**REDUNDANT WITH TABLE 2**
-
-```{r dat-long-example, echo = FALSE}
-head(dat_long) %>% knitr::kable(digits = 2, caption = "Data in the format required for visualization.")
-```
+This final long-form data should looks like Table\ \@ref(tab:long-example).
 
 We have purposefully used a more complex dataset with two DVs for this tutorial. If you are working with a dataset with only one DV, note that only step 1 of this process would be necessary, potentially with the removal of the `names_sep` argument. Finally, be careful not to calculate demographic descriptive statistics from this long-form dataset. Because the process of transformation has introduced some repetition for these variables, the wide-form dataset where 1 row = 1 participant should be used for demographic information.
 
@@ -135,7 +128,11 @@ ggplot(dat_long, aes(x = rt)) +
 
 ### Grouped density plots
 
-Density plots are most useful for comparing the distributions of different groups of data. Because the dataset is now in long format, it makes it easier to map another variable to the plot. In addition to mapping `rt` to the x-axis, we specify the `fill` aesthetic to fill the visualisation of each level of the `condition` variable with different colours. Just like with the x and y-axis scale functions, we can edit the names and labels of our fill aesthetic by adding on another `scale_*_*()` layer.
+Density plots are most useful for comparing the distributions of different groups of data. Because the dataset is now in long format, it makes it easier to map another variable to the plot because each variable is contained within a single column. 
+
+* In addition to mapping `rt` to the x-axis, we specify the `fill` aesthetic to fill the visualisation of each level of the `condition` variable with different colours. 
+* As with the x and y-axis scale functions, we can edit the names and labels of our fill aesthetic by adding on another `scale_*_*()` layer.
+* Note that the `fill` here is set inside the `aes()` function, which tells ggplot to set the fill differently for each value in the `condition` column. You cannot specify which colour here (e.g., `fill="red"`), like you could when you set `fill` inside the `geom_*()` function before.
 
 ```{r density-grouped, fig.cap="Density plot of reaction times grouped by condition."}
 ggplot(dat_long, aes(x = rt, fill = condition)) +
@@ -144,8 +141,6 @@ ggplot(dat_long, aes(x = rt, fill = condition)) +
   scale_fill_discrete(name = "Condition",
                       labels = c("Congruent", "Incongruent"))
 ```
-
-Note that the `fill` here is set inside the `aes()` function, which tells ggplot to set the fill differently for each value in the `condition` column. You cannot specify which colour here (e.g., `fill="red"`), like you could when you set `fill` inside the `geom_*()` function before.
 
 ## Scatterplots
 
@@ -158,7 +153,7 @@ ggplot(dat_long, aes(x = rt, y = age)) +
 
 A line of best fit can be added with an additional layer that calls the function `geom_smooth()`. The default is to draw a LOESS or curved regression line, however, a linear line of best fit can be specified using `method = "lm"`. By default, `geom_smooth()` will also draw a confidence envelope around the regression line, this can be removed by adding `se = FALSE` to `geom_point()`.
 
-```{r smooth-plot, fig.cap="Line of best fit for reaction time versus age."}
+```{r smooth-plot, warning = FALSE, fig.cap="Line of best fit for reaction time versus age."}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -168,7 +163,7 @@ ggplot(dat_long, aes(x = rt, y = age)) +
 
 Similar to the density plot, the scatterplot can also be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `color` rather than `fill` and the relevant `scale_*_*()` function is added.
 
-```{r scatter-grouped, fig.cap="Grouped scatter plot of reaction time versus age by condition."}
+```{r scatter-grouped, warning = FALSE,fig.cap="Grouped scatter plot of reaction time versus age by condition."}
 ggplot(dat_long, aes(x = rt, y = age, color = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -180,9 +175,9 @@ ggplot(dat_long, aes(x = rt, y = age, color = condition)) +
 
 ### Accessible color schemes
 
-One of the drawbacks of using `ggplot` for visualisation is that the default color scheme is not accessible (or visually appealing). The red and green default palette is difficult for color-blind people to differentiate, and also does not display well in grey scale. You can specify exact custom colors for your plots, but one easy option is to use the `viridis` scale functions. These take the same arguments as their default sister functions for updating axis names and labels, but display plots in contrasting colors that can be read by color-blind people and that also print well in grey scale. The `viridis` scale functions provide a number of different options for the color -- try setting `option` to any letter from A - E to see the different sets.
+One of the drawbacks of using `ggplot` for visualisation is that the default colour scheme is not accessible (or visually appealing). The red and green default palette is difficult for colour-blind people to differentiate, and also does not display well in grey scale. You can specify exact custom colors for your plots, but one easy option is to use the `viridis` scale functions. These take the same arguments as their default sister functions for updating axis names and labels, but display plots in contrasting colors that can be read by color-blind people and that also print well in grey scale. The `viridis` scale functions provide a number of different options for the color -- try setting `option` to any letter from A - E to see the different sets.
 
-```{r viridis, fig.cap="Use the viridis color scheme for accessibility."}
+```{r viridis, warning = FALSE,fig.cap="Use the viridis color scheme for accessibility."}
 ggplot(dat_long, aes(x = rt, y = age, color = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -198,11 +193,68 @@ Before you move on try the following:
 
 -   Use `fill` to created grouped histograms that display the distributions for `rt` for each `language` group separately and also edit the fill axis labels. Try adding `position = "dodge"` to `geom_histogram()` to see what happens.
 
+`r hide("Solution")`
+```{r eval = FALSE}
+# fill and axis changes
+ggplot(dat_long, aes(x = rt, fill = language)) +
+  geom_histogram(binwidth = 10) +
+  scale_x_continuous(name = "Reaction time (ms)") +
+  scale_fill_discrete(name = "Group",
+                      labels = c("Monolingual", "Bilingual"))
+# add in dodge
+ggplot(dat_long, aes(x = rt, fill = language)) +
+  geom_histogram(binwidth = 10, position = "dodge") +
+  scale_x_continuous(name = "Reaction time (ms)") +
+  scale_fill_discrete(name = "Group",
+                      labels = c("Monolingual", "Bilingual"))
+```
+
+`r unhide()`
+
 -   Use `scale_*_*()` functions to edit the name of the x and y-axis on the scatterplot
+
+`r hide("Solution")`
+```{r warning = FALSE,eval = FALSE}
+ggplot(dat_long, aes(x = rt, y = age)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_x_continuous(name = "Reaction time") +
+  scale_y_continuous(name = "Age")
+```
+
+`r unhide()`
 
 -   Use `se = FALSE` to remove the confidence envelope from the scatterplots
 
+`r hide("Solution")`
+```{r warning = FALSE,eval = FALSE}
+ggplot(dat_long, aes(x = rt, y = age)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  scale_x_continuous(name = "Reaction time") +
+  scale_y_continuous(name = "Age")
+```
+
 -   Remove `method = "lm"` from `geom_smooth()` to produce a curved regression line.
 
+`r hide("Solution")`
+```{r warning = FALSE,eval = FALSE}
+ggplot(dat_long, aes(x = rt, y = age)) +
+  geom_point() +
+  geom_smooth() +
+  scale_x_continuous(name = "Reaction time") +
+  scale_y_continuous(name = "Age")
+```
+
 -   Replace the default `scale_fill_*()` on the grouped density plot with the color-blind friendly version.
+
+`r hide("Solution")`
+```{r eval = FALSE}
+ggplot(dat_long, aes(x = rt, fill = condition)) +
+  geom_density()+
+  scale_x_continuous(name = "Reaction time (ms)") +
+  scale_fill_viridis_d(option = "E",
+                      name = "Condition",
+                      labels = c("Congruent", "Incongruent"))
+```
 

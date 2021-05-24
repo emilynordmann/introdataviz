@@ -19,6 +19,7 @@ long <- pivot_longer(dat,
 dat_long <- pivot_wider(long, 
                         names_from = "dv_type", 
                         values_from = "dv")
+theme_set(theme_grey())
 ```
 
 # Chapter 4
@@ -36,7 +37,7 @@ ggplot(dat_long, aes(x = condition, y = acc)) +
 
 As with histograms and density plots, `fill` can be used to create grouped boxplots:
 
-```{r boxplot2}
+```{r boxplot2, fig.cap="Grouped boxplots"}
 ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
   geom_boxplot() +
   scale_fill_viridis_d(option = "D",
@@ -66,11 +67,11 @@ ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
 
 ## Bar chart of means
 
-Commonly, rather than visualising distributions of raw data researchers will wish to visualise the mean using a bar chart with error bars. Although this is one of the most common data visualisations, it is perhaps the least intuitive for novice learners of R to achieve in `ggplot`. We present this code here because it is a common visualisation, however, we would urge you to use a better visualisation that provides more transparency about the distribution of the raw data such as the violin-boxplots we will present in the next section.
+Commonly, rather than visualising distributions of raw data researchers will wish to visualise the mean using a bar chart with error bars. Although this is one of the most common data visualisations, it is somewhat unintuitive for novice learners of R to achieve in `ggplot`. We present this code here because it is a common visualisation, however, we would urge you to use a better visualisation that provides more transparency about the distribution of the raw data such as the violin-boxplots we will present in the next section.
 
-Rather than calling a specified geom, we call `stat_summary()`.
+Rather than calling a `geom_` function, we call `stat_summary()`.
 
--   `fun` specifies the a summary function that gives us the y-value we want to plot, in this case, `mean`
+-   `fun` specifies the summary function that gives us the y-value we want to plot, in this case, `mean`
 
 -   `geom` specifies what shape or plot we want to use to display the summary. For the first layer we will specify `bar`.
 
@@ -81,7 +82,7 @@ ggplot(dat_long, aes(x = condition, y = rt)) +
 
 To add the error bars, another layer is added with a second call to `stat_summary`. This time, the function represents the type of error bars we wish to draw, you can choose from `mean_se` for standard error, `mean_cl_normal` for confidence intervals, or `mean_sdl` for standard deviation. `width` controls the width of the error bars - try changing the value to see what happens.
 
--   `fun.data` specifies the a summary function that gives us the y-values we want to plot plus their minimum and maximum values, in this case, `mean_se`
+-   Whilst `fun` returns a single value (y), `fun.data` returns the y-values we want to plot plus their minimum and maximum values, in this case, `mean_se`
 
 ```{r badbar2, fig.cap="Bar plot of means with error bars representing SE."}
 ggplot(dat_long, aes(x = condition, y = rt)) +
@@ -93,7 +94,9 @@ ggplot(dat_long, aes(x = condition, y = rt)) +
 
 The power of the layered system is further highlighted by the ability to combine different types of plots. For example, rather than using a bar chart with error bars, one can easily create a single plot that includes a violin plot, boxplot, and the mean with error bars. This plot requires just two extra lines of code to produce than the bar plot with error bars, yet the amount of information displayed is vastly superior.
 
-```{r viobox1, fig.cap="Violin-boxplot with mean dot and standard error bars."}
+* `fatten = NULL` removes the median line from the boxplot, which can make it easier to see the mean and error bars. Including this argument will result in the warning message `Removed 1 rows containing missing values (geom_segment)` and is not a cause for concern. Removing this argument will reinstate the median line. 
+
+```{r viobox1, fig.cap="Violin-boxplot with mean dot and standard error bars.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_violin() +
   # remove the median line with fatten = NULL
@@ -104,7 +107,7 @@ ggplot(dat_long, aes(x = condition, y= rt)) +
 
 It is important to note that the order of the layers matters. For example, if we call `geom_boxplot()` followed by `geom_violin()`, we get the following mess:
 
-```{r viobox1b, fig.cap="Plot with the geoms in the wrong order."}
+```{r viobox1b, fig.cap="Plot with the geoms in the wrong order.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt)) +
   geom_boxplot() +  
   geom_violin() +
@@ -116,7 +119,7 @@ ggplot(dat_long, aes(x = condition, y= rt)) +
 
 As with previous plots, another variable can be mapped to `fill` for the violin-boxplot, however, simply adding `fill` to the mapping causes the different components of the plot to become misaligned because they have different default positions:
 
-```{r viobox2, fig.cap="Grouped violin-boxplots without repositioning."}
+```{r viobox2, fig.cap="Grouped violin-boxplots without repositioning.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
   geom_boxplot(width = .2, fatten = NULL) +
@@ -126,7 +129,7 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
 
 To rectify this we need to adjust the argument `position` for each of the misaligned layers. `position_dodge()` instructs R to move (dodge) the position of the plot component by the specified value - what value you need can sometimes take trial and error.
 
-```{r viobox3, fig.cap="Grouped violin-boxplots with repositioning."}
+```{r viobox3, fig.cap="Grouped violin-boxplots with repositioning.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
   geom_boxplot(width = .2, fatten = NULL, position = position_dodge(.9)) +
@@ -139,9 +142,9 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
 
 ## Customisation part 3
 
-Combining multiple type of plots can present an issue with the colors, particularly when the viridis scheme is used - in the below example it is hard to make out the black lines of the boxplot and the mean/errorbars.
+Combining multiple type of plots can present an issue with the colours, particularly when the viridis scheme is used - in the below example it is hard to make out the black lines of the boxplot and the mean/errorbars.
 
-```{r viobox4, fig.cap="A color scheme that makes lines difficult to see."}
+```{r viobox4, fig.cap="A color scheme that makes lines difficult to see.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   geom_violin() +
   geom_boxplot(width = .2, fatten = NULL, position = position_dodge(.9)) +
@@ -153,21 +156,21 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   theme_minimal()
 ```
 
-There are a number of solutions to this problem. First, we can change the color of individual geoms by adding `color = "color"` to each relevant geom:
+There are a number of solutions to this problem. First, we can change the colour of individual geoms by adding `colour = "colour"` to each relevant geom:
 
-```{r viobox5, fig.cap="Manually changing the line colors."}
+```{r viobox5, fig.cap="Manually changing the line colors.",  warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = condition)) +
   geom_violin() +
-  geom_boxplot(width = .2, fatten = NULL, color = "grey") +
-  stat_summary(fun = "mean", geom = "point", color = "grey") +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1, color = "grey") +
+  geom_boxplot(width = .2, fatten = NULL, colour = "grey") +
+  stat_summary(fun = "mean", geom = "point", colour = "grey") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1, colour = "grey") +
   scale_fill_viridis_d(option = "E") +
   theme_minimal()
 ```
 
-We can also keep the original colors but adjust the transparency of each layer using `alpha`. Again, the exact values needed can take trial and error:
+We can also keep the original colours but adjust the transparency of each layer using `alpha`. Again, the exact values needed can take trial and error:
 
-```{r viobox6, fig.cap="Using transparency on the fill color."}
+```{r viobox6, fig.cap="Using transparency on the fill color.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = condition)) +
   geom_violin(alpha = .4) +
   geom_boxplot(width = .2, fatten = NULL, alpha = .5) +
@@ -185,11 +188,42 @@ Before you go on, do the following:
 
 -   Take a moment to recognise the complexity of the code you are now able to read.
 
--   In `stat_summary` for geom = "point", try changing `fun` to `median`
+-   For the violin-boxplot, for `geom = "point"`, try changing `fun` to `median`
 
--   In `stat_summary` for geom = "errorbar", try changing `fun.data` to `mean_cl_normal` (for 95% CI)
+`r hide("Solution")`
+
+```{r eval =FALSE}
+ggplot(dat_long, aes(x = condition, y= rt)) +
+  geom_violin() +
+  # remove the median line with fatten = NULL
+  geom_boxplot(width = .2, fatten = NULL) +
+  stat_summary(fun = "median", geom = "point") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1)
+```
+`r unhide()`
+
+-   For the violin-boxplot, for `geom = "errorbar"`, try changing `fun.data` to `mean_cl_normal` (for 95% CI)
+
+`r hide("Solution")`
+```{r eval =FALSE}
+ggplot(dat_long, aes(x = condition, y= rt)) +
+  geom_violin() +
+  # remove the median line with fatten = NULL
+  geom_boxplot(width = .2, fatten = NULL) +
+  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun.data = "mean_cl_normal", geom = "errorbar", width = .1)
+```
+`r unhide()`
 
 -   Go back to the grouped density plots and try changing the transparency with `alpha`.
 
-
+`r hide("Solution")`
+```{r eval =FALSE}
+ggplot(dat_long, aes(x = rt, fill = condition)) +
+  geom_density(alpha = .4)+
+  scale_x_continuous(name = "Reaction time (ms)") +
+  scale_fill_discrete(name = "Condition",
+                      labels = c("Congruent", "Incongruent"))
+```
+`r unhide()`
 
