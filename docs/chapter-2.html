@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-05-21" />
+<meta name="date" content="2021-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -198,18 +198,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>4</b> Chapter 4</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="chapter-4.html"><a href="chapter-4.html#boxplots"><i class="fa fa-check"></i><b>4.1</b> Boxplots</a>
+<li class="chapter" data-level="4.1" data-path="chapter-4.html"><a href="chapter-4.html#transforming-data-2"><i class="fa fa-check"></i><b>4.1</b> Transforming data 2</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-4.html"><a href="chapter-4.html#boxplots"><i class="fa fa-check"></i><b>4.2</b> Boxplots</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="chapter-4.html"><a href="chapter-4.html#grouped-boxplots"><i class="fa fa-check"></i><b>4.1.1</b> Grouped boxplots</a></li>
+<li class="chapter" data-level="4.2.1" data-path="chapter-4.html"><a href="chapter-4.html#grouped-boxplots"><i class="fa fa-check"></i><b>4.2.1</b> Grouped boxplots</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="chapter-4.html"><a href="chapter-4.html#violin-plots"><i class="fa fa-check"></i><b>4.2</b> Violin plots</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-4.html"><a href="chapter-4.html#bar-chart-of-means"><i class="fa fa-check"></i><b>4.3</b> Bar chart of means</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-4.html"><a href="chapter-4.html#violin-boxplot"><i class="fa fa-check"></i><b>4.4</b> Violin-boxplot</a>
+<li class="chapter" data-level="4.3" data-path="chapter-4.html"><a href="chapter-4.html#violin-plots"><i class="fa fa-check"></i><b>4.3</b> Violin plots</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-4.html"><a href="chapter-4.html#bar-chart-of-means"><i class="fa fa-check"></i><b>4.4</b> Bar chart of means</a></li>
+<li class="chapter" data-level="4.5" data-path="chapter-4.html"><a href="chapter-4.html#violin-boxplot"><i class="fa fa-check"></i><b>4.5</b> Violin-boxplot</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="chapter-4.html"><a href="chapter-4.html#grouped-violin-boxplots"><i class="fa fa-check"></i><b>4.4.1</b> Grouped violin-boxplots</a></li>
+<li class="chapter" data-level="4.5.1" data-path="chapter-4.html"><a href="chapter-4.html#grouped-violin-boxplots"><i class="fa fa-check"></i><b>4.5.1</b> Grouped violin-boxplots</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="chapter-4.html"><a href="chapter-4.html#customisation-part-3"><i class="fa fa-check"></i><b>4.5</b> Customisation part 3</a></li>
-<li class="chapter" data-level="4.6" data-path="chapter-4.html"><a href="chapter-4.html#activities-3"><i class="fa fa-check"></i><b>4.6</b> Activities 3</a></li>
+<li class="chapter" data-level="4.6" data-path="chapter-4.html"><a href="chapter-4.html#customisation-part-3"><i class="fa fa-check"></i><b>4.6</b> Customisation part 3</a></li>
+<li class="chapter" data-level="4.7" data-path="chapter-4.html"><a href="chapter-4.html#activities-3"><i class="fa fa-check"></i><b>4.7</b> Activities 3</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>5</b> Chapter 5</a>
 <ul>
@@ -274,6 +275,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="loading-data" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Loading data</h2>
+<p>Download the data here: <a href="stroop_data.csv" download>stroop_data.csv</a></p>
 <p>To load the simulated data we use the function <code>read_csv()</code> from the <code>readr</code> tidyverse package.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chapter-2.html#cb4-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;stroop_data.csv&quot;</span>)</span></code></pre></div>
 <p>This code has created an object <code>dat</code> that contains the data from the file <code>stroop_data.csv</code>. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (<code>.csv</code>) must also be included. If you receive the error <code>…does not exist in current working directory</code> it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error <code>could not find function</code> it means you have either not loaded the correct package, or you have made a typo in the function name.</p>
@@ -416,13 +418,16 @@ Figure 2.1: Bar chart of counts.
 <li><p><code>x</code> specifies which variable to put on the x-axis</p></li>
 </ul>
 <p>The second line of code draws the plot, and is connected to the base code with <code>+</code>. In this case, we ask for <code>geom_bar()</code>. Each <code>geom</code>, or type of plot, has an associated default statistic. For bar charts, the default statistic is to count the data passed to it. This means that you do not have to specify a <code>y</code> variable when making a bar plot of counts, when given an <code>x</code> variable, <code>geom_bar()</code> will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the <code>language</code> variable.</p>
-<p>If your data already have the counts that you want to plot, you can set <code>stat="identity"</code> inside of <code>geom_bar()</code> to use that number instead of counting rows. Notice that we are now omitting the names of the arguments <code>data</code> and <code>mapping</code> in the <code>ggplot()</code> function.</p>
+<p>If your data already have the counts that you want to plot, you can set <code>stat="identity"</code> inside of <code>geom_bar()</code> to use that number instead of counting rows. For example, there is no way to plot percentages rather than counts within <code>ggplot</code>, you need to calculate these and store them in an object which is then used as the dataset.</p>
+<p>Notice that we are now omitting the names of the arguments <code>data</code> and <code>mapping</code> in the <code>ggplot()</code> function.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-2.html#cb14-1" aria-hidden="true" tabindex="-1"></a>count_dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="chapter-2.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="chapter-2.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span>
-<span id="cb14-4"><a href="chapter-2.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="chapter-2.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(count_dat, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> n)) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="chapter-2.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<span id="cb14-3"><a href="chapter-2.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="chapter-2.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="chapter-2.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>))</span>
+<span id="cb14-6"><a href="chapter-2.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="chapter-2.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(count_dat, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="chapter-2.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar-precalc"></span>
 <img src="02-ch2_files/figure-html/bar-precalc-1.png" alt="Bar chart of pre-calculated counts." width="100%" />
 <p class="caption">

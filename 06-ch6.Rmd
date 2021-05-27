@@ -1,2 +1,7 @@
 # Chapter 6
 
+
+ridge
+Alluvial
+raincloud
+split-violin
