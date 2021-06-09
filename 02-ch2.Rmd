@@ -113,7 +113,8 @@ dat %>%
 ```{r age1b, echo = FALSE}
 dat %>%
   summarise(mean_age = mean(age),
-            sd_age = sd(age),n_values = n()) %>%
+            sd_age = sd(age),
+            n_values = n()) %>%
   knitr::kable(align = "c", digits = 2)
 ```
 
