@@ -2,7 +2,7 @@
 library(knitr)
 library(tidyverse)
 library(patchwork)
-dat <- read_csv(file = "stroop_data.csv")
+dat <- read_csv(file = "ldt_data.csv")
 dat <- dat %>%
   mutate(language = factor(
     x = language, # column to translate
@@ -10,7 +10,7 @@ dat <- dat %>%
     labels = c("monolingual", "bilingual") # labels for display
   ))
 long <- pivot_longer(dat, 
-                     cols = rt_cong:acc_incon, 
+                     cols = rt_word:acc_nonword, 
                      names_to = c("dv_type", "condition"), 
                      names_sep = "_", 
                      values_to = "dv")
@@ -25,10 +25,10 @@ theme_set(theme_grey())
 
 ## Transforming data 2
 
-Following the rule *anything that shares an axis should probably be in the same column* means that we will frequently need our data in long-form when using `ggplot2`, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the congruent and incongurent conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:
+Following the rule *anything that shares an axis should probably be in the same column* means that we will frequently need our data in long-form when using `ggplot2`, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the word and non-word conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:
 
 ```{r}
-ggplot(dat, aes(x = rt_cong, y = rt_incon, fill = language)) +
+ggplot(dat, aes(x = rt_word, y = rt_nonword, fill = language)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```
@@ -64,12 +64,12 @@ As with histograms and density plots, `fill` can be used to create grouped boxpl
 ```{r boxplot2, fig.cap="Grouped boxplots"}
 ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
   geom_boxplot() +
-  scale_fill_viridis_d(option = "D",
+  scale_fill_viridis_d(option = "E",
                        name = "Group",
                        labels = c("Bilingual", "Monolingual")) +
   theme_classic() +
   scale_x_discrete(name = "Condition",
-                   labels = c("Congruent", "Incongruent")) +
+                   labels = c("Word", "Non-word")) +
   scale_y_continuous(name = "Accuracy")
 ```
 
@@ -85,7 +85,7 @@ ggplot(dat_long, aes(x = condition, y = acc, fill = language)) +
                        labels = c("Bilingual", "Monolingual")) +
   theme_classic() +
   scale_x_discrete(name = "Condition",
-                   labels = c("Congruent", "Incongruent")) +
+                   labels = c("Word", "Non-word")) +
   scale_y_continuous(name = "Accuracy")
 ```
 
@@ -251,7 +251,7 @@ ggplot(dat_long, aes(x = rt, fill = condition)) +
   geom_density(alpha = .4)+
   scale_x_continuous(name = "Reaction time (ms)") +
   scale_fill_discrete(name = "Condition",
-                      labels = c("Congruent", "Incongruent"))
+                      labels = c("Word", "Non-word"))
 ```
 
 `r unhide()`

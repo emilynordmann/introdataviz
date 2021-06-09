@@ -28,6 +28,7 @@ head(dat) %>% knitr::kable(digits = 2, caption="Data in wide format.")
 
 Wide-format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer. Wide-format data concatenates multiple pieces of information in a single column, for example in Table\ \@ref(tab:wide-data), `rt_word` contains information related to both a DV and one level of an IV. In comparison long-format data separates the DV from the IV's so that each column represents only one variable. The less intuitive part is that long data has multiple rows for each participant and a column that encodes the level of the IV (`word` or `nonword`). In essence the long format encodes the repeated measures variable in the same way as a between groups variable in SPSS, raher than via column labels. Wickham [-@wickham2014tidy] provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
 
+
 Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules for reshaping the data would produce Table\ \@ref(tab:long). Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
 
 [^4]: That is to say, if you are new to R, know that many before you have struggled with this conceptual shift - it does get better, it just takes time and your preferred choice of cursing.
@@ -67,6 +68,7 @@ long <- pivot_longer(data = dat,
 
 -   As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case `dat`. This argument name is often dropped in examples.
 
+
 -   `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table\ \@ref(tab:long-example) and Table\ \@ref(tab:wide-data), you can see that `id`, `age`, and `language` all remain, it is the columns that contain the measurements of the DVs that change. Here we have specified a list of all the columns, but if all the columns that will chagne are next to each other, you can replace the `c(rt_word, rt_nonword, acc_word, acc_nonword)` notation with colon notation `rt_word:acc_nonword` to select all variables from the first column specified to the second.  In our code, `cols` specifies that the columns we want to transform are `rt_word` to `acc_nonword`.
 
 -   `names_sep` specifies how to split up the variable name in cases where it has multiple components. This is when taking care to name your variables consistently and meaningfully pays off. Because the word to the left of the separator (`_`) is always the DV type and the word to the right is always the condition of the within-subject IV, it is easy to automatically split the columns.
@@ -102,7 +104,7 @@ We have purposefully used a more complex dataset with two DVs for this tutorial.
 
 ## Histogram 2
 
-Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (`dat_long`), the binwidths of the histograms, the `x` variable to display (`rt`/`acc`), and the name of the x-axis.
+Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (`dat_long`), the bin-widths of the histograms, the `x` variable to display (`rt`/`acc`), and the name of the x-axis.
 
 ```{r histogram-rt, fig.cap="Histogram of reaction times."}
 ggplot(dat_long, aes(x = rt)) +
@@ -140,7 +142,7 @@ ggplot(dat_long, aes(x = rt, fill = condition)) +
   geom_density()+
   scale_x_continuous(name = "Reaction time (ms)") +
   scale_fill_discrete(name = "Condition",
-                      labels = c("Word", "Nonword"))
+                      labels = c("Word", "Non-word"))
 ```
 
 ## Scatterplots
@@ -182,9 +184,10 @@ One of the drawbacks of using `ggplot` for visualisation is that the default col
 ggplot(dat_long, aes(x = rt, y = age, colour = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
-  # use "viridis_d" instead of "discrete" for better colours
-  scale_colour_viridis_d(name = "Condition",
-                        labels = c("Word", "Nonword"),
+
+  # use "viridis_d" instead of "discrete" for better colors
+  scale_color_viridis_d(name = "Condition",
+                        labels = c("Word", "Non-word"),
                         option = "E")
 ```
 
@@ -256,6 +259,7 @@ ggplot(dat_long, aes(x = rt, fill = condition)) +
   scale_x_continuous(name = "Reaction time (ms)") +
   scale_fill_viridis_d(option = "E",
                       name = "Condition",
-                      labels = c("Word", "Nonword"))
+                      labels = c("Word", "Non-word"))
+
 ```
 

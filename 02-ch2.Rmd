@@ -50,6 +50,10 @@ dat <- dat %>%
   ))
 ```
 
+Make sure that you always check the output of any code that you run. If after running this code `language` is full of `NA` values, it means that you have run the code twice. The first time would have worked and transformed the values from `1` to `monolingual` and `2` to `bilingual`. If you run the code again on the same dataset, it will look for the values `1` and `2`, and because there are no longer any that match, it will return NA. If this happens, you will need to reload the dataset from the csv file.
+
+A good way to avoid this is never to overwrite data, but to always store the output of code in new objects (e.g., `dat_recoded`) or new variables (`language_recoded`). For the purposes of this tutorial, overwriting  provides a useful teachable moment so we'll leave it as it is.
+
 ## Argument names
 
 Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering `?function_name` into the console, although be aware that learning to read the help documentation in R is a skill in itself. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:
@@ -170,19 +174,20 @@ The second line of code adds a `geom`, and is connected to the base code with `+
 
 The base layer and the geoms you add as layers work in symbiosis so it is worthwhile checking the mapping rules as these are related to the default statistic for the plot's geom.
 
+## Plotting existing aggregates and percent
 
 If your data already have the counts that you want to plot, you can set `stat="identity"` inside of `geom_bar()` to use that number instead of counting rows. For example, there is no way to plot percentages rather than counts within `ggplot`, you need to calculate these and store them in an object which is then used as the dataset. 
 
 Notice that we are now omitting the names of the arguments `data` and `mapping` in the `ggplot()` function.
 
 ```{r bar-precalc, fig.cap = "Bar chart of pre-calculated counts."}
-count_dat <- dat %>%
+dat_percent <- dat %>%
   group_by(language) %>%
   count() %>%
   ungroup() %>%
   mutate(percent = (n/sum(n)*100))
 
-ggplot(count_dat, aes(x = language, y = percent)) +
+ggplot(dat_percent, aes(x = language, y = percent)) +
   geom_bar(stat="identity") 
 ```
 
