@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-07" />
+<meta name="date" content="2021-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,14 +164,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="chapter-2.html"><a href="chapter-2.html#argument-names"><i class="fa fa-check"></i><b>2.4</b> Argument names</a></li>
 <li class="chapter" data-level="2.5" data-path="chapter-2.html"><a href="chapter-2.html#demographic-information"><i class="fa fa-check"></i><b>2.5</b> Demographic information</a></li>
 <li class="chapter" data-level="2.6" data-path="chapter-2.html"><a href="chapter-2.html#bar-chart-of-counts"><i class="fa fa-check"></i><b>2.6</b> Bar chart of counts</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>2.7</b> Histogram</a></li>
-<li class="chapter" data-level="2.8" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>2.8</b> Customisation 1</a>
+<li class="chapter" data-level="2.7" data-path="chapter-2.html"><a href="chapter-2.html#plotting-existing-aggregates-and-percent"><i class="fa fa-check"></i><b>2.7</b> Plotting existing aggregates and percent</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>2.8</b> Histogram</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>2.9</b> Customisation 1</a>
 <ul>
-<li class="chapter" data-level="2.8.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.8.1</b> Changing colours</a></li>
-<li class="chapter" data-level="2.8.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.8.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.8.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.8.3</b> Adding a theme</a></li>
+<li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
+<li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.3</b> Adding a theme</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.9</b> Activities 1</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>3</b> Chapter 3</a>
 <ul>
@@ -229,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
 <li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
 </ul></li>
+<li class="chapter" data-level="5.8" data-path="chapter-5.html"><a href="chapter-5.html#activities-4"><i class="fa fa-check"></i><b>5.8</b> Activities 4</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
@@ -274,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-formats" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Data formats</h2>
 <p>To visualise the experimental reaction time and accuracy data using <code>ggplot</code> we first need to perform some data wrangling, and it is this step that can cause friction with novice users of R. Traditionally, wide-format data is the preferred or default format. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition.</p>
-<p>The simulated Stroop data is currently in wide-format (see Table <a href="chapter-3.html#tab:wide-data">3.1</a>) where each participant’s aggregated<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> reaction time and accuracy for each level of the within-subject variable is split across multiple columns.</p>
+<p>The simulated lexical decision data is currently in wide-format (see Table <a href="chapter-3.html#tab:wide-data">3.1</a>) where each participant’s aggregated<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> reaction time and accuracy for each level of the within-subject variable is split across multiple columns.</p>
 <table>
 <caption><span id="tab:wide-data">Table 3.1: </span>Data in wide format.</caption>
 <thead>
@@ -282,70 +284,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <th align="left">id</th>
 <th align="right">age</th>
 <th align="left">language</th>
-<th align="right">rt_cong</th>
-<th align="right">rt_incon</th>
-<th align="right">acc_cong</th>
-<th align="right">acc_incon</th>
+<th align="right">rt_word</th>
+<th align="right">rt_nonword</th>
+<th align="right">acc_word</th>
+<th align="right">acc_nonword</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
-<td align="right">369.46</td>
-<td align="right">666.82</td>
+<td align="right">379.46</td>
+<td align="right">516.82</td>
 <td align="right">99</td>
 <td align="right">90</td>
 </tr>
 <tr class="even">
 <td align="left">S002</td>
-<td align="right">37</td>
+<td align="right">33</td>
 <td align="left">monolingual</td>
-<td align="right">302.45</td>
-<td align="right">585.04</td>
+<td align="right">312.45</td>
+<td align="right">435.04</td>
 <td align="right">94</td>
 <td align="right">82</td>
 </tr>
 <tr class="odd">
 <td align="left">S003</td>
-<td align="right">26</td>
+<td align="right">23</td>
 <td align="left">monolingual</td>
-<td align="right">394.94</td>
-<td align="right">608.50</td>
+<td align="right">404.94</td>
+<td align="right">458.50</td>
 <td align="right">96</td>
 <td align="right">87</td>
 </tr>
 <tr class="even">
 <td align="left">S004</td>
-<td align="right">32</td>
+<td align="right">28</td>
 <td align="left">monolingual</td>
-<td align="right">288.37</td>
-<td align="right">485.89</td>
+<td align="right">298.37</td>
+<td align="right">335.89</td>
 <td align="right">92</td>
 <td align="right">76</td>
 </tr>
 <tr class="odd">
 <td align="left">S005</td>
-<td align="right">28</td>
+<td align="right">26</td>
 <td align="left">monolingual</td>
-<td align="right">306.42</td>
-<td align="right">551.32</td>
+<td align="right">316.42</td>
+<td align="right">401.32</td>
 <td align="right">91</td>
 <td align="right">83</td>
 </tr>
 <tr class="even">
 <td align="left">S006</td>
-<td align="right">34</td>
+<td align="right">29</td>
 <td align="left">monolingual</td>
-<td align="right">347.17</td>
-<td align="right">517.34</td>
+<td align="right">357.17</td>
+<td align="right">367.34</td>
 <td align="right">96</td>
 <td align="right">78</td>
 </tr>
 </tbody>
 </table>
-<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_cong</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(<a href="additional-resources-phil.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
+<p>This format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer . Wide-format data combines multiple variables in a single column, for example in Table <a href="chapter-3.html#tab:wide-data">3.1</a>, <code>rt_word</code> contains information related to both a DV and the level of an IV. Wickham <span class="citation">(<a href="additional-resources-phil.html#ref-wickham2014tidy" role="doc-biblioref">2014</a>)</span> provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a <em>variable</em> and each row should be an <em>observation.</em></p>
 <p>Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For our example dataset, adhering to these rules would produce Table <a href="chapter-3.html#tab:long">3.2</a>. Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.</p>
 <table>
 <caption><span id="tab:long">Table 3.2: </span>Data in the correct format for visualization.</caption>
@@ -362,55 +364,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
-<td align="left">cong</td>
-<td align="right">369.46</td>
+<td align="left">word</td>
+<td align="right">379.46</td>
 <td align="right">99</td>
 </tr>
 <tr class="even">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
-<td align="left">incon</td>
-<td align="right">666.82</td>
+<td align="left">nonword</td>
+<td align="right">516.82</td>
 <td align="right">90</td>
 </tr>
 <tr class="odd">
 <td align="left">S002</td>
-<td align="right">37</td>
+<td align="right">33</td>
 <td align="left">monolingual</td>
-<td align="left">cong</td>
-<td align="right">302.45</td>
+<td align="left">word</td>
+<td align="right">312.45</td>
 <td align="right">94</td>
 </tr>
 <tr class="even">
 <td align="left">S002</td>
-<td align="right">37</td>
+<td align="right">33</td>
 <td align="left">monolingual</td>
-<td align="left">incon</td>
-<td align="right">585.04</td>
+<td align="left">nonword</td>
+<td align="right">435.04</td>
 <td align="right">82</td>
 </tr>
 <tr class="odd">
 <td align="left">S003</td>
-<td align="right">26</td>
+<td align="right">23</td>
 <td align="left">monolingual</td>
-<td align="left">cong</td>
-<td align="right">394.94</td>
+<td align="left">word</td>
+<td align="right">404.94</td>
 <td align="right">96</td>
 </tr>
 <tr class="even">
 <td align="left">S003</td>
-<td align="right">26</td>
+<td align="right">23</td>
 <td align="left">monolingual</td>
-<td align="left">incon</td>
-<td align="right">608.50</td>
+<td align="left">nonword</td>
+<td align="right">458.50</td>
 <td align="right">87</td>
 </tr>
 </tbody>
 </table>
-<p>The benefits and flexibility of this format will hopefully become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that <em>anything that shares an axis should probably be in the same column</em>. For example, a simple bar chart of means for the reaction time DV would display the variable <code>condition</code> on the x-axis with bars representing both the <code>cong</code> and <code>incon</code> data, therefore, these data should be in one column and not split.</p>
+<p>The benefits and flexibility of this format will hopefully become apparent as we progress through the tutorial, however, a useful rule of thumb when working with data in R for visualisation is that <em>anything that shares an axis should probably be in the same column</em>. For example, a simple bar chart of means for the reaction time DV would display the variable <code>condition</code> on the x-axis with bars representing both the <code>word</code> and <code>nonword</code> data, therefore, these data should be in one column and not split.</p>
 </div>
 <div id="transforming-data" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Transforming data</h2>
@@ -419,13 +421,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.2.1</span> Step 1: <code>pivot_longer()</code></h3>
 <p>The first step is to use the function <code>pivot_longer()</code> to transform the data to long-form. The pivot functions can be easier to show than tell - you may find it a useful exercise to run the below code and compare the newly created object <code>long</code> (Table <a href="chapter-3.html#tab:long-example">3.3</a>) with the original <code>dat</code> Table <a href="chapter-3.html#tab:wide-data">3.1</a> before reading on.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="chapter-3.html#cb25-1" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> dat, </span>
-<span id="cb25-2"><a href="chapter-3.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> rt_cong<span class="sc">:</span>acc_incon, </span>
+<span id="cb25-2"><a href="chapter-3.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> rt_word<span class="sc">:</span>acc_nonword, </span>
 <span id="cb25-3"><a href="chapter-3.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>, </span>
 <span id="cb25-4"><a href="chapter-3.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;dv_type&quot;</span>, <span class="st">&quot;condition&quot;</span>),</span>
 <span id="cb25-5"><a href="chapter-3.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">&quot;dv&quot;</span>)</span></code></pre></div>
 <ul>
 <li><p>As with the other tidyverse functions, the first argument specifies the dataset to use as the base, in this case <code>dat</code>. This argument name is often dropped in examples.</p></li>
-<li><p><code>cols</code> specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table <a href="chapter-3.html#tab:long-example">3.3</a> and Table <a href="chapter-3.html#tab:wide-data">3.1</a>, you can see that <code>id</code>, <code>age</code>, and <code>language</code> all remain, it is the columns that contain the measurements of the DVs that change. The colon notation <code>first_column:last_column</code> is used to select all variables from the first column specified to the second. In our code, <code>cols</code> specifies that the columns we want to transform are <code>rt_cong</code> to <code>acc_incon</code>.</p></li>
+<li><p><code>cols</code> specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table <a href="chapter-3.html#tab:long-example">3.3</a> and Table <a href="chapter-3.html#tab:wide-data">3.1</a>, you can see that <code>id</code>, <code>age</code>, and <code>language</code> all remain, it is the columns that contain the measurements of the DVs that change. The colon notation <code>first_column:last_column</code> is used to select all variables from the first column specified to the second. In our code, <code>cols</code> specifies that the columns we want to transform are <code>rt_word</code> to <code>acc_nonword</code>.</p></li>
 <li><p><code>names_sep</code> specifies how to split up the variable name in cases where it has multiple components. This is when taking care to name your variables consistently and meaningfully pays off. Because the word to the left of the separator (<code>_</code>) is always the DV type and the word to the right is always the condition of the within-subject IV, it is easy to automatically split the columns.</p></li>
 <li><p><code>names_to</code> specifies the names of the new columns that will be created. There are two: one for the text to the left of the separator, and one for the text to the right of the separator.</p></li>
 <li><p>Finally, <code>values_to</code> names the new column that will contain the measurements, in this case we’ll call it <code>dv</code>. At this point you may find it helpful to go back and compare <code>dat</code> and <code>long</code> again to see how each argument matches up with the output of the table.</p></li>
@@ -445,51 +447,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
 <td align="left">rt</td>
-<td align="left">cong</td>
-<td align="right">369.46</td>
+<td align="left">word</td>
+<td align="right">379.46</td>
 </tr>
 <tr class="even">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
 <td align="left">rt</td>
-<td align="left">incon</td>
-<td align="right">666.82</td>
+<td align="left">nonword</td>
+<td align="right">516.82</td>
 </tr>
 <tr class="odd">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
 <td align="left">acc</td>
-<td align="left">cong</td>
+<td align="left">word</td>
 <td align="right">99.00</td>
 </tr>
 <tr class="even">
 <td align="left">S001</td>
-<td align="right">25</td>
+<td align="right">22</td>
 <td align="left">monolingual</td>
 <td align="left">acc</td>
-<td align="left">incon</td>
+<td align="left">nonword</td>
 <td align="right">90.00</td>
 </tr>
 <tr class="odd">
 <td align="left">S002</td>
-<td align="right">37</td>
+<td align="right">33</td>
 <td align="left">monolingual</td>
 <td align="left">rt</td>
-<td align="left">cong</td>
-<td align="right">302.45</td>
+<td align="left">word</td>
+<td align="right">312.45</td>
 </tr>
 <tr class="even">
 <td align="left">S002</td>
-<td align="right">37</td>
+<td align="right">33</td>
 <td align="left">monolingual</td>
 <td align="left">rt</td>
-<td align="left">incon</td>
-<td align="right">585.04</td>
+<td align="left">nonword</td>
+<td align="right">435.04</td>
 </tr>
 </tbody>
 </table>
@@ -511,7 +513,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="histogram-2" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Histogram 2</h2>
-<p>Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (<code>dat_long</code>), the binwidths of the histograms, the <code>x</code> variable to display (<code>rt</code>/<code>acc</code>), and the name of the x-axis.</p>
+<p>Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (<code>dat_long</code>), the bin-widths of the histograms, the <code>x</code> variable to display (<code>rt</code>/<code>acc</code>), and the name of the x-axis.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="chapter-3.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> rt)) <span class="sc">+</span></span>
 <span id="cb27-2"><a href="chapter-3.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">10</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb27-3"><a href="chapter-3.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Reaction time (ms)&quot;</span>)</span></code></pre></div>
@@ -555,7 +557,7 @@ Figure 3.3: Density plot of reaction time.
 <span id="cb30-2"><a href="chapter-3.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()<span class="sc">+</span></span>
 <span id="cb30-3"><a href="chapter-3.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Reaction time (ms)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb30-4"><a href="chapter-3.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb30-5"><a href="chapter-3.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>))</span></code></pre></div>
+<span id="cb30-5"><a href="chapter-3.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:density-grouped"></span>
 <img src="03-ch3_files/figure-html/density-grouped-1.png" alt="Density plot of reaction times grouped by condition." width="100%" />
 <p class="caption">
@@ -593,7 +595,7 @@ Figure 3.6: Line of best fit for reaction time versus age.
 <span id="cb34-2"><a href="chapter-3.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb34-3"><a href="chapter-3.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb34-4"><a href="chapter-3.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb34-5"><a href="chapter-3.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>))</span></code></pre></div>
+<span id="cb34-5"><a href="chapter-3.html#cb34-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>))</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:scatter-grouped"></span>
 <img src="03-ch3_files/figure-html/scatter-grouped-1.png" alt="Grouped scatter plot of reaction time versus age by condition." width="100%" />
@@ -613,7 +615,7 @@ Figure 3.7: Grouped scatter plot of reaction time versus age by condition.
 <span id="cb36-3"><a href="chapter-3.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
 <span id="cb36-4"><a href="chapter-3.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># use &quot;viridis_d&quot; instead of &quot;discrete&quot; for better colors</span></span>
 <span id="cb36-5"><a href="chapter-3.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb36-6"><a href="chapter-3.html#cb36-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>),</span>
+<span id="cb36-6"><a href="chapter-3.html#cb36-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>),</span>
 <span id="cb36-7"><a href="chapter-3.html#cb36-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">option =</span> <span class="st">&quot;E&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:viridis"></span>
@@ -696,7 +698,7 @@ Solution
 <span id="cb42-3"><a href="chapter-3.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Reaction time (ms)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb42-4"><a href="chapter-3.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>,</span>
 <span id="cb42-5"><a href="chapter-3.html#cb42-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb42-6"><a href="chapter-3.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>))</span></code></pre></div>
+<span id="cb42-6"><a href="chapter-3.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>))</span></code></pre></div>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-07" />
+<meta name="date" content="2021-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -164,14 +164,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="chapter-2.html"><a href="chapter-2.html#argument-names"><i class="fa fa-check"></i><b>2.4</b> Argument names</a></li>
 <li class="chapter" data-level="2.5" data-path="chapter-2.html"><a href="chapter-2.html#demographic-information"><i class="fa fa-check"></i><b>2.5</b> Demographic information</a></li>
 <li class="chapter" data-level="2.6" data-path="chapter-2.html"><a href="chapter-2.html#bar-chart-of-counts"><i class="fa fa-check"></i><b>2.6</b> Bar chart of counts</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>2.7</b> Histogram</a></li>
-<li class="chapter" data-level="2.8" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>2.8</b> Customisation 1</a>
+<li class="chapter" data-level="2.7" data-path="chapter-2.html"><a href="chapter-2.html#plotting-existing-aggregates-and-percent"><i class="fa fa-check"></i><b>2.7</b> Plotting existing aggregates and percent</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>2.8</b> Histogram</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>2.9</b> Customisation 1</a>
 <ul>
-<li class="chapter" data-level="2.8.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.8.1</b> Changing colours</a></li>
-<li class="chapter" data-level="2.8.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.8.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.8.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.8.3</b> Adding a theme</a></li>
+<li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
+<li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.3</b> Adding a theme</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.9</b> Activities 1</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>3</b> Chapter 3</a>
 <ul>
@@ -229,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7.1" data-path="chapter-5.html"><a href="chapter-5.html#axis-labels"><i class="fa fa-check"></i><b>5.7.1</b> Axis labels</a></li>
 <li class="chapter" data-level="5.7.2" data-path="chapter-5.html"><a href="chapter-5.html#non-meaningful-colours"><i class="fa fa-check"></i><b>5.7.2</b> Non-meaningful colours</a></li>
 </ul></li>
+<li class="chapter" data-level="5.8" data-path="chapter-5.html"><a href="chapter-5.html#activities-4"><i class="fa fa-check"></i><b>5.8</b> Activities 4</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
@@ -273,8 +275,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Chapter 4</h1>
 <div id="transforming-data-2" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Transforming data 2</h2>
-<p>Following the rule <em>anything that shares an axis should probably be in the same column</em> means that we will frequently need our data in long-form when using <code>ggplot2</code>, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the congruent and incongurent conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapter-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> rt_cong, <span class="at">y =</span> rt_incon, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
+<p>Following the rule <em>anything that shares an axis should probably be in the same column</em> means that we will frequently need our data in long-form when using <code>ggplot2</code>, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the word and non-word conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="chapter-4.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> rt_word, <span class="at">y =</span> rt_nonword, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
 <span id="cb43-2"><a href="chapter-4.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb43-3"><a href="chapter-4.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
@@ -293,52 +295,52 @@ Figure 4.1: <strong>CAPTION THIS FIGURE!!</strong>
 <thead>
 <tr class="header">
 <th align="center">id</th>
-<th align="center">rt_cong</th>
-<th align="center">rt_incon</th>
-<th align="center">acc_cong</th>
-<th align="center">acc_incon</th>
+<th align="center">rt_word</th>
+<th align="center">rt_nonword</th>
+<th align="center">acc_word</th>
+<th align="center">acc_nonword</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center">S001</td>
-<td align="center">369.4585</td>
-<td align="center">666.8176</td>
+<td align="center">379.4585</td>
+<td align="center">516.8176</td>
 <td align="center">99</td>
 <td align="center">90</td>
 </tr>
 <tr class="even">
 <td align="center">S002</td>
-<td align="center">302.4513</td>
-<td align="center">585.0404</td>
+<td align="center">312.4513</td>
+<td align="center">435.0404</td>
 <td align="center">94</td>
 <td align="center">82</td>
 </tr>
 <tr class="odd">
 <td align="center">S003</td>
-<td align="center">394.9407</td>
-<td align="center">608.5022</td>
+<td align="center">404.9407</td>
+<td align="center">458.5022</td>
 <td align="center">96</td>
 <td align="center">87</td>
 </tr>
 <tr class="even">
 <td align="center">S004</td>
-<td align="center">288.3734</td>
-<td align="center">485.8933</td>
+<td align="center">298.3734</td>
+<td align="center">335.8933</td>
 <td align="center">92</td>
 <td align="center">76</td>
 </tr>
 <tr class="odd">
 <td align="center">S005</td>
-<td align="center">306.4250</td>
-<td align="center">551.3214</td>
+<td align="center">316.4250</td>
+<td align="center">401.3214</td>
 <td align="center">91</td>
 <td align="center">83</td>
 </tr>
 <tr class="even">
 <td align="center">S006</td>
-<td align="center">347.1710</td>
-<td align="center">517.3355</td>
+<td align="center">357.1710</td>
+<td align="center">367.3355</td>
 <td align="center">96</td>
 <td align="center">78</td>
 </tr>
@@ -361,12 +363,12 @@ Figure 4.2: Basic boxplot.
 <p>As with histograms and density plots, <code>fill</code> can be used to create grouped boxplots:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="chapter-4.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> acc, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
 <span id="cb47-2"><a href="chapter-4.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb47-3"><a href="chapter-4.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;D&quot;</span>,</span>
+<span id="cb47-3"><a href="chapter-4.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;E&quot;</span>,</span>
 <span id="cb47-4"><a href="chapter-4.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name =</span> <span class="st">&quot;Group&quot;</span>,</span>
 <span id="cb47-5"><a href="chapter-4.html#cb47-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Bilingual&quot;</span>, <span class="st">&quot;Monolingual&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb47-6"><a href="chapter-4.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb47-7"><a href="chapter-4.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb47-8"><a href="chapter-4.html#cb47-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb47-8"><a href="chapter-4.html#cb47-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb47-9"><a href="chapter-4.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Accuracy&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:boxplot2"></span>
 <img src="04-ch4_files/figure-html/boxplot2-1.png" alt="Grouped boxplots" width="100%" />
@@ -386,7 +388,7 @@ Figure 4.3: Grouped boxplots
 <span id="cb48-5"><a href="chapter-4.html#cb48-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Bilingual&quot;</span>, <span class="st">&quot;Monolingual&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb48-6"><a href="chapter-4.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb48-7"><a href="chapter-4.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb48-8"><a href="chapter-4.html#cb48-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="chapter-4.html#cb48-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb48-9"><a href="chapter-4.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Accuracy&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:violin1"></span>
 <img src="04-ch4_files/figure-html/violin1-1.png" alt="Violin plot." width="100%" />
@@ -576,7 +578,7 @@ Solution
 <span id="cb60-2"><a href="chapter-4.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">4</span>)<span class="sc">+</span></span>
 <span id="cb60-3"><a href="chapter-4.html#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Reaction time (ms)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb60-4"><a href="chapter-4.html#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Condition&quot;</span>,</span>
-<span id="cb60-5"><a href="chapter-4.html#cb60-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Congruent&quot;</span>, <span class="st">&quot;Incongruent&quot;</span>))</span></code></pre></div>
+<span id="cb60-5"><a href="chapter-4.html#cb60-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Word&quot;</span>, <span class="st">&quot;Non-word&quot;</span>))</span></code></pre></div>
 </div>
 
 </div>
