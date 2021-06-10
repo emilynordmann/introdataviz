@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction | Data visualisation using R, for researchers who don’t use R</title>
+  <title>Chapter 1 Introduction | workbook</title>
   <meta name="description" content="Abstract here." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction | Data visualisation using R, for researchers who don’t use R" />
+  <meta property="og:title" content="Chapter 1 Introduction | workbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction | Data visualisation using R, for researchers who don’t use R" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | workbook" />
   
   <meta name="twitter:description" content="Abstract here." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-09" />
+<meta name="date" content="2021-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,7 +170,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
 <li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.3</b> Adding a theme</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs continuous errors</a></li>
+<li class="chapter" data-level="2.9.4" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.4</b> Adding a theme</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
 </ul></li>
@@ -180,7 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="chapter-3.html"><a href="chapter-3.html#transforming-data"><i class="fa fa-check"></i><b>3.2</b> Transforming data</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="chapter-3.html"><a href="chapter-3.html#step-1-pivot_longer"><i class="fa fa-check"></i><b>3.2.1</b> Step 1: <code>pivot_longer()</code></a></li>
-<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_wider"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_longer-adjusted"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_longer()</code> adjusted</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chapter-3.html"><a href="chapter-3.html#step-3-pivot_wider"><i class="fa fa-check"></i><b>3.2.3</b> Step 3: <code>pivot_wider()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="chapter-3.html"><a href="chapter-3.html#histogram-2"><i class="fa fa-check"></i><b>3.3</b> Histogram 2</a></li>
 <li class="chapter" data-level="3.4" data-path="chapter-3.html"><a href="chapter-3.html#density-plots"><i class="fa fa-check"></i><b>3.4</b> Density plots</a>
@@ -193,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="chapter-3.html"><a href="chapter-3.html#customisation-2"><i class="fa fa-check"></i><b>3.6</b> Customisation 2</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-color-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible color schemes</a></li>
+<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-colour-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible colour schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="chapter-3.html"><a href="chapter-3.html#activities-2"><i class="fa fa-check"></i><b>3.7</b> Activities 2</a></li>
 </ul></li>
@@ -235,17 +237,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a></li>
-<li class="chapter" data-level="B" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html"><i class="fa fa-check"></i><b>B</b> Additional Resources - Phil</a>
+<li class="chapter" data-level="B" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html"><i class="fa fa-check"></i><b>B</b> Additional advanced plots and customisation options</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
-<li class="chapter" data-level="B.2" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
-<li class="chapter" data-level="B.3" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
-<li class="chapter" data-level="B.4" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
-<li class="chapter" data-level="B.5" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
-<li class="chapter" data-level="B.6" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
-<li class="chapter" data-level="B.7" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
-<li class="chapter" data-level="B.8" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
-<li class="chapter" data-level="B.9" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#additional-links"><i class="fa fa-check"></i><b>B.9</b> Additional Links</a></li>
+<li class="chapter" data-level="B.1" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
+<li class="chapter" data-level="B.2" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
+<li class="chapter" data-level="B.3" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
+<li class="chapter" data-level="B.4" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
+<li class="chapter" data-level="B.5" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
+<li class="chapter" data-level="B.6" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
+<li class="chapter" data-level="B.7" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
+<li class="chapter" data-level="B.8" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>C</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="r-markdown.html"><a href="r-markdown.html#tutorial-workbook"><i class="fa fa-check"></i><b>C.1</b> Tutorial workbook</a></li>
+<li class="chapter" data-level="C.2" data-path="chapter-2.html"><a href="chapter-2.html#chapter-2"><i class="fa fa-check"></i><b>C.2</b> Chapter 2</a>
+<ul>
+<li class="chapter" data-level="C.2.1" data-path="chapter-2.html"><a href="chapter-2.html#loading-packages"><i class="fa fa-check"></i><b>C.2.1</b> Loading packages</a></li>
+<li class="chapter" data-level="C.2.2" data-path="chapter-2.html"><a href="chapter-2.html#loading-data"><i class="fa fa-check"></i><b>C.2.2</b> Loading data</a></li>
+<li class="chapter" data-level="C.2.3" data-path="chapter-2.html"><a href="chapter-2.html#handling-numeric-factors"><i class="fa fa-check"></i><b>C.2.3</b> Handling numeric factors</a></li>
+<li class="chapter" data-level="C.2.4" data-path="chapter-2.html"><a href="chapter-2.html#demographic-information"><i class="fa fa-check"></i><b>C.2.4</b> Demographic information</a></li>
+<li class="chapter" data-level="C.2.5" data-path="chapter-2.html"><a href="chapter-2.html#bar-chart-of-counts"><i class="fa fa-check"></i><b>C.2.5</b> Bar chart of counts</a></li>
+<li class="chapter" data-level="C.2.6" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>C.2.6</b> Histogram</a></li>
+<li class="chapter" data-level="C.2.7" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>C.2.7</b> Customisation 1</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -263,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data visualisation using R, for researchers who don’t use R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">workbook</a>
           </h1>
         </div>
 
@@ -273,17 +288,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>Use of the programming language R for data processing and statistical analysis by researchers is increasingly common with a GET THE STATS FROM THAT THING I SAW ABOUT R ON TWITTER rise since XXXX (REF). In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means <span class="citation">(<a href="additional-resources-phil.html#ref-newman2012bar" role="doc-biblioref">Newman and Scholl 2012</a>)</span>.</p>
-<p>Yet, the benefits of using R are obscured for many researchers by the perception that coding skills are difficult to learn <span class="citation">(<a href="additional-resources-phil.html#ref-robins2003learning" role="doc-biblioref">Robins, Rountree, and Rountree 2003</a>)</span>. Coupled with this, only a minority of psychology programmes currently teach coding skills <span class="citation">(<a href="additional-resources-phil.html#ref-rminr" role="doc-biblioref">Wills, n.d.</a>)</span> with the majority of both undergraduate and postgraduate courses using proprietary and point-and-click software such as SAS, SPSS or Microsoft Excel. While the sophisticated use of proprietary software often necessitates the use of computational thinking skills akin to coding (for instance SPSS scripts or formulas in Excel), we have found that many researchers do not perceive that they already have introductory coding skills. In the following tutorial we intend to change that perception by showing how experienced researchers can redevelop their existing computational skills to utilise the powerful data visualisation tools offered by R.</p>
+<p>Use of the programming language R for data processing and statistical analysis by researchers is increasingly common with a GET THE STATS FROM THAT THING I SAW ABOUT R ON TWITTER rise since XXXX (REF). In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means <span class="citation">(<a href="r-markdown.html#ref-newman2012bar" role="doc-biblioref">Newman and Scholl 2012</a>)</span>.</p>
+<p>Yet, the benefits of using R are obscured for many researchers by the perception that coding skills are difficult to learn <span class="citation">(<a href="r-markdown.html#ref-robins2003learning" role="doc-biblioref">Robins, Rountree, and Rountree 2003</a>)</span>. Coupled with this, only a minority of psychology programmes currently teach coding skills <span class="citation">(<a href="r-markdown.html#ref-rminr" role="doc-biblioref">Wills, n.d.</a>)</span> with the majority of both undergraduate and postgraduate courses using proprietary and point-and-click software such as SAS, SPSS or Microsoft Excel. While the sophisticated use of proprietary software often necessitates the use of computational thinking skills akin to coding (for instance SPSS scripts or formulas in Excel), we have found that many researchers do not perceive that they already have introductory coding skills. In the following tutorial we intend to change that perception by showing how experienced researchers can redevelop their existing computational skills to utilise the powerful data visualisation tools offered by R.</p>
 <p>We aim to provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience using R. We detail the rationale for using R for data visualisation, introduce the “grammar of graphics” that underlies data visualisation using the <code>ggplot</code> package, and provide a tutorial that walks the reader through how to replicate plots that are commonly available in point-and-click software such as histograms and boxplots, as well as showing how the code for these “basic” plots can be easily extended to less commonly available options such as violin-boxplots, raincloud plots, and heat-maps.</p>
 <div id="why-r-for-data-visualisation" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Why R for data visualisation?</h2>
-<p>Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software – reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis <span class="citation">(e.g. <a href="additional-resources-phil.html#ref-munafo2017manifesto" role="doc-biblioref">Munafò et al. 2017</a>)</span> and we will not repeat those arguments here. However, there is an additional benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.</p>
-<p>In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting at first, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has for instance lead news outlets such as the BBC <span class="citation">(<a href="additional-resources-phil.html#ref-BBC-R" role="doc-biblioref">Visual and Journalism 2019</a>)</span> and the New York Times <span class="citation">(<a href="additional-resources-phil.html#ref-NYT-R" role="doc-biblioref">Bertini and Stefaner 2015</a>)</span> adopting R as their preferred data visualisation tool.</p>
+<p>Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software – reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis <span class="citation">(e.g. <a href="r-markdown.html#ref-munafo2017manifesto" role="doc-biblioref">Munafò et al. 2017</a>)</span> and we will not repeat those arguments here. However, there is an additional benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.</p>
+<p>In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting at first, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has for instance lead news outlets such as the BBC <span class="citation">(<a href="r-markdown.html#ref-BBC-R" role="doc-biblioref">Visual and Journalism 2019</a>)</span> and the New York Times <span class="citation">(<a href="r-markdown.html#ref-NYT-R" role="doc-biblioref">Bertini and Stefaner 2015</a>)</span> adopting R as their preferred data visualisation tool.</p>
 </div>
 <div id="a-layered-grammar-of-graphics" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> A layered grammar of graphics</h2>
-<p>There are multiple approaches to data visualisation in R; in this paper we will be using the popular package<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <code>ggplot2</code> <span class="citation">(<a href="additional-resources-phil.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> which is part of the larger <code>tidyverse</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <span class="citation">(<a href="additional-resources-phil.html#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span> collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics <span class="citation">(<a href="additional-resources-phil.html#ref-wilkinson2005graph" role="doc-biblioref">Wilkinson, Anand, and Grossman 2005</a>)</span> is a standardised way to describe the components of a graphic. <code>ggplot2</code> uses a layered grammar of graphics <span class="citation">(<a href="additional-resources-phil.html#ref-wickham2010layered" role="doc-biblioref">Wickham 2010</a>)</span>, in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit semi-transparently over each other. A good analogy is old Disney movies where artists would create a background and then add moveable elements on top of the background via transparencies.</p>
+<p>There are multiple approaches to data visualisation in R; in this paper we will be using the popular package<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <code>ggplot2</code> <span class="citation">(<a href="r-markdown.html#ref-ggplot2" role="doc-biblioref">Wickham 2016</a>)</span> which is part of the larger <code>tidyverse</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> <span class="citation">(<a href="r-markdown.html#ref-tidyverse" role="doc-biblioref">Wickham 2017</a>)</span> collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics <span class="citation">(<a href="r-markdown.html#ref-wilkinson2005graph" role="doc-biblioref">Wilkinson, Anand, and Grossman 2005</a>)</span> is a standardised way to describe the components of a graphic. <code>ggplot2</code> uses a layered grammar of graphics <span class="citation">(<a href="r-markdown.html#ref-wickham2010layered" role="doc-biblioref">Wickham 2010</a>)</span>, in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit semi-transparently over each other. A good analogy is old Disney movies where artists would create a background and then add moveable elements on top of the background via transparencies.</p>
 <p>Figure <a href="introduction.html#fig:layers">1.1</a> displays the evolution of a simple scatterplot using this layered approach. First, the plot space is built (layer 1); the variables are specified (layer 2); the type of visualisation (known as a <code>geom</code>) that is desired for these variables is specified (layer 3) - in this case <code>geom_point()</code> is called to visualise individual data points; a second geom is added to include a line of best fit (layer 4), the axis labels are edited for readability (layer 5), and finally, a theme is applied to change the overall appearance of the plot (layer 6).</p>
 <div class="figure" style="text-align: center"><span id="fig:layers"></span>
 <img src="01-ch1_files/figure-html/layers-1.png" alt="Evolution of a layered plot" width="100%" />
@@ -325,14 +340,13 @@ Figure 1.2: Plot with scatterplot layer removed.
 <div id="setting-up-r-and-rstudio" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Setting up R and RStudio</h2>
 <p>We strongly encourage the use of RStudio to write code in R. R is the programming language whilst RStudio is an <em>integrated development environment</em> that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.</p>
-<p>Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click <code>File - New Project - New Directory - New Project</code>. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click <code>Create Project</code>. Download the simulated dataset from the online materials and save the file ( <code>ldt_data.csv</code>) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your <em>working directory</em> and it is where R will look for any data you wish to import and where it will save any output you create.</p>
+<p>Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click <code>File - New Project - New Directory - New Project</code>. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click <code>Create Project</code>. Download the simulated dataset and code tutorial Rmd file from the online materials and them (<code>ldt_data.csv</code>, <code>workbook.Rmd</code>) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your <em>working directory</em> and it is where R will look for any data you wish to import and where it will save any output you create.</p>
 <p>This tutorial will require you to use the packages contained with the <code>tidyverse</code> collection. Additionally, we will also require use of <code>patchwork</code>. To install these packages, copy and paste the below code into the console (the left hand pane) and press enter to execute the code.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="introduction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only run in the console, never put this in a script </span></span>
 <span id="cb1-2"><a href="introduction.html#cb1-2" aria-hidden="true" tabindex="-1"></a>package_list <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;patchwork&quot;</span>)</span>
 <span id="cb1-3"><a href="introduction.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(package_list)</span></code></pre></div>
-<p>Finally, so that you can save your code to return to later, open a new script <code>File - New File - R Script</code> and then save it using <code>File - Save</code>. R will default to saving the script in your project folder. This is where we will write all the tutorial code from now on. We have also provided an R Markdown copy of all below code in the supplementary materials. The reason that the install packages code is not included in the script is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn’t want. For this reason, avoid including install code in any script. R scripts (or R code chunks if you are using Markdown) treat anything you write in them as code by default. If you wish to write a comment with further information about your code (which we encourage you to do), you must use the hashtag sign to “comment it out.” There is more information about the difference between scripts and Markdown documents in the additional resources.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="introduction.html#cb2-1" aria-hidden="true" tabindex="-1"></a>this_is_code</span>
-<span id="cb2-2"><a href="introduction.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this is a comment</span></span></code></pre></div>
+<p>The R Markdown workbook contains all below code and there is more information and links to additional resources for how to use R Markdown for reproducible reports in the additional resources.</p>
+<p>The reason that the above install packages code is not included in the workbook is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn’t want. For this reason, avoid including install code in any script or Markdown document.</p>
 </div>
 <div id="preparing-your-data" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Preparing your data</h2>

@@ -28,7 +28,7 @@ theme_set(theme_grey())
 Following the rule *anything that shares an axis should probably be in the same column* means that we will frequently need our data in long-form when using `ggplot2`, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the word and non-word conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:
 
 ```{r}
-ggplot(dat, aes(x = rt_word, y = rt_nonword, fill = language)) +
+ggplot(dat, aes(x = rt_word, y = rt_nonword, colour = language)) +
   geom_point() +
   geom_smooth(method = "lm")
 ```

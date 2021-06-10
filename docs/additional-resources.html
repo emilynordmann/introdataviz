@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Additional resources | Data visualisation using R, for researchers who don’t use R</title>
+  <title>A Additional resources | workbook</title>
   <meta name="description" content="Abstract here." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Additional resources | Data visualisation using R, for researchers who don’t use R" />
+  <meta property="og:title" content="A Additional resources | workbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Additional resources | Data visualisation using R, for researchers who don’t use R" />
+  <meta name="twitter:title" content="A Additional resources | workbook" />
   
   <meta name="twitter:description" content="Abstract here." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-09" />
+<meta name="date" content="2021-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="chapter-6.html"/>
-<link rel="next" href="additional-resources-phil.html"/>
+<link rel="next" href="additional-advanced-plots-and-customisation-options.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -170,7 +170,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
 <li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.3</b> Adding a theme</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs continuous errors</a></li>
+<li class="chapter" data-level="2.9.4" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.4</b> Adding a theme</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
 </ul></li>
@@ -180,7 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="chapter-3.html"><a href="chapter-3.html#transforming-data"><i class="fa fa-check"></i><b>3.2</b> Transforming data</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="chapter-3.html"><a href="chapter-3.html#step-1-pivot_longer"><i class="fa fa-check"></i><b>3.2.1</b> Step 1: <code>pivot_longer()</code></a></li>
-<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_wider"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_longer-adjusted"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_longer()</code> adjusted</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chapter-3.html"><a href="chapter-3.html#step-3-pivot_wider"><i class="fa fa-check"></i><b>3.2.3</b> Step 3: <code>pivot_wider()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="chapter-3.html"><a href="chapter-3.html#histogram-2"><i class="fa fa-check"></i><b>3.3</b> Histogram 2</a></li>
 <li class="chapter" data-level="3.4" data-path="chapter-3.html"><a href="chapter-3.html#density-plots"><i class="fa fa-check"></i><b>3.4</b> Density plots</a>
@@ -193,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="chapter-3.html"><a href="chapter-3.html#customisation-2"><i class="fa fa-check"></i><b>3.6</b> Customisation 2</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-color-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible color schemes</a></li>
+<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-colour-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible colour schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="chapter-3.html"><a href="chapter-3.html#activities-2"><i class="fa fa-check"></i><b>3.7</b> Activities 2</a></li>
 </ul></li>
@@ -235,17 +237,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a></li>
-<li class="chapter" data-level="B" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html"><i class="fa fa-check"></i><b>B</b> Additional Resources - Phil</a>
+<li class="chapter" data-level="B" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html"><i class="fa fa-check"></i><b>B</b> Additional advanced plots and customisation options</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
-<li class="chapter" data-level="B.2" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
-<li class="chapter" data-level="B.3" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
-<li class="chapter" data-level="B.4" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
-<li class="chapter" data-level="B.5" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
-<li class="chapter" data-level="B.6" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
-<li class="chapter" data-level="B.7" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
-<li class="chapter" data-level="B.8" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
-<li class="chapter" data-level="B.9" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#additional-links"><i class="fa fa-check"></i><b>B.9</b> Additional Links</a></li>
+<li class="chapter" data-level="B.1" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
+<li class="chapter" data-level="B.2" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
+<li class="chapter" data-level="B.3" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
+<li class="chapter" data-level="B.4" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
+<li class="chapter" data-level="B.5" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
+<li class="chapter" data-level="B.6" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
+<li class="chapter" data-level="B.7" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
+<li class="chapter" data-level="B.8" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>C</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="r-markdown.html"><a href="r-markdown.html#tutorial-workbook"><i class="fa fa-check"></i><b>C.1</b> Tutorial workbook</a></li>
+<li class="chapter" data-level="C.2" data-path="chapter-2.html"><a href="chapter-2.html#chapter-2"><i class="fa fa-check"></i><b>C.2</b> Chapter 2</a>
+<ul>
+<li class="chapter" data-level="C.2.1" data-path="chapter-2.html"><a href="chapter-2.html#loading-packages"><i class="fa fa-check"></i><b>C.2.1</b> Loading packages</a></li>
+<li class="chapter" data-level="C.2.2" data-path="chapter-2.html"><a href="chapter-2.html#loading-data"><i class="fa fa-check"></i><b>C.2.2</b> Loading data</a></li>
+<li class="chapter" data-level="C.2.3" data-path="chapter-2.html"><a href="chapter-2.html#handling-numeric-factors"><i class="fa fa-check"></i><b>C.2.3</b> Handling numeric factors</a></li>
+<li class="chapter" data-level="C.2.4" data-path="chapter-2.html"><a href="chapter-2.html#demographic-information"><i class="fa fa-check"></i><b>C.2.4</b> Demographic information</a></li>
+<li class="chapter" data-level="C.2.5" data-path="chapter-2.html"><a href="chapter-2.html#bar-chart-of-counts"><i class="fa fa-check"></i><b>C.2.5</b> Bar chart of counts</a></li>
+<li class="chapter" data-level="C.2.6" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>C.2.6</b> Histogram</a></li>
+<li class="chapter" data-level="C.2.7" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>C.2.7</b> Customisation 1</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -263,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data visualisation using R, for researchers who don’t use R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">workbook</a>
           </h1>
         </div>
 
@@ -273,6 +288,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="additional-resources" class="section level1" number="7">
 <h1><span class="header-section-number">A</span> Additional resources</h1>
+<p>There are a number of incredible open-access online resources that, using the skills you have developed in this tutorial, will allow you to start adapting your figures and plots to make them as informative as possible for your reader. Additionally, there are also many excellent resources that expand on some of the topics we have covered here briefly, particularly data wrangling, that can help you consolidate and expand your skill set.</p>
+<p><strong>PsyTeachR</strong></p>
+<p>The psyTeachR team at the University of Glasgow School of Psychology and Institute of Neuroscience and Psychology has successfully made the transition to teaching reproducible research using R across all undergraduate and postgraduate levels. Our curriculum now emphasizes essential ‘data science’ graduate skills that have been overlooked in traditional approaches to teaching, including programming skills, data visualisation, data wrangling and reproducible reports. Students learn about probability and inference through data simulation as well as by working with real datasets. These materials cover all the functions we have used in this tutorial in more depth and all have Creative Commons licences to allow their use and reuse without attribution.</p>
+<ul>
+<li><a href="https://psyteachr.github.io/ug1-practical/">Level 1 Data Skills</a></li>
+<li><a href="https://psyteachr.github.io/ug2-practical/">Level 2 Research Methods and Statistics</a></li>
+<li><a href="https://psyteachr.github.io/ug3-stats/">Level 3 Statistical Models</a></li>
+<li><a href="https://psyteachr.github.io/msc-conv/">Msc Conversion Research Methods</a></li>
+<li><a href="https://psyteachr.github.io/msc-data-skills/">MSc Data Skills &amp; Simulation</a></li>
+</ul>
+<p><strong>R Markdown</strong></p>
+<ul>
+<li><a href="https://rmarkdown.rstudio.com/lesson-1.html">Introduction to R Markdown</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a></li>
+</ul>
+<p><strong>Data wrangling</strong></p>
+<ul>
+<li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
+<li><a href="https://www.tidytextmining.com/">Text Mining with R</a></li>
+</ul>
+<p><strong>Data visualisation</strong></p>
+<ul>
+<li><a href="https://clauswilke.com/dataviz/">Fundamentals of Data Vizualisation</a></li>
+<li><a href="https://socviz.co/">Data Vizualisation: A Practical Introduction</a></li>
+</ul>
 </div>
 <div class="psyteachr_footer">
   
@@ -385,7 +425,7 @@ window.onload = function() {
         </div>
       </div>
 <a href="chapter-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-resources-phil.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="additional-advanced-plots-and-customisation-options.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

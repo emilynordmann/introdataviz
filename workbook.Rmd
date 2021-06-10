@@ -1,0 +1,168 @@
+---
+title: "workbook"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
+
+## Tutorial workbook
+
+This workbook contains the code from the tutorial paper. You can add notes to this file and/or make a duplicate copy to work with your own dataset.
+
+The document outline tool will help you navigate this workbook more easily (Ctrl+Shift+O on Windows, Cmd+Shift+O on Mac).
+
+When you are working in a Markdown document, the working directory (where R looks for data files to import, and where it will save any output you create) will default to the folder that the .Rmd file is stored in when you open RStudio by opening the Markdown document. For this reason, make sure that the .Rmd file and the data file are in the same folder before you begin. 
+
+## Chapter 2
+
+### Loading packages
+
+Remember that you need to install the packages before you can load them - but never save the install code in your Markdown.
+
+```{r}
+library(tidyverse)
+library(patchwork)
+```
+
+### Loading data
+
+```{r}
+dat <- read_csv(file = "ldt_data.csv")
+```
+
+### Handling numeric factors
+
+```{r}
+summary(dat)
+str(dat)        
+```
+
+```{r}
+dat <- dat %>%
+  mutate(language = factor(
+    x = language, # column to translate
+    levels = c(1, 2), # values of the original data in preferred order
+    labels = c("monolingual", "bilingual") # labels for display
+  ))
+```
+
+### Demographic information
+
+```{r}
+dat %>%
+  group_by(language) %>%
+  count()
+```
+
+```{r}
+dat %>%
+  count()
+```
+
+```{r}
+dat %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age),
+            n_values = n())
+```
+
+```{r}
+age_stats <- dat %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age),
+            n_values = n())
+```
+
+```{r}
+dat %>%
+  group_by(language) %>%
+  summarise(mean_age = mean(age),
+            sd_age = sd(age),
+            n_values = n())
+```
+
+### Bar chart of counts
+
+```{r fig.cap = "Bar chart of counts."}
+ggplot(data = dat, mapping = aes(x = language)) +
+  geom_bar()
+```
+
+
+```{r fig.cap = "Bar chart of pre-calculated counts."}
+dat_percent <- dat %>%
+  group_by(language) %>%
+  count() %>%
+  ungroup() %>%
+  mutate(percent = (n/sum(n)*100))
+
+ggplot(dat_percent, aes(x = language, y = percent)) +
+  geom_bar(stat="identity") 
+```
+
+
+### Histogram
+
+```{r fig.cap = "Histogram of ages."}
+ggplot(dat, aes(x = age)) +
+  geom_histogram()
+```
+
+```{r fig.cap = "Histogram of ages where each bin covers one year."}
+ggplot(dat, aes(x = age)) +
+  geom_histogram(binwidth = 5)
+```
+
+### Customisation 1
+
+#### Changing colours
+
+```{r fig.cap="Histogram with custom colors for bar fill and line colors."}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, 
+                 fill = "white", 
+                 colour = "black")
+```
+
+#### Editing axis names and labels
+
+```{r fig.cap = "Bar chart with custom axis labels."}
+ggplot(dat, aes(language)) +
+  geom_bar() +
+  scale_x_discrete(name = "Language group", 
+                   labels = c("Monolingual", "Bilingual")) +
+  scale_y_continuous(name = "Number of participants",
+                     breaks = c(0,10,20,30,40,50))
+```
+
+
+#### Discrete vs continuous errors
+
+```{r eval = FALSE}
+ggplot(dat, aes(language)) +
+  geom_bar() +
+  scale_x_continuous(name = "Language group", 
+                   labels = c("Monolingual", "Bilingual")) 
+```
+
+#### Adding a theme
+
+```{r fig.cap="Histogram with a custom theme."}
+ggplot(dat, aes(age)) +
+  geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
+  scale_x_continuous(name = "Participant age (years)") +
+  theme_minimal()
+```
+
+```{r eval = FALSE}
+theme_set(theme_minimal())
+```
+

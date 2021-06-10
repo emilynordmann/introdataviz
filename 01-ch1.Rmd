@@ -151,7 +151,7 @@ write_csv(wide, "ldt_data.csv")
 
 We strongly encourage the use of RStudio to write code in R. R is the programming language whilst RStudio is an *integrated development environment* that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.
 
-Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset from the online materials and save the file ( `ldt_data.csv`) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
+Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset and code tutorial Rmd file from the online materials and them (`ldt_data.csv`, `workbook.Rmd`) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
 
 This tutorial will require you to use the packages contained with the `tidyverse` collection. Additionally, we will also require use of `patchwork`. To install these packages, copy and paste the below code into the console (the left hand pane) and press enter to execute the code.
 
@@ -161,12 +161,9 @@ package_list <- c("tidyverse", "patchwork")
 install.packages(package_list)
 ```
 
-Finally, so that you can save your code to return to later, open a new script `File - New File - R Script` and then save it using `File - Save`. R will default to saving the script in your project folder. This is where we will write all the tutorial code from now on. We have also provided an R Markdown copy of all below code in the supplementary materials. The reason that the install packages code is not included in the script is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script. R scripts (or R code chunks if you are using Markdown) treat anything you write in them as code by default. If you wish to write a comment with further information about your code (which we encourage you to do), you must use the hashtag sign to "comment it out". There is more information about the difference between scripts and Markdown documents in the additional resources.
+The R Markdown workbook contains all below code and there is more information and links to additional resources for how to use R Markdown for reproducible reports in the additional resources. 
 
-```{r comments, eval = FALSE}
-this_is_code
-# this is a comment
-```
+The reason that the above install packages code is not included in the workbook is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document. 
 
 ## Preparing your data
 

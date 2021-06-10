@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Chapter 2 | Data visualisation using R, for researchers who don’t use R</title>
+  <title>Chapter 2 Chapter 2 | workbook</title>
   <meta name="description" content="Abstract here." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Chapter 2 | Data visualisation using R, for researchers who don’t use R" />
+  <meta property="og:title" content="Chapter 2 Chapter 2 | workbook" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Chapter 2 | Data visualisation using R, for researchers who don’t use R" />
+  <meta name="twitter:title" content="Chapter 2 Chapter 2 | workbook" />
   
   <meta name="twitter:description" content="Abstract here." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-09" />
+<meta name="date" content="2021-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,7 +170,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
 <li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.3</b> Adding a theme</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs continuous errors</a></li>
+<li class="chapter" data-level="2.9.4" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.4</b> Adding a theme</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
 </ul></li>
@@ -180,7 +181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="chapter-3.html"><a href="chapter-3.html#transforming-data"><i class="fa fa-check"></i><b>3.2</b> Transforming data</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="chapter-3.html"><a href="chapter-3.html#step-1-pivot_longer"><i class="fa fa-check"></i><b>3.2.1</b> Step 1: <code>pivot_longer()</code></a></li>
-<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_wider"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_wider()</code></a></li>
+<li class="chapter" data-level="3.2.2" data-path="chapter-3.html"><a href="chapter-3.html#step-2-pivot_longer-adjusted"><i class="fa fa-check"></i><b>3.2.2</b> Step 2: <code>pivot_longer()</code> adjusted</a></li>
+<li class="chapter" data-level="3.2.3" data-path="chapter-3.html"><a href="chapter-3.html#step-3-pivot_wider"><i class="fa fa-check"></i><b>3.2.3</b> Step 3: <code>pivot_wider()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="chapter-3.html"><a href="chapter-3.html#histogram-2"><i class="fa fa-check"></i><b>3.3</b> Histogram 2</a></li>
 <li class="chapter" data-level="3.4" data-path="chapter-3.html"><a href="chapter-3.html#density-plots"><i class="fa fa-check"></i><b>3.4</b> Density plots</a>
@@ -193,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="chapter-3.html"><a href="chapter-3.html#customisation-2"><i class="fa fa-check"></i><b>3.6</b> Customisation 2</a>
 <ul>
-<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-color-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible color schemes</a></li>
+<li class="chapter" data-level="3.6.1" data-path="chapter-3.html"><a href="chapter-3.html#accessible-colour-schemes"><i class="fa fa-check"></i><b>3.6.1</b> Accessible colour schemes</a></li>
 </ul></li>
 <li class="chapter" data-level="3.7" data-path="chapter-3.html"><a href="chapter-3.html#activities-2"><i class="fa fa-check"></i><b>3.7</b> Activities 2</a></li>
 </ul></li>
@@ -235,17 +237,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a></li>
-<li class="chapter" data-level="B" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html"><i class="fa fa-check"></i><b>B</b> Additional Resources - Phil</a>
+<li class="chapter" data-level="B" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html"><i class="fa fa-check"></i><b>B</b> Additional advanced plots and customisation options</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
-<li class="chapter" data-level="B.2" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
-<li class="chapter" data-level="B.3" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
-<li class="chapter" data-level="B.4" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
-<li class="chapter" data-level="B.5" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
-<li class="chapter" data-level="B.6" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
-<li class="chapter" data-level="B.7" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
-<li class="chapter" data-level="B.8" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
-<li class="chapter" data-level="B.9" data-path="additional-resources-phil.html"><a href="additional-resources-phil.html#additional-links"><i class="fa fa-check"></i><b>B.9</b> Additional Links</a></li>
+<li class="chapter" data-level="B.1" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#adding-lines-to-plots"><i class="fa fa-check"></i><b>B.1</b> Adding lines to plots</a></li>
+<li class="chapter" data-level="B.2" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#zooming-in-and-out"><i class="fa fa-check"></i><b>B.2</b> Zooming in and out</a></li>
+<li class="chapter" data-level="B.3" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-the-axis-values"><i class="fa fa-check"></i><b>B.3</b> Setting the axis values</a></li>
+<li class="chapter" data-level="B.4" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#controlling-the-legend"><i class="fa fa-check"></i><b>B.4</b> Controlling the Legend</a></li>
+<li class="chapter" data-level="B.5" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#setting-a-lab-theme-using-theme"><i class="fa fa-check"></i><b>B.5</b> Setting A Lab Theme using <code>theme()</code></a></li>
+<li class="chapter" data-level="B.6" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---overlaying-plots"><i class="fa fa-check"></i><b>B.6</b> Easter Egg - Overlaying Plots</a></li>
+<li class="chapter" data-level="B.7" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-dumbbell-plot"><i class="fa fa-check"></i><b>B.7</b> Easter Egg - A Dumbbell Plot</a></li>
+<li class="chapter" data-level="B.8" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html#easter-egg---a-pie-chart"><i class="fa fa-check"></i><b>B.8</b> Easter Egg - A Pie Chart</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>C</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="r-markdown.html"><a href="r-markdown.html#tutorial-workbook"><i class="fa fa-check"></i><b>C.1</b> Tutorial workbook</a></li>
+<li class="chapter" data-level="C.2" data-path="chapter-2.html"><a href="chapter-2.html#chapter-2"><i class="fa fa-check"></i><b>C.2</b> Chapter 2</a>
+<ul>
+<li class="chapter" data-level="C.2.1" data-path="chapter-2.html"><a href="chapter-2.html#loading-packages"><i class="fa fa-check"></i><b>C.2.1</b> Loading packages</a></li>
+<li class="chapter" data-level="C.2.2" data-path="chapter-2.html"><a href="chapter-2.html#loading-data"><i class="fa fa-check"></i><b>C.2.2</b> Loading data</a></li>
+<li class="chapter" data-level="C.2.3" data-path="chapter-2.html"><a href="chapter-2.html#handling-numeric-factors"><i class="fa fa-check"></i><b>C.2.3</b> Handling numeric factors</a></li>
+<li class="chapter" data-level="C.2.4" data-path="chapter-2.html"><a href="chapter-2.html#demographic-information"><i class="fa fa-check"></i><b>C.2.4</b> Demographic information</a></li>
+<li class="chapter" data-level="C.2.5" data-path="chapter-2.html"><a href="chapter-2.html#bar-chart-of-counts"><i class="fa fa-check"></i><b>C.2.5</b> Bar chart of counts</a></li>
+<li class="chapter" data-level="C.2.6" data-path="chapter-2.html"><a href="chapter-2.html#histogram"><i class="fa fa-check"></i><b>C.2.6</b> Histogram</a></li>
+<li class="chapter" data-level="C.2.7" data-path="chapter-2.html"><a href="chapter-2.html#customisation-1"><i class="fa fa-check"></i><b>C.2.7</b> Customisation 1</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" 
@@ -263,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data visualisation using R, for researchers who don’t use R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">workbook</a>
           </h1>
         </div>
 
@@ -276,43 +291,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="loading-packages" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Loading packages</h2>
 <p>To load the packages that have the functions we need, use the <code>library()</code> function. Whilst you only need to install packages once, you need to load any packages you want to use with <code>library()</code> every time you start R. When you load the tidyverse, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-2.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb3-2"><a href="chapter-2.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="chapter-2.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="chapter-2.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code></pre></div>
 </div>
 <div id="loading-data" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Loading data</h2>
-<p>Download the data here: <a href="ldt_data.csv" download>ldt_data.csv</a></p>
 <p>To load the simulated data we use the function <code>read_csv()</code> from the <code>readr</code> tidyverse package. Note that there are many other ways of reading data into R, but the benefit of this function is that it enters the data into the R environment in such a way that it makes most sense for other tidyverse packages.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chapter-2.html#cb4-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;ldt_data.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="chapter-2.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;ldt_data.csv&quot;</span>)</span></code></pre></div>
 <p>This code has created an object <code>dat</code> into which you have read the data from the file <code>ldt_data.csv</code>. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (<code>.csv</code>) must also be included. If you receive the error <code>…does not exist in current working directory</code> it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error <code>could not find function</code> it means you have either not loaded the correct package, or you have made a typo in the function name.</p>
 <p>To view the dataset, click <code>dat</code> in the environment pane or run <code>View(dat)</code> in the console. The environment pane also tells us that the object <code>dat</code> has 100 observations of 7 variables, and is a useful quick check to ensure one has loaded the right data. Note that the 7 variables have an additional piece of information <code>chr</code> and <code>num</code>; this specifies the kind of data in the column. Similar to Excel and SPSS, R used this information (or variable type) to specify allowable manipulations of data. For instance character data such as the <code>id</code> can’t be averaged, while it is possible to do this with numerical data such as the <code>age</code>.</p>
 </div>
 <div id="handling-numeric-factors" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Handling numeric factors</h2>
 <p>Another useful check is to use the functions <code>summary()</code> and <code>str()</code> (structure) to check what kind of data R thinks is in each column. Run the below code and look at the output of each, comparing it with what you know about the simulated dataset:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span>
-<span id="cb5-2"><a href="chapter-2.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)        </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="chapter-2.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat)</span>
+<span id="cb4-2"><a href="chapter-2.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dat)        </span></code></pre></div>
 <p>Because the factor <code>language</code> is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels.</p>
 <ul>
 <li><code>mutate()</code> makes new columns in a data table, or overwrites a column;</li>
 <li><code>factor()</code> translates the language column into a factor with the labels “monolingual” and “bilingual.” You can also use <code>factor()</code> to set the display order of a column that contains words. Otherwise, they will display in alphabetical order. n this case we are replacing the numeric data (1 and 2) in the <code>language</code> column with the equivalent English labels <code>monolingual</code> for 1 and <code>bilingual</code> for 2. At the same time we will change the column type to be a factor, which is how R defines categorical data.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-2.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="chapter-2.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(</span>
-<span id="cb6-3"><a href="chapter-2.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> language, <span class="co"># column to translate</span></span>
-<span id="cb6-4"><a href="chapter-2.html#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="co"># values of the original data in preferred order</span></span>
-<span id="cb6-5"><a href="chapter-2.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>) <span class="co"># labels for display</span></span>
-<span id="cb6-6"><a href="chapter-2.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="chapter-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="chapter-2.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(</span>
+<span id="cb5-3"><a href="chapter-2.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> language, <span class="co"># column to translate</span></span>
+<span id="cb5-4"><a href="chapter-2.html#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="co"># values of the original data in preferred order</span></span>
+<span id="cb5-5"><a href="chapter-2.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>) <span class="co"># labels for display</span></span>
+<span id="cb5-6"><a href="chapter-2.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
 <p>Make sure that you always check the output of any code that you run. If after running this code <code>language</code> is full of <code>NA</code> values, it means that you have run the code twice. The first time would have worked and transformed the values from <code>1</code> to <code>monolingual</code> and <code>2</code> to <code>bilingual</code>. If you run the code again on the same dataset, it will look for the values <code>1</code> and <code>2</code>, and because there are no longer any that match, it will return NA. If this happens, you will need to reload the dataset from the csv file.</p>
 <p>A good way to avoid this is never to overwrite data, but to always store the output of code in new objects (e.g., <code>dat_recoded</code>) or new variables (<code>language_recoded</code>). For the purposes of this tutorial, overwriting provides a useful teachable moment so we’ll leave it as it is.</p>
 </div>
 <div id="argument-names" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Argument names</h2>
 <p>Each function has a list of arguments it can take, and a default order for those arguments. You can get more information on each function by entering <code>?function_name</code> into the console, although be aware that learning to read the help documentation in R is a skill in itself. When you are writing R code, as long as you stick to the default order, you do not have to explicitly call the argument names, for example, the above code could also be written as:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chapter-2.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="chapter-2.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(language, </span>
-<span id="cb7-3"><a href="chapter-2.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
-<span id="cb7-4"><a href="chapter-2.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="chapter-2.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="chapter-2.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(language, </span>
+<span id="cb6-3"><a href="chapter-2.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb6-4"><a href="chapter-2.html#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>)))</span></code></pre></div>
 <p>One of the challenges in learning R is that many of the “helpful” examples and solutions you will find online do not include argument names and so for novice learners are completely opaque. In this tutorial, we will include the argument names the first time a function is used, however, we will remove some argument names from subsequent examples to facilitate knowledge transfer to the help available online.</p>
 </div>
 <div id="demographic-information" class="section level2" number="2.5">
@@ -323,9 +337,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Group it by the variable <code>language</code> <em>and then;</em></p></li>
 <li><p>Count the number of observations in each group</p></li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-2.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="chapter-2.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="chapter-2.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="chapter-2.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="chapter-2.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="chapter-2.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -345,8 +359,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p><code>group_by()</code> does not result in surface level changes to the dataset, rather, it changes the underlying structure so that if groups are specified, whatever function is called next is performed separately on each level of the grouping variable. The above code therefore counts the number of observations in each group of the variable <code>language</code>. If you just need the total number of observations, you could remove the <code>group_by()</code> line which would perform the operation on the whole dataset, rather than by groups:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-2.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="chapter-2.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="chapter-2.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="chapter-2.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -360,10 +374,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Similarly, we may wish to calculate the mean age (and SD) of the sample and we can do so using the function <code>summarise()</code> from the <code>dplyr</code> tidyverse package.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-2.html#cb10-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="chapter-2.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb10-3"><a href="chapter-2.html#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
-<span id="cb10-4"><a href="chapter-2.html#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="chapter-2.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="chapter-2.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb9-3"><a href="chapter-2.html#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
+<span id="cb9-4"><a href="chapter-2.html#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -382,16 +396,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>This code produces summary data in the form of a column named <code>mean_age</code> that contains the result of calculating the mean of the variable <code>age.</code> It then creates <code>sd_age</code> which does the same but for standard deviation. Finally, it uses the function <code>n()</code> to add the number of values used to calculate the statistic in a column named <code>n_values</code> - this is a useful sanity check whenever you make summary statistics.</p>
 <p>Note that the above code will not save the result of this operation, it will simply output the result in the console. If you wish to save it for future use, you can store it in an object by using the <code>&lt;-</code> notation and print it later by typing the object name.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-2.html#cb11-1" aria-hidden="true" tabindex="-1"></a>age_stats <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="chapter-2.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb11-3"><a href="chapter-2.html#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
-<span id="cb11-4"><a href="chapter-2.html#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="chapter-2.html#cb10-1" aria-hidden="true" tabindex="-1"></a>age_stats <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="chapter-2.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb10-3"><a href="chapter-2.html#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
+<span id="cb10-4"><a href="chapter-2.html#cb10-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
 <p>Finally, the <code>group_by()</code> function will work in the same way when calculating summary statistics - the output of the function that is called after <code>group_by()</code> will be produced for each level of the grouping variable.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-2.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="chapter-2.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb12-3"><a href="chapter-2.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb12-4"><a href="chapter-2.html#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
-<span id="cb12-5"><a href="chapter-2.html#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="chapter-2.html#cb11-1" aria-hidden="true" tabindex="-1"></a>dat <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="chapter-2.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="chapter-2.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb11-4"><a href="chapter-2.html#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(age),</span>
+<span id="cb11-5"><a href="chapter-2.html#cb11-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_values =</span> <span class="fu">n</span>())</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -420,8 +434,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="bar-chart-of-counts" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Bar chart of counts</h2>
 <p>For our first plot, we will make a simple bar chart of counts that shows the number of participants in each <code>language</code> group.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-2.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> language)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="chapter-2.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="chapter-2.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> language)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="chapter-2.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar1"></span>
 <img src="02-ch2_files/figure-html/bar1-1.png" alt="Bar chart of counts." width="100%" />
 <p class="caption">
@@ -441,14 +455,14 @@ Figure 2.1: Bar chart of counts.
 <h2><span class="header-section-number">2.7</span> Plotting existing aggregates and percent</h2>
 <p>If your data already have the counts that you want to plot, you can set <code>stat="identity"</code> inside of <code>geom_bar()</code> to use that number instead of counting rows. For example, there is no way to plot percentages rather than counts within <code>ggplot</code>, you need to calculate these and store them in an object which is then used as the dataset.</p>
 <p>Notice that we are now omitting the names of the arguments <code>data</code> and <code>mapping</code> in the <code>ggplot()</code> function.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-2.html#cb14-1" aria-hidden="true" tabindex="-1"></a>dat_percent <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="chapter-2.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="chapter-2.html#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="chapter-2.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="chapter-2.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>))</span>
-<span id="cb14-6"><a href="chapter-2.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="chapter-2.html#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_percent, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="chapter-2.html#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="chapter-2.html#cb13-1" aria-hidden="true" tabindex="-1"></a>dat_percent <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="chapter-2.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="chapter-2.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="chapter-2.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="chapter-2.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> (n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>))</span>
+<span id="cb13-6"><a href="chapter-2.html#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="chapter-2.html#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_percent, <span class="fu">aes</span>(<span class="at">x =</span> language, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="chapter-2.html#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar-precalc"></span>
 <img src="02-ch2_files/figure-html/bar-precalc-1.png" alt="Bar chart of pre-calculated counts." width="100%" />
 <p class="caption">
@@ -459,8 +473,8 @@ Figure 2.2: Bar chart of pre-calculated counts.
 <div id="histogram" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Histogram</h2>
 <p>The code to plot a histogram of <code>age</code> is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with <code>age</code> on the x-axis:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="chapter-2.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="chapter-2.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="chapter-2.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="chapter-2.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <div class="figure" style="text-align: center"><span id="fig:histogram1"></span>
 <img src="02-ch2_files/figure-html/histogram1-1.png" alt="Histogram of ages." width="100%" />
@@ -469,8 +483,8 @@ Figure 2.3: Histogram of ages.
 </p>
 </div>
 <p>The base statistic for <code>geom_historgram()</code> is also counts, and by default <code>geom_histogram()</code> divides the x-axis into “bins” and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message <code>stat_bin() using bins = 30. Pick better value with binwidth</code>. This means that the default number of bins <code>geom_histogram()</code> divided the x-axis into was 30. For our data that is appropriate as each bin represents one year, but if you we want one bar to equal 5 years, we can adjust <code>binwidth = 5</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="chapter-2.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="chapter-2.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="chapter-2.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:histogram2"></span>
 <img src="02-ch2_files/figure-html/histogram2-1.png" alt="Histogram of ages where each bin covers one year." width="100%" />
 <p class="caption">
@@ -484,10 +498,10 @@ Figure 2.4: Histogram of ages where each bin covers one year.
 <div id="changing-colours" class="section level3" number="2.9.1">
 <h3><span class="header-section-number">2.9.1</span> Changing colours</h3>
 <p>For our basic bar chart, you can control colours used to display the bars by setting <code>fill</code> (internal colour) and <code>colour</code> (outline colour) inside the geom function. This methods changes <strong>all</strong> the bars; we will show you later how to set fill or colour separately for different groups.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
-<span id="cb18-2"><a href="chapter-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, </span>
-<span id="cb18-3"><a href="chapter-2.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
-<span id="cb18-4"><a href="chapter-2.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="chapter-2.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="chapter-2.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, </span>
+<span id="cb17-3"><a href="chapter-2.html#cb17-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb17-4"><a href="chapter-2.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:histogram-fill-color"></span>
 <img src="02-ch2_files/figure-html/histogram-fill-color-1.png" alt="Histogram with custom colors for bar fill and line colors." width="100%" />
 <p class="caption">
@@ -499,12 +513,12 @@ Figure 2.5: Histogram with custom colors for bar fill and line colors.
 <h3><span class="header-section-number">2.9.2</span> Editing axis names and labels</h3>
 <p>To edit axis names and labels you can connect <code>scale_</code> functions to your plot with <code>+</code> to add layers. These functions are part of <code>ggplot</code> and the one you use depends on which aesthetic you wish to edit (e.g., x-axis, y-axis, fill, colour) as well as the type of data it represents (discrete, continuous).</p>
 <p>For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. For each of these there is a relevant scale function with various elements that can be customised. Each axis then has its own function added as a layer to the basic plot.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(language)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="chapter-2.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb19-3"><a href="chapter-2.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Language group&quot;</span>, </span>
-<span id="cb19-4"><a href="chapter-2.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Monolingual&quot;</span>, <span class="st">&quot;Bilingual&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="chapter-2.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of participants&quot;</span>,</span>
-<span id="cb19-6"><a href="chapter-2.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="chapter-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(language)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="chapter-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="chapter-2.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">&quot;Language group&quot;</span>, </span>
+<span id="cb18-4"><a href="chapter-2.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Monolingual&quot;</span>, <span class="st">&quot;Bilingual&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="chapter-2.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Number of participants&quot;</span>,</span>
+<span id="cb18-6"><a href="chapter-2.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:bar3"></span>
 <img src="02-ch2_files/figure-html/bar3-1.png" alt="Bar chart with custom axis labels." width="100%" />
 <p class="caption">
@@ -518,8 +532,17 @@ Figure 2.6: Bar chart with custom axis labels.
 <li><p><code>breaks</code> controls the tick marks on the axis. Again because there are multiple values, they are enclosed within <code>c()</code> although because they are numeric and not text, they do not need quotation marks.</p></li>
 </ul>
 </div>
-<div id="adding-a-theme" class="section level3" number="2.9.3">
-<h3><span class="header-section-number">2.9.3</span> Adding a theme</h3>
+<div id="discrete-vs-continuous-errors" class="section level3" number="2.9.3">
+<h3><span class="header-section-number">2.9.3</span> Discrete vs continuous errors</h3>
+<p>One very common error is to map the wrong type of <code>scale_</code> function to a variables. Try running the below code:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="chapter-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(language)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="chapter-2.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb19-3"><a href="chapter-2.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Language group&quot;</span>, </span>
+<span id="cb19-4"><a href="chapter-2.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Monolingual&quot;</span>, <span class="st">&quot;Bilingual&quot;</span>)) </span></code></pre></div>
+<p>This will produce the error <code>Discrete value supplied to continuous scale</code> because we have used a <code>continuous</code> scale function, despite the fact that x-axis variable is discrete. If you get this error (or the reverse), check the type of data on each axis and the function you have used.</p>
+</div>
+<div id="adding-a-theme" class="section level3" number="2.9.4">
+<h3><span class="header-section-number">2.9.4</span> Adding a theme</h3>
 <p><code>ggplot</code> has a number of built-in visual themes that you can apply as an extra layer. The below code updates the x-axis and y-axis labels to the histogram, but also applies <code>theme_minimal()</code>. Each part of a theme can be independently customised, which may be necessary, for example, if you have journal guidelines on fonts for publication. There are further instructions for how to do this in the additional resources.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="chapter-2.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(age)) <span class="sc">+</span></span>
 <span id="cb20-2"><a href="chapter-2.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;wheat&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>

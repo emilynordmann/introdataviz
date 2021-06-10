@@ -15,8 +15,6 @@ library(patchwork)
 
 ## Loading data
 
-Download the data here: <a href="ldt_data.csv" download>ldt_data.csv</a>
-
 To load the simulated data we use the function `read_csv()` from the `readr` tidyverse package. Note that there are many other ways of reading data into R, but the benefit of this function is that it enters the data into the R environment in such a way that it makes most sense for other tidyverse packages.
 
 ```{r load3, message=FALSE}
@@ -244,6 +242,19 @@ ggplot(dat, aes(language)) +
 -   `c()` is a function that you will see in many different contexts and is used to combine multiple values. In this case, the labels we want to apply are combined within `c()` by enclosing each word within their own parenthesis, and are in the order displayed on the plot.
 
 -   `breaks` controls the tick marks on the axis. Again because there are multiple values, they are enclosed within `c()` although because they are numeric and not text, they do not need quotation marks. 
+
+### Discrete vs continuous errors
+
+One very common error is to map the wrong type of `scale_` function to a variables. Try running the below code:
+
+```{r eval = FALSE}
+ggplot(dat, aes(language)) +
+  geom_bar() +
+  scale_x_continuous(name = "Language group", 
+                   labels = c("Monolingual", "Bilingual")) 
+```
+
+This will produce the error `Discrete value supplied to continuous scale` because we have used a `continuous` scale function, despite the fact that x-axis variable is discrete. If you get this error (or the reverse), check the type of data on each axis and the function you have used. 
 
 ### Adding a theme
 
