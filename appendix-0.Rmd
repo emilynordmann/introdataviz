@@ -175,6 +175,7 @@ The psyTeachR team at the University of Glasgow School of Psychology and Institu
 
 **Data visualisation**
 
+* [R Graph Gallery](https://www.r-graph-gallery.com/index.html)
 * [Fundamentals of Data Vizualisation](https://clauswilke.com/dataviz/)
 * [Data Vizualisation: A Practical Introduction](https://socviz.co/)
 

@@ -288,10 +288,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="chapter-6" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Chapter 6</h1>
-<p>ridge
-Alluvial
-raincloud
-split-violin</p>
+<p>This tutorial has but scratched the surface of the visualisation options available using R - in the additional online resources we provide some further advanced plots and customisation options for those readers who are feeling confident with the content covered in this tutorial, however, the below plots give an idea of what is possible, and represent the favourite plots of the authorship team.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="chapter-6.html#cb81-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
+<span id="cb81-2"><a href="chapter-6.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb81-3"><a href="chapter-6.html#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb81-4"><a href="chapter-6.html#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb81-5"><a href="chapter-6.html#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
+<span id="cb81-6"><a href="chapter-6.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.cap =</span> <span class="st">&quot;**CAPTION THIS**&quot;</span></span>
+<span id="cb81-7"><a href="chapter-6.html#cb81-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb81-8"><a href="chapter-6.html#cb81-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-9"><a href="chapter-6.html#cb81-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-10"><a href="chapter-6.html#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb81-11"><a href="chapter-6.html#cb81-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb81-12"><a href="chapter-6.html#cb81-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb81-13"><a href="chapter-6.html#cb81-13" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;ldt_data.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   id = col_character(),
+##   age = col_double(),
+##   language = col_double(),
+##   rt_word = col_double(),
+##   rt_nonword = col_double(),
+##   acc_word = col_double(),
+##   acc_nonword = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="chapter-6.html#cb83-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="chapter-6.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(</span>
+<span id="cb83-3"><a href="chapter-6.html#cb83-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> language, <span class="co"># column to translate</span></span>
+<span id="cb83-4"><a href="chapter-6.html#cb83-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="co"># values of the original data in preferred order</span></span>
+<span id="cb83-5"><a href="chapter-6.html#cb83-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>) <span class="co"># labels for display</span></span>
+<span id="cb83-6"><a href="chapter-6.html#cb83-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb83-7"><a href="chapter-6.html#cb83-7" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(dat, </span>
+<span id="cb83-8"><a href="chapter-6.html#cb83-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> rt_word<span class="sc">:</span>acc_nonword, </span>
+<span id="cb83-9"><a href="chapter-6.html#cb83-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;dv_type&quot;</span>, <span class="st">&quot;condition&quot;</span>), </span>
+<span id="cb83-10"><a href="chapter-6.html#cb83-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>, </span>
+<span id="cb83-11"><a href="chapter-6.html#cb83-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">&quot;dv&quot;</span>)</span>
+<span id="cb83-12"><a href="chapter-6.html#cb83-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-13"><a href="chapter-6.html#cb83-13" aria-hidden="true" tabindex="-1"></a>dat_long <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(long, </span>
+<span id="cb83-14"><a href="chapter-6.html#cb83-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_from =</span> <span class="st">&quot;dv_type&quot;</span>, </span>
+<span id="cb83-15"><a href="chapter-6.html#cb83-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_from =</span> <span class="st">&quot;dv&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="06-ch6_files/figure-html/unnamed-chunk-4-1.png" alt="**CAPTION THIS**" width="100%" />
+<p class="caption">
+Figure 5.3: <strong>CAPTION THIS</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="06-ch6_files/figure-html/unnamed-chunk-5-1.png" alt="**CAPTION THIS**" width="100%" />
+<p class="caption">
+Figure 5.4: <strong>CAPTION THIS</strong>
+</p>
+</div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="06-ch6_files/figure-html/unnamed-chunk-6-1.png" alt="**CAPTION THIS**" width="100%" />
+<p class="caption">
+Figure 6.1: <strong>CAPTION THIS</strong>
+</p>
+</div>
+<p>Alluvial</p>
+<p>In this tutorial we aimed to provide a practical introduction to common data visualisation techniques using R. Whilst a number of the plots produced in this tutorial can be created in point-and-click software, the underlying skill-set developed by making these visualisations is as powerful as it is extendable, and we hope that this tutorial serves as a jumping off point to encourage more researchers to adopt reproducible workflows and open-access software.</p>
 
 </div>
 
