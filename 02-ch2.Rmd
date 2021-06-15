@@ -6,7 +6,7 @@ theme_set(theme_grey())
 
 ## Loading packages
 
-To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load any packages you want to use with `library()` every time you start R. When you load the tidyverse, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.
+To load the packages that have the functions we need, use the `library()` function. Whilst you only need to install packages once, you need to load any packages you want to use with `library()` every time you start R or start a new session. When you load the `tidyverse`, you actually load several separate packages that are all part of the same collection and have been designed to work well together. R will produce a message that tells you the names of all the packages that have been loaded.
 
 ```{r load, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -21,9 +21,9 @@ To load the simulated data we use the function `read_csv()` from the `readr` tid
 dat <- read_csv(file = "ldt_data.csv")
 ```
 
-This code has created an object `dat` into which you have read the data from the file `ldt_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…does not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension, or that the data file you want to load is not stored in your project folder. If you get the error `could not find function` it means you have either not loaded the correct package, or you have made a typo in the function name.
+This code has created an object `dat` into which you have read the data from the file `ldt_data.csv`. This object will appear in the environment pane in the top right. Note that the name of the data file must be in quotation marks and the file extension (`.csv`) must also be included. If you receive the error `…does not exist in current working directory` it is highly likely that you have made a typo in the file name (remember R is case sensitive), have forgotten to include the file extension `.csv`, or that the data file you want to load is not stored in your project folder. If you get the error `could not find function` it means you have either not loaded the correct package (a common beginner error is to write the code, but not run it), or you have made a typo in the function name.
 
-To view the dataset, click `dat` in the environment pane or run `View(dat)` in the console. The environment pane also tells us that the object `dat` has 100 observations of 7 variables, and is a useful quick check to ensure one has loaded the right data. Note that the 7 variables have an additional piece of information `chr` and `num`; this specifies the kind of data in the column. Similar to Excel and SPSS, R used this information (or variable type) to specify allowable manipulations of data. For instance character data such as the `id` can't be averaged, while it is possible to do this with numerical data such as the `age`.
+To view the dataset, click `dat` in the environment pane or run `View(dat)` in the console. The environment pane also tells us that the object `dat` has 100 observations of 7 variables, and this is a useful quick check to ensure one has loaded the right data. Note that the 7 variables have an additional piece of information `chr` and `num`; this specifies the kind of data in the column. Similar to Excel and SPSS, R used this information (or variable type) to specify allowable manipulations of data. For instance character data such as the `id` can't be averaged, while it is possible to do this with numerical data such as the `age`.
 
 ## Handling numeric factors
 
@@ -37,7 +37,7 @@ str(dat)
 Because the factor `language` is coded as 1 and 2, R has categorised this column as containing numeric information and unless we correct it, this will cause problems for visualisation and analysis. The code below shows how to recode numeric codes into labels. 
 
 * `mutate()` makes new columns in a data table, or overwrites a column;
-* `factor()` translates the language column into a factor with the labels "monolingual" and "bilingual". You can also use `factor()` to set the display order of a column that contains words. Otherwise, they will display in alphabetical order. n this case we are replacing the numeric data (1 and 2) in the `language` column with the equivalent English labels `monolingual` for 1 and `bilingual` for 2. At the same time we will change the column type to be a factor, which is how R defines categorical data.
+* `factor()` translates the language column into a factor with the labels "monolingual" and "bilingual". You can also use `factor()` to set the display order of a column that contains words. Otherwise, they will display in alphabetical order. In this case we are replacing the numeric data (1 and 2) in the `language` column with the equivalent English labels `monolingual` for 1 and `bilingual` for 2. At the same time we will change the column type to be a factor, which is how R defines categorical data.
 
 ```{r}
 dat <- dat %>%
@@ -167,13 +167,13 @@ The first line of code sets up the base of the plot.
 
 -   `x` specifies which variable to put on the x-axis
 
-The second line of code adds a `geom`, and is connected to the base code with `+`. In this case, we ask for `geom_bar()`. Each `geom` has an associated default statistic. For `geom_bar()`, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts, when given an `x` variable, `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
+The second line of code adds a `geom`, and is connected to the base code with `+`. In this case, we ask for `geom_bar()`. Each `geom` has an associated default statistic. For `geom_bar()`, the default statistic is to count the data passed to it. This means that you do not have to specify a `y` variable when making a bar plot of counts; when given an `x` variable `geom_bar()` will automatically calculate counts of the groups in that variable. In this example, it counts the number of data points that are in each category of the `language` variable.
 
 The base layer and the geoms you add as layers work in symbiosis so it is worthwhile checking the mapping rules as these are related to the default statistic for the plot's geom.
 
 ## Plotting existing aggregates and percent
 
-If your data already have the counts that you want to plot, you can set `stat="identity"` inside of `geom_bar()` to use that number instead of counting rows. For example, there is no way to plot percentages rather than counts within `ggplot`, you need to calculate these and store them in an object which is then used as the dataset. 
+If your data already have the counts that you want to plot, you can set `stat="identity"` inside of `geom_bar()` to use that number instead of counting rows. For example, there is currently no function to plot percentages rather than counts within `ggplot`, you need to calculate these and store them in an object which is then used as the dataset. 
 
 Notice that we are now omitting the names of the arguments `data` and `mapping` in the `ggplot()` function.
 
@@ -191,23 +191,23 @@ ggplot(dat_percent, aes(x = language, y = percent)) +
 
 ## Histogram
 
-The code to plot a histogram of `age` is very similar to the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with `age` on the x-axis:
+The code to plot a histogram of `age` is very similar to the code used for the bar chart. We start by setting up the plot space, the dataset we want to use, and mapping the variables to the relevant axis. In this case, we want to plot a histogram with `age` on the x-axis:
 
 ```{r histogram1, fig.cap = "Histogram of ages."}
 ggplot(dat, aes(x = age)) +
   geom_histogram()
 ```
 
-The base statistic for `geom_historgram()` is also counts, and by default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified - it is automatically a count. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divided the x-axis into was 30. For our data that is appropriate as each bin represents one year, but if you we want one bar to equal 5 years, we can adjust `binwidth = 5`.
+The base statistic for `geom_histogram()` is also count, and by default `geom_histogram()` divides the x-axis into "bins" and counts how many observations are in each bin and so the y-axis does not need to be specified. When you run the code to produce the histogram, you will get the message `stat_bin() using bins = 30. Pick better value with binwidth`. This means that the default number of bins `geom_histogram()` divided the x-axis into is 30. For our data that looks appropriate, but for example, if you want one bar to equal 5 years, you can adjust `binwidth = 5`.
 
-```{r histogram2, fig.cap = "Histogram of ages where each bin covers one year."}
+```{r histogram2, fig.cap = "Histogram of ages where each bin covers five years."}
 ggplot(dat, aes(x = age)) +
   geom_histogram(binwidth = 5)
 ```
 
 ## Customisation 1
 
-So far we have made basic plots with the default visual appearance, before we move on to the experimental data we will introduce some simple visual customisation options. There are many ways in which you can control or customise the visual appearance of figures in R, however, once you understand the logic of one, it becomes easier to understand others that you may see in online examples. Visual appearance of elements can be customised with within a geom itself, within the aesthetic mapping or by connecting additional layers with`+`. In this section we look at the simplest and most commonly-used customisations: changing colours, adding axis labels and adding themes.
+So far we have made basic plots with the default visual appearance. Before we move on to the experimental data we will introduce some simple visual customisation options. There are many ways in which you can control or customise the visual appearance of figures in R, however, once you understand the logic of one, it becomes easier to understand others that you may see in other examples. Visual appearance of elements can be customised within a geom itself, within the aesthetic mapping, or by connecting additional layers with `+`. In this section we look at the simplest and most commonly-used customisations: changing colours, adding axis labels, and adding themes.
 
 ### Changing colours
 
@@ -222,7 +222,7 @@ ggplot(dat, aes(age)) +
 
 ### Editing axis names and labels
 
-To edit axis names and labels you can connect `scale_` functions to your plot with `+` to add layers. These functions are part of `ggplot` and the one you use depends on which aesthetic you wish to edit (e.g., x-axis, y-axis, fill, colour) as well as the type of data it represents (discrete, continuous).
+To edit axis names and labels you can connect `scale_*` functions to your plot with `+` to add layers. These functions are part of `ggplot` and the one you use depends on which aesthetic you wish to edit (e.g., x-axis, y-axis, fill, colour) as well as the type of data it represents (discrete, continuous).
 
 For the bar chart of counts, the x-axis is mapped to a discrete (categorical) variable whilst the y-axis is continuous. For each of these there is a relevant scale function with various elements that can be customised.  Each axis then has its own function added as a layer to the basic plot. 
 
@@ -239,13 +239,13 @@ ggplot(dat, aes(language)) +
 
 -   `labels` controls the names of the conditions with a discrete variable.
 
--   `c()` is a function that you will see in many different contexts and is used to combine multiple values. In this case, the labels we want to apply are combined within `c()` by enclosing each word within their own parenthesis, and are in the order displayed on the plot.
+-   `c()` is a function that you will see in many different contexts and is used to combine multiple values. In this case, the labels we want to apply are combined within `c()` by enclosing each word within their own parenthesis, and are in the order displayed on the plot. A very common error is to forget to enclose multiple values in `c()`.
 
 -   `breaks` controls the tick marks on the axis. Again because there are multiple values, they are enclosed within `c()` although because they are numeric and not text, they do not need quotation marks. 
 
 ### Discrete vs continuous errors
 
-One very common error is to map the wrong type of `scale_` function to a variables. Try running the below code:
+Another very common error is to map the wrong type of `scale_` function to a variable. Try running the below code:
 
 ```{r eval = FALSE}
 ggplot(dat, aes(language)) +

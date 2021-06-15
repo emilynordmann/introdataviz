@@ -39,7 +39,7 @@ Use of the programming language R for data processing and statistical analysis b
 
 Yet, the benefits of using R are obscured for many researchers by the perception that coding skills are difficult to learn [@robins2003learning]. Coupled with this, only a minority of psychology programmes currently teach coding skills [@rminr] with the majority of both undergraduate and postgraduate courses using proprietary and point-and-click software such as SAS, SPSS or Microsoft Excel. While the sophisticated use of proprietary software often necessitates the use of computational thinking skills akin to coding (for instance SPSS scripts or formulas in Excel), we have found that many researchers do not perceive that they already have introductory coding skills. In the following tutorial we intend to change that perception by showing how experienced researchers can redevelop their existing computational skills to utilise the powerful data visualisation tools offered by R.
 
-We aim to provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience using R. We detail the rationale for using R for data visualisation, introduce the "grammar of graphics" that underlies data visualisation using the `ggplot` package, and provide a tutorial that walks the reader through how to replicate plots that are commonly available in point-and-click software such as histograms and boxplots, as well as showing how the code for these "basic" plots can be easily extended to less commonly available options such as violin-boxplots, raincloud plots, and heat-maps.
+In this tutorial, we aim to provide a practical introduction to data visualisation using R, specifically aimed at researchers who have little to no prior experience using R. First we detail the rationale for using R for data visualisation and introduce the "grammar of graphics" that underlies data visualisation using the `ggplot` package. The tutorial then walks the reader through how to replicate plots that are commonly available in point-and-click software such as histograms and boxplots, as well as showing how the code for these "basic" plots can be easily extended to less commonly available options such as violin-boxplots.
 
 ## Why R for data visualisation?
 
@@ -49,7 +49,7 @@ In addition to the benefits of reproducibility, using R for data visualisation g
 
 ## A layered grammar of graphics
 
-There are multiple approaches to data visualisation in R; in this paper we will be using the popular package[^ch1-1] `ggplot2` [@ggplot2] which is part of the larger `tidyverse`[^ch1-2] [@tidyverse] collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics [@wilkinson2005graph] is a standardised way to describe the components of a graphic. `ggplot2` uses a layered grammar of graphics [@wickham2010layered], in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit semi-transparently over each other. A good analogy is old Disney movies where artists would create a background and then add moveable elements on top of the background via transparencies.
+There are multiple approaches to data visualisation in R; in this paper we use the popular package[^ch1-1] `ggplot2` [@ggplot2] which is part of the larger `tidyverse`[^ch1-2] [@tidyverse] collection of packages that provide functions for data wrangling, descriptives, and visualisation. A grammar of graphics [@wilkinson2005graph] is a standardised way to describe the components of a graphic. `ggplot2` uses a layered grammar of graphics [@wickham2010layered], in which plots are built up in a series of layers. It may be helpful to think about any picture as having multiple elements that sit semi-transparently over each other. A good analogy is old Disney movies where artists would create a background and then add moveable elements on top of the background via transparencies.
 
 [^ch1-1]: The power of R is that it is extendable and open source - put simply, if a function doesn't exist or is difficult to use, anyone can create a new **package** that contains data and code to allow you to perform new tasks. You may find it helpful to think of packages as additional apps that you need to download separately to extend the functionality beyond what comes with "Base R".
 
@@ -70,7 +70,7 @@ f <- e + theme_minimal(base_family = "Times") + labs(subtitle = "Layer 6")
 a + b + c + d + e + f + plot_layout(nrow = 2)
 ```
 
-Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (geometric object) to only visualise the line of best fit, simply by removing the layer that draws the data points (Figure  \@ref(fig:remove-layer)). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
+Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (th data points) to only visualise the line of best fit, simply by removing the layer that draws the data points (Figure  \@ref(fig:remove-layer)). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
 
 ```{r remove-layer, message=FALSE, echo=FALSE, fig.cap="Plot with scatterplot layer removed."}
 iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
@@ -81,7 +81,7 @@ iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) +
 
 ## Simulated dataset
 
-For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design lexical decision task. There are 100 rows (1 for each subject) and 7 variables:
+For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-design lexical decision task in which participants have to decide whether a presented word is a real word, or a non-word, with 100 participants. There are 100 rows (1 for each participant) and 7 variables:
 
 -   Participant information:
 
@@ -94,8 +94,8 @@ For the purpose of this tutorial, we will use simulated data for a 2 x 2 mixed-d
 
 -   4 columns for the 2 dependent variables for RT and accuracy, crossed by the within-subject IV of condition:
 
-    -   `rt`\_word\`: Reaction time (ms) for word trials
-    -   `rt`\_nonword\`: Reaction time (ms) for non-word trials
+    -   `rt_word\`: Reaction time (ms) for word trials
+    -   `rt_nonword\`: Reaction time (ms) for non-word trials
     -   `acc_word`: Accuracy for word trials
     -   `acc_nonword`: Accuracy for non-word trials
 
@@ -151,7 +151,7 @@ write_csv(wide, "ldt_data.csv")
 
 We strongly encourage the use of RStudio to write code in R. R is the programming language whilst RStudio is an *integrated development environment* that makes working with R easier. More information on installing both R and RStudio can be found in the additional resources.
 
-Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset and code tutorial Rmd file from the online materials and them (`ldt_data.csv`, `workbook.Rmd`) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
+Projects are a useful way of keeping all your code, data, and output in one place. To create a new project, open RStudio and click `File - New Project - New Directory - New Project`. You will be prompted to give the project a name, and select a location for where to store the project on your computer. Once you have done this, click `Create Project`. Download the simulated dataset and code tutorial Rmd file from [the online materials](https://osf.io/bj83f/files/) and then (`ldt_data.csv`, `workbook.Rmd`) to this folder. The files pane on the bottom right of RStudio should now display this folder and the files it contains - this is known as your *working directory* and it is where R will look for any data you wish to import and where it will save any output you create.
 
 This tutorial will require you to use the packages contained with the `tidyverse` collection. Additionally, we will also require use of `patchwork`. To install these packages, copy and paste the below code into the console (the left hand pane) and press enter to execute the code.
 
@@ -161,7 +161,7 @@ package_list <- c("tidyverse", "patchwork")
 install.packages(package_list)
 ```
 
-The R Markdown workbook contains all below code and there is more information and links to additional resources for how to use R Markdown for reproducible reports in the additional resources. 
+The R Markdown workbook available in the [online materials](https://osf.io/bj83f/files/)contains all the code in this tutorial and there is more information and links to additional resources for how to use R Markdown for reproducible reports in the additional resources. 
 
 The reason that the above install packages code is not included in the workbook is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document. 
 
@@ -179,7 +179,7 @@ Ensuring that your variable names are consistent can make it much easier to work
 
 It is also helpful to have a consistent naming scheme, particularly for variable names that require more than one word. Two popular options are `CamelCase` where each new word begins with a capital letter, or `snake_case` where all letters are lower case and words are separated by an underscore. For the purposes of naming variables, avoid using any spaces in variable names (e.g., `rt word`) and consider the additional meaning of a separator beyond making the variable names easier to read. For example, `rt_word`, `rt_nonword`, `acc_word`, and `acc_nonword` all have the DV to the left of the separator and the level of the IV to the right. `rt_word_condition` on the other hand has two separators but only one of them is meaningful and it is useful to be able to split variable names consistently. In this paper, we will use `snake_case` and lower case letters for all variable names so that we don't have to remember where to put the capital letters.
 
-When working with your own data, you can rename columns in Excel, but there are also instructions for how to do this in R in the additional resources.
+When working with your own data, you can rename columns in Excel, but the resources listed in the additional resources point to how to rename columns reproducibly with code.
 
 ### Data values
 

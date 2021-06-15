@@ -163,6 +163,11 @@ The psyTeachR team at the University of Glasgow School of Psychology and Institu
 * [Msc Conversion Research Methods](https://psyteachr.github.io/msc-conv/)
 * [MSc Data Skills & Simulation](https://psyteachr.github.io/msc-data-skills/)
 
+**Installing R and RStudio**
+
+* [Installing R - PsyTeachR](https://psyteachr.github.io/msc-conv/installing-r.html)
+* [Running R on your own computer (walkthrough videos) - Danielle Navarro](https://www.youtube.com/playlist?list=PLRPB0ZzEYegOZivdelOuEn-R-XUN-DOjd)
+
 **R Markdown**
 
 * [Introduction to R Markdown](https://rmarkdown.rstudio.com/lesson-1.html)

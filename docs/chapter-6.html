@@ -234,7 +234,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.8" data-path="chapter-5.html"><a href="chapter-5.html#activities-4"><i class="fa fa-check"></i><b>5.8</b> Activities 4</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a></li>
+<li class="chapter" data-level="6" data-path="chapter-6.html"><a href="chapter-6.html"><i class="fa fa-check"></i><b>6</b> Chapter 6</a>
+<ul>
+<li class="chapter" data-level="6.0.1" data-path="chapter-6.html"><a href="chapter-6.html#split-violin-plots"><i class="fa fa-check"></i><b>6.0.1</b> Split-violin plots</a></li>
+<li class="chapter" data-level="6.0.2" data-path="chapter-6.html"><a href="chapter-6.html#raincloud-plots"><i class="fa fa-check"></i><b>6.0.2</b> Raincloud plots</a></li>
+<li class="chapter" data-level="6.0.3" data-path="chapter-6.html"><a href="chapter-6.html#ridge-plots"><i class="fa fa-check"></i><b>6.0.3</b> Ridge plots</a></li>
+<li class="chapter" data-level="6.0.4" data-path="chapter-6.html"><a href="chapter-6.html#alluvial-plots"><i class="fa fa-check"></i><b>6.0.4</b> Alluvial plots</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendices</b></span></li>
 <li class="chapter" data-level="A" data-path="additional-resources.html"><a href="additional-resources.html"><i class="fa fa-check"></i><b>A</b> Additional resources</a></li>
 <li class="chapter" data-level="B" data-path="additional-advanced-plots-and-customisation-options.html"><a href="additional-advanced-plots-and-customisation-options.html"><i class="fa fa-check"></i><b>B</b> Additional advanced plots and customisation options</a>
@@ -300,66 +306,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="chapter-6" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Chapter 6</h1>
 <p>This tutorial has but scratched the surface of the visualisation options available using R - in the additional online resources we provide some further advanced plots and customisation options for those readers who are feeling confident with the content covered in this tutorial, however, the below plots give an idea of what is possible, and represent the favourite plots of the authorship team.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="chapter-6.html#cb79-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb79-2"><a href="chapter-6.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb79-3"><a href="chapter-6.html#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb79-4"><a href="chapter-6.html#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb79-5"><a href="chapter-6.html#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">out.width =</span> <span class="st">&quot;100%&quot;</span>,</span>
-<span id="cb79-6"><a href="chapter-6.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fig.cap =</span> <span class="st">&quot;**CAPTION THIS**&quot;</span></span>
-<span id="cb79-7"><a href="chapter-6.html#cb79-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb79-8"><a href="chapter-6.html#cb79-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-9"><a href="chapter-6.html#cb79-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-10"><a href="chapter-6.html#cb79-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb79-11"><a href="chapter-6.html#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb79-12"><a href="chapter-6.html#cb79-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb79-13"><a href="chapter-6.html#cb79-13" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="at">file =</span> <span class="st">&quot;ldt_data.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## 
-## -- Column specification --------------------------------------------------------
-## cols(
-##   id = col_character(),
-##   age = col_double(),
-##   language = col_double(),
-##   rt_word = col_double(),
-##   rt_nonword = col_double(),
-##   acc_word = col_double(),
-##   acc_nonword = col_double()
-## )</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="chapter-6.html#cb81-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb81-2"><a href="chapter-6.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">language =</span> <span class="fu">factor</span>(</span>
-<span id="cb81-3"><a href="chapter-6.html#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> language, <span class="co"># column to translate</span></span>
-<span id="cb81-4"><a href="chapter-6.html#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="co"># values of the original data in preferred order</span></span>
-<span id="cb81-5"><a href="chapter-6.html#cb81-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;monolingual&quot;</span>, <span class="st">&quot;bilingual&quot;</span>) <span class="co"># labels for display</span></span>
-<span id="cb81-6"><a href="chapter-6.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb81-7"><a href="chapter-6.html#cb81-7" aria-hidden="true" tabindex="-1"></a>long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(dat, </span>
-<span id="cb81-8"><a href="chapter-6.html#cb81-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> rt_word<span class="sc">:</span>acc_nonword, </span>
-<span id="cb81-9"><a href="chapter-6.html#cb81-9" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;dv_type&quot;</span>, <span class="st">&quot;condition&quot;</span>), </span>
-<span id="cb81-10"><a href="chapter-6.html#cb81-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>, </span>
-<span id="cb81-11"><a href="chapter-6.html#cb81-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">&quot;dv&quot;</span>)</span>
-<span id="cb81-12"><a href="chapter-6.html#cb81-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-13"><a href="chapter-6.html#cb81-13" aria-hidden="true" tabindex="-1"></a>dat_long <span class="ot">&lt;-</span> <span class="fu">pivot_wider</span>(long, </span>
-<span id="cb81-14"><a href="chapter-6.html#cb81-14" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_from =</span> <span class="st">&quot;dv_type&quot;</span>, </span>
-<span id="cb81-15"><a href="chapter-6.html#cb81-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">values_from =</span> <span class="st">&quot;dv&quot;</span>)</span></code></pre></div>
+<div id="split-violin-plots" class="section level3" number="6.0.1">
+<h3><span class="header-section-number">6.0.1</span> Split-violin plots</h3>
+<p>Split-violin plots remove the redundancy of mirrored violin plots and make it easier to compare the distributions between multiple conditions.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
 <img src="06-ch6_files/figure-html/unnamed-chunk-4-1.png" alt="**CAPTION THIS**" width="100%" />
 <p class="caption">
 Figure 5.4: <strong>CAPTION THIS</strong>
 </p>
 </div>
+</div>
+<div id="raincloud-plots" class="section level3" number="6.0.2">
+<h3><span class="header-section-number">6.0.2</span> Raincloud plots</h3>
+<p>LISA CAN YOU MAKE MY RAINCLOUD PLOTS LOOKS A BIT BETTER, I CAN’T FIGURE OUT HOW TO JITTER THE RAIN</p>
+<p>Raincloud plots combine a density plot, boxplot, raw data points, and any desired summary statistics for a complete visualisation of the data. They are so called because the density plot + raw data is reminiscent of a rain cloud.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="06-ch6_files/figure-html/unnamed-chunk-5-1.png" alt="**CAPTION THIS**" width="100%" />
 <p class="caption">
 Figure 5.5: <strong>CAPTION THIS</strong>
 </p>
 </div>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="06-ch6_files/figure-html/unnamed-chunk-6-1.png" alt="**CAPTION THIS**" width="100%" />
-<p class="caption">
-Figure 3.7: <strong>CAPTION THIS</strong>
-</p>
 </div>
-<p>Alluvial</p>
-<p>In this tutorial we aimed to provide a practical introduction to common data visualisation techniques using R. Whilst a number of the plots produced in this tutorial can be created in point-and-click software, the underlying skill-set developed by making these visualisations is as powerful as it is extendable, and we hope that this tutorial serves as a jumping off point to encourage more researchers to adopt reproducible workflows and open-access software.</p>
+<div id="ridge-plots" class="section level3" number="6.0.3">
+<h3><span class="header-section-number">6.0.3</span> Ridge plots</h3>
+<p>Ridge plots are a series of density plots and show the distribution of numeric values for several groups. Figure X is by <span class="citation">(<a href="r-markdown.html#ref-Nation2017" role="doc-biblioref">Nation 2017</a>)</span> and demonstrates how effective this type of visualisation can be to convey a lot of information very intuitively whilst being visually attractive.</p>
+<p>LISA I DON’T KNOW HOW TO GIVE THIS A CAPTION AND A FIGURE NUMBER BECAUSE IT’S NOT IN A CODE CHUNK.</p>
+<p><img src="https://raw.githubusercontent.com/zonination/perceptions/master/joy1.png" /></p>
+</div>
+<div id="alluvial-plots" class="section level3" number="6.0.4">
+<h3><span class="header-section-number">6.0.4</span> Alluvial plots</h3>
+<p>Alluvial plots visualise multi-level categorical data through flows that can easily be traced in the diagram.</p>
+<p>In this tutorial we aimed to provide a practical introduction to common data visualisation techniques using R. Whilst a number of the plots produced in this tutorial can be created in point-and-click software, the underlying skill-set developed by making these visualisations is as powerful as it is extendable. we hope that this tutorial serves as a jumping off point to encourage more researchers to adopt reproducible workflows and open-access software, in addition to beautiful data visualisations.</p>
 
+</div>
 </div>
 
 
