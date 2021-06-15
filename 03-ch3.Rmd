@@ -20,15 +20,15 @@ To visualise the experimental reaction time and accuracy data using `ggplot` we 
 
 The simulated lexical decision data is currently in wide-format (see Table\ \@ref(tab:wide-data)) where each participant's aggregated [^3] reaction time and accuracy for each level of the within-subject variable is split across multiple columns.
 
-[^3]: In this tutorial we have chosen to gloss over the data processing steps that must occur to get from the raw data to aggregated values. This type of processing requires a more extensive tutorial than we can provide in the curent paper, more importantly, it is still possible to use R for data visualisation having done the preparatory steps using existing workflows in Excel and SPSS so long as the file is saved/exported as a `.csv` file. We bypass these initial steps and focus on tangible outputs that may then encourage further mastery of reproducible methods. Collectively we tend to call the steps for reshaping data and for processing raw data or for getting data ready to use statistical functions "wrangling".
+[^3]: In this tutorial we have chosen to gloss over the data processing steps that must occur to get from the raw data to aggregated values. This type of processing requires a more extensive tutorial than we can provide in the current paper, more importantly, it is still possible to use R for data visualisation having done the preparatory steps using existing workflows in Excel and SPSS so long as the file is saved/exported as a `.csv` file. We bypass these initial steps and focus on tangible outputs that may then encourage further mastery of reproducible methods. Collectively we tend to call the steps for reshaping data and for processing raw data or for getting data ready to use statistical functions "wrangling".
 
 ```{r wide-data, echo=FALSE}
 head(dat) %>% knitr::kable(digits = 2, caption="Data in wide format.")
 ```
 
-Wide-format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer. Wide-format data concatenates multiple pieces of information in a single column, for example in Table\ \@ref(tab:wide-data), `rt_word` contains information related to both a DV and one level of an IV. In comparison long-format data separates the DV from the IV's so that each column represents only one variable. The less intuitive part is that long data has multiple rows for each participant and a column that encodes the level of the IV (`word` or `nonword`). In essence the long format encodes the repeated measures variable in the same way as a between groups variable in SPSS, raher than via column labels. Wickham [-@wickham2014tidy] provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
+Wide-format is popular because it is intuitive to read and easy to enter data into as all the data for one participant is contained within a single row. However, for the purposes of analysis, and particularly for analysis using R, this format is unsuitable because whilst it is intuitive to read by a human, the same is not true for a computer. Wide-format data concatenates multiple pieces of information in a single column, for example in Table\ \@ref(tab:wide-data), `rt_word` contains information related to both a DV and one level of an IV. In comparison long-format data separates the DV from the IV's so that each column represents only one variable. The less intuitive part is that long data has multiple rows for each participant and a column that encodes the level of the IV (`word` or `nonword`). In essence the long format encodes the repeated measures variable in the same way as a between groups variable in SPSS, rather than via column labels. Wickham [-@wickham2014tidy] provides a comprehensive overview of the benefits of tidy data as a standard way of mapping a dataset to its structure, but for the purposes of this tutorial there are two important rules: each column should be a *variable* and each row should be an *observation.*
 
-Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules would produce Table\ \@ref(tab:long). Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
+Moving from using wide-form to long-form datasets can require a conceptual shift on the part of the researcher and one that usually only comes with practice and repeated exposure[^4]. For our example dataset, adhering to these rules for reshaping the data would produce Table\ \@ref(tab:long). Rather than different observations of the same dependent variable being split across columns, there is now a single column for the DV reaction time, and a single column for the DV accuracy. Each participant now has multiple rows of data, one for each observation (i.e., for each participant there will be as many rows as there are levels of the within-subject IV). Although there is some repetition of age and language group, each row is unique when looking at the combination of measures.
 
 [^4]: That is to say, if you are new to R, know that many before you have struggled with this conceptual shift - it does get better, it just takes time and your preferred choice of cursing.
 
@@ -61,7 +61,7 @@ This first code ignores that the dataset has two DVs, a problem we will fix in s
 ```{r long1}
 long <- pivot_longer(data = dat, 
                      cols = rt_word:acc_nonword, 
-                     names_to = c("dv_condition"),
+                     names_to = "dv_condition",
                      values_to = "dv")
 ```
 
@@ -136,13 +136,23 @@ dat_long <- pivot_longer(data = dat,
 
 Now that we have the experimental data in the right form, we can begin to create some useful visualizations. First, to demonstrate how code recipes can be reused and adapted, we will create histograms of reaction time and accuracy. The below code uses the same template as before but changes the dataset (`dat_long`), the bin-widths of the histograms, the `x` variable to display (`rt`/`acc`), and the name of the x-axis.
 
-```{r histogram-rt, fig.cap="Histogram of reaction times."}
+```{r histograms}
+hist1<- ggplot(dat_long, aes(x = rt)) +
+  geom_histogram(binwidth = 10, fill = "white", colour = "black") +
+  scale_x_continuous(name = "Reaction time (ms)")
+
+hist2 <-ggplot(dat_long, aes(x = acc)) +
+  geom_histogram(binwidth = 1, fill = "white", colour = "black") +
+  scale_x_continuous(name = "Accuracy (0-100)")
+
+hist1 / hist2
+```
+
+```{r eval = FALSE}
 ggplot(dat_long, aes(x = rt)) +
   geom_histogram(binwidth = 10, fill = "white", colour = "black") +
   scale_x_continuous(name = "Reaction time (ms)")
-```
 
-```{r histogram-acc, fig.cap="Histogram of accuracy scores."}
 ggplot(dat_long, aes(x = acc)) +
   geom_histogram(binwidth = 1, fill = "white", colour = "black") +
   scale_x_continuous(name = "Accuracy (0-100)")
@@ -178,14 +188,14 @@ ggplot(dat_long, aes(x = rt, fill = condition)) +
 
 Scatterplots are created by calling `geom_point()` and require both an `x` and `y` variable to be specified in the mapping.
 
-```{r point-plot, fig.cap="Point plot of reaction time versus age."}
+```{r point-plot, fig.cap="Point plot of reaction time versus age.", message = FALSE}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point()
 ```
 
 A line of best fit can be added with an additional layer that calls the function `geom_smooth()`. The default is to draw a LOESS or curved regression line, however, a linear line of best fit can be specified using `method = "lm"`. By default, `geom_smooth()` will also draw a confidence envelope around the regression line, this can be removed by adding `se = FALSE` to `geom_smooth()`.
 
-```{r smooth-plot, warning = FALSE, fig.cap="Line of best fit for reaction time versus age."}
+```{r smooth-plot, warning = FALSE, fig.cap="Line of best fit for reaction time versus age.", message = FALSE}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
   geom_smooth(method = "lm")
@@ -195,13 +205,39 @@ ggplot(dat_long, aes(x = rt, y = age)) +
 
 Similar to the density plot, the scatterplot can also be easily adjusted to display grouped data. For `geom_point()`, the grouping variable is mapped to `colour` rather than `fill` and the relevant `scale_*_*()` function is added.
 
-```{r scatter-grouped, warning = FALSE,fig.cap="Grouped scatter plot of reaction time versus age by condition."}
+```{r scatter-grouped, warning = FALSE,fig.cap="Grouped scatter plot of reaction time versus age by condition.", message = FALSE}
 ggplot(dat_long, aes(x = rt, y = age, colour = condition)) +
   geom_point() +
   geom_smooth(method = "lm") +
   scale_colour_discrete(name = "Condition",
                       labels = c("Word", "Non-word"))
 ```
+
+## Transforming data 2
+
+Following the rule *anything that shares an axis should probably be in the same column* means that we will frequently need our data in long-form when using `ggplot2`, however, there are some cases when wide-form is necessary. For example, we may wish to visualise the relationship between reaction time in the word and non-word conditions. The easiest way to achieve this in our case would simply be to use the original wide-form data as the input:
+
+```{r}
+ggplot(dat, aes(x = rt_word, y = rt_nonword, colour = language)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+However, there may also be cases when you do not have an original wide-form version and you can use the `pivot_wider()` function to transform from long to wide.
+
+```{r}
+dat_wide <- dat_long %>%
+  pivot_wider(id_cols = "id",
+              names_from = "condition", 
+              values_from = c(rt,acc))
+```
+
+```{r echo = FALSE}
+dat_wide %>%
+  head %>%
+  knitr::kable(align = "c")
+```
+
 
 ## Customisation  2
 
@@ -223,9 +259,9 @@ ggplot(dat_long, aes(x = rt, y = age, colour = condition)) +
 
 Before you move on try the following:
 
--   Use `fill` to created grouped histograms that display the distributions for `rt` for each `language` group separately and also edit the fill axis labels. Try adding `position = "dodge"` to `geom_histogram()` to see what happens.
+1.   Use `fill` to created grouped histograms that display the distributions for `rt` for each `language` group separately and also edit the fill axis labels. Try adding `position = "dodge"` to `geom_histogram()` to see what happens.
 
-`r hide("Solution")`
+`r hide("Solution 1")`
 ```{r eval = FALSE}
 # fill and axis changes
 ggplot(dat_long, aes(x = rt, fill = language)) +
@@ -243,9 +279,9 @@ ggplot(dat_long, aes(x = rt, fill = language)) +
 
 `r unhide()`
 
--   Use `scale_*_*()` functions to edit the name of the x and y-axis on the scatterplot
+2. Use `scale_*_*()` functions to edit the name of the x and y-axis on the scatterplot
 
-`r hide("Solution")`
+`r hide("Solution 2")`
 ```{r warning = FALSE,eval = FALSE}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
@@ -256,9 +292,9 @@ ggplot(dat_long, aes(x = rt, y = age)) +
 
 `r unhide()`
 
--   Use `se = FALSE` to remove the confidence envelope from the scatterplots
+3. Use `se = FALSE` to remove the confidence envelope from the scatterplots
 
-`r hide("Solution")`
+`r hide("Solution 3")`
 ```{r warning = FALSE,eval = FALSE}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
@@ -267,9 +303,9 @@ ggplot(dat_long, aes(x = rt, y = age)) +
   scale_y_continuous(name = "Age")
 ```
 
--   Remove `method = "lm"` from `geom_smooth()` to produce a curved regression line.
+4. Remove `method = "lm"` from `geom_smooth()` to produce a curved regression line.
 
-`r hide("Solution")`
+`r hide("Solution 4")`
 ```{r warning = FALSE,eval = FALSE}
 ggplot(dat_long, aes(x = rt, y = age)) +
   geom_point() +
@@ -278,7 +314,7 @@ ggplot(dat_long, aes(x = rt, y = age)) +
   scale_y_continuous(name = "Age")
 ```
 
--   Replace the default `scale_fill_*()` on the grouped density plot with the colour-blind friendly version.
+5. Replace the default `scale_fill_*()` on the grouped density plot with the colour-blind friendly version.
 
 `r hide("Solution")`
 ```{r eval = FALSE}

@@ -279,9 +279,9 @@ If you wished to return to the default theme, change the above to specify `theme
 
 Before you move on try the following:
 
--   Add a layer that edits the **name** of the y-axis histogram label to `Number of participants`.
+1. Add a layer that edits the **name** of the y-axis histogram label to `Number of participants`.
 
-`r hide("Solution")`
+`r hide("Solution 1")`
 ```{r eval=FALSE}
 ggplot(dat, aes(age)) +
   geom_histogram(binwidth = 1, fill = "wheat", color = "black") +
@@ -291,18 +291,18 @@ ggplot(dat, aes(age)) +
 ```
 `r unhide()`
 
--   Change the colour of the bars in the bar chart to red.
+2.  Change the colour of the bars in the bar chart to red.
 
-`r hide("Solution")`
+`r hide("Solution 2")`
 ```{r eval=FALSE}
 ggplot(data = dat, mapping = aes(x = language)) +
   geom_bar(fill = "red")
 ```
 `r unhide()`
 
--   Remove `theme_minimal()` from the histogram and instead apply one of the other available themes. To find out about other available themes, start typing `theme_` and the auto-complete will show you the available options - this will only work if you have loaded the `tidyverse` library with `library(tidyverse)`.
+3.   Remove `theme_minimal()` from the histogram and instead apply one of the other available themes. To find out about other available themes, start typing `theme_` and the auto-complete will show you the available options - this will only work if you have loaded the `tidyverse` library with `library(tidyverse)`.
 
-`r hide("Solution")`
+`r hide("Solution 3")`
 ```{r eval=FALSE}
 #multiple options here e.g., theme_classic()
 ggplot(dat, aes(age)) +

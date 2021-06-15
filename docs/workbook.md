@@ -17,6 +17,8 @@ This workbook contains the code from the tutorial paper. You can add notes to th
 
 The document outline tool will help you navigate this workbook more easily (Ctrl+Shift+O on Windows, Cmd+Shift+O on Mac).
 
+This workbook contains code chunks for all the the code and activities in the tutorial. If you wish to create extra code chunks, you can use the Insert Code - R menu (a green box with a C and a plus sign) or use the keyboard shortcuts (Ctrl+Alt+I on Windows, Cmd+Option+I on Mac). 
+
 When you are working in a Markdown document, the working directory (where R looks for data files to import, and where it will save any output you create) will default to the folder that the .Rmd file is stored in when you open RStudio by opening the Markdown document. For this reason, make sure that the .Rmd file and the data file are in the same folder before you begin. 
 
 ## Chapter 2
@@ -189,6 +191,7 @@ ggplot(data = dat, mapping = aes(x = language)) +
 <p class="caption">(\#fig:unnamed-chunk-10)Bar chart of counts.</p>
 </div>
 
+### Plotting existing aggregates and percent
 
 
 ```r
@@ -300,4 +303,222 @@ ggplot(dat, aes(age)) +
 ```r
 theme_set(theme_minimal())
 ```
+
+### Activities 1
+
+1. 
+
+
+
+2. 
+
+
+
+3. 
+
+
+
+4.
+
+
+
+## Chapter 3
+
+### Transforming data
+
+Step 1
+
+
+```r
+long <- pivot_longer(data = dat, 
+                     cols = rt_word:acc_nonword, 
+                     names_to = c("dv_condition"),
+                     values_to = "dv")
+```
+
+Step 2
+
+
+```r
+long2 <- pivot_longer(data = dat, 
+                     cols = rt_word:acc_nonword, 
+                     names_sep = "_", 
+                     names_to = c("dv_type", "condition"),
+                     values_to = "dv")
+```
+
+Step 3
+
+
+```r
+dat_long <- pivot_wider(long2, 
+                        names_from = "dv_type", 
+                        values_from = "dv")
+```
+
+Combined steps
+
+
+```r
+dat_long <- pivot_longer(data = dat, 
+                     cols = rt_word:acc_nonword, 
+                     names_sep = "_", 
+                     names_to = c("dv_type", "condition"),
+                     values_to = "dv") %>%
+  pivot_wider(names_from = "dv_type", 
+              values_from = "dv")
+```
+
+### Histogram 2
+
+
+```r
+ggplot(dat_long, aes(x = rt)) +
+  geom_histogram(binwidth = 10, fill = "white", colour = "black") +
+  scale_x_continuous(name = "Reaction time (ms)")
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-27-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-27-1)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+```r
+ggplot(dat_long, aes(x = acc)) +
+  geom_histogram(binwidth = 1, fill = "white", colour = "black") +
+  scale_x_continuous(name = "Accuracy (0-100)")
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-27-2.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-27-2)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+### Density plots
+
+
+```r
+ggplot(dat_long, aes(x = rt)) +
+  geom_density()+
+  scale_x_continuous(name = "Reaction time (ms)")
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-28-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-28)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+#### Grouped density plots
+
+
+```r
+ggplot(dat_long, aes(x = rt, fill = condition)) +
+  geom_density()+
+  scale_x_continuous(name = "Reaction time (ms)") +
+  scale_fill_discrete(name = "Condition",
+                      labels = c("Word", "Non-word"))
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-29-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-29)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+### Scatterplots
+
+
+```r
+ggplot(dat_long, aes(x = rt, y = age)) +
+  geom_point()
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-30-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-30)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+With line of best fit
+
+
+```r
+ggplot(dat_long, aes(x = rt, y = age)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-31-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-31)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+#### Grouped scatterplots
+
+
+```r
+ggplot(dat_long, aes(x = rt, y = age, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_colour_discrete(name = "Condition",
+                      labels = c("Word", "Non-word"))
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-32-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-32)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+### Customisation 2
+
+#### Accessible colour schemes
+
+
+```r
+ggplot(dat_long, aes(x = rt, y = age, colour = condition)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  # use "viridis_d" instead of "discrete" for better colours
+  scale_colour_viridis_d(name = "Condition",
+                        labels = c("Word", "Non-word"),
+                        option = "E")
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+<div class="figure" style="text-align: center">
+<img src="workbook_files/figure-html/unnamed-chunk-33-1.png" alt="**CAPTION THIS FIGURE!!**" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-33)**CAPTION THIS FIGURE!!**</p>
+</div>
+
+### Activities 2
+
+1. 
+
+
+
+2.
+
+
+
+
+3.
+
+
+
+4.
+
+
+
+5. 
+
+
 
