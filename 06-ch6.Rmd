@@ -157,14 +157,14 @@ GeomFlatViolin <-
 
 Split-violin plots remove the redundancy of mirrored violin plots and make it easier to compare the distributions between multiple conditions.
 
-```{r}
+```{r fig.cap = "Split-violin plot"}
 ggplot(dat_long, aes(x = condition, y = rt, fill = language)) +
   geom_split_violin(alpha = .4) +
   geom_boxplot(width = .2, alpha = .6, show.legend = F) +
   stat_summary(fun.data = "mean_se", geom = "pointrange", position = position_dodge(.175), show.legend = F)+
   scale_fill_viridis_d(option  ="E") +
   theme_minimal() +
-  labs(x = "Condition", y = "Reaction time (ms)", fill = "Language group", title = "Split-violin plot")
+  labs(x = "Condition", y = "Reaction time (ms)", fill = "Language group")
 ```
 
 ### Raincloud plots
@@ -173,7 +173,7 @@ LISA CAN YOU MAKE MY RAINCLOUD PLOTS LOOKS A BIT BETTER, I CAN'T FIGURE OUT HOW 
 
 Raincloud plots combine a density plot, boxplot, raw data points, and any desired summary statistics for a complete visualisation of the data. They are so called because the density plot + raw data is reminiscent of a rain cloud.
 
-```{r}
+```{r fig.cap="Raincloud plot"}
 ggplot(dat_long, aes(x = condition, y = rt, fill = language))+
   geom_flat_violin(position = position_nudge(x = .25, y = 0), 
                    trim=FALSE, alpha = 0.6) +
@@ -183,7 +183,7 @@ ggplot(dat_long, aes(x = condition, y = rt, fill = language))+
   scale_fill_viridis_d() +
   scale_colour_viridis_d() +
   theme_minimal()+
-  labs(x = "Condition", y = "Reaction time (ms)", fill = "Language group", title = "Raincloud plot") +
+  labs(x = "Condition", y = "Reaction time (ms)", fill = "Language group") +
   coord_flip()
 ```
 
@@ -191,7 +191,7 @@ ggplot(dat_long, aes(x = condition, y = rt, fill = language))+
 
 Ridge plots are a series of density plots and show the distribution of numeric values for several groups. Figure X is by [@Nation2017] and demonstrates how effective this type of visualisation can be to convey a lot of information very intuitively whilst being visually attractive.
 
-LISA I DON'T KNOW HOW TO GIVE THIS A CAPTION AND A FIGURE NUMBER BECAUSE IT'S NOT IN A CODE CHUNK.
+LISA I DON'T KNOW HOW TO GIVE THIS A CAPTION AND A FIGURE NUMBER BECAUSE IT'S NOT IN A CODE CHUNK. HAVE I EVER TOLD YOU YOU'RE VERY GOOD AT R
 
 ![](https://raw.githubusercontent.com/zonination/perceptions/master/joy1.png)
 
