@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
 <li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs continuous errors</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs.-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs. continuous errors</a></li>
 <li class="chapter" data-level="2.9.4" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.4</b> Adding a theme</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
@@ -394,7 +394,7 @@ Figure 4.7: Plot with the geoms in the wrong order.
 </div>
 <div id="grouped-violin-boxplots" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Grouped violin-boxplots</h3>
-<p>As with previous plots, another variable can be mapped to <code>fill</code> for the violin-boxplot, however, simply adding <code>fill</code> to the mapping causes the different components of the plot to become misaligned because they have different default positions:</p>
+<p>As with previous plots, another variable can be mapped to <code>fill</code> for the violin-boxplot. However, simply adding <code>fill</code> to the mapping causes the different components of the plot to become misaligned because they have different default positions:</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chapter-4.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
 <span id="cb50-2"><a href="chapter-4.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
 <span id="cb50-3"><a href="chapter-4.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
@@ -406,7 +406,7 @@ Figure 4.7: Plot with the geoms in the wrong order.
 Figure 4.8: Grouped violin-boxplots without repositioning.
 </p>
 </div>
-<p>To rectify this we need to adjust the argument <code>position</code> for each of the misaligned layers. <code>position_dodge()</code> instructs R to move (dodge) the position of the plot component by the specified value - what value you need can sometimes take trial and error.</p>
+<p>To rectify this we need to adjust the argument <code>position</code> for each of the misaligned layers. <code>position_dodge()</code> instructs R to move (dodge) the position of the plot component by the specified value - finding what value you need can sometimes take trial and error.</p>
 <div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="chapter-4.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y=</span> rt, <span class="at">fill =</span> language)) <span class="sc">+</span></span>
 <span id="cb51-2"><a href="chapter-4.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
 <span id="cb51-3"><a href="chapter-4.html#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)) <span class="sc">+</span></span>

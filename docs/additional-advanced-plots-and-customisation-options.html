@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="chapter-2.html"><a href="chapter-2.html#changing-colours"><i class="fa fa-check"></i><b>2.9.1</b> Changing colours</a></li>
 <li class="chapter" data-level="2.9.2" data-path="chapter-2.html"><a href="chapter-2.html#editing-axis-names-and-labels"><i class="fa fa-check"></i><b>2.9.2</b> Editing axis names and labels</a></li>
-<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs continuous errors</a></li>
+<li class="chapter" data-level="2.9.3" data-path="chapter-2.html"><a href="chapter-2.html#discrete-vs.-continuous-errors"><i class="fa fa-check"></i><b>2.9.3</b> Discrete vs. continuous errors</a></li>
 <li class="chapter" data-level="2.9.4" data-path="chapter-2.html"><a href="chapter-2.html#adding-a-theme"><i class="fa fa-check"></i><b>2.9.4</b> Adding a theme</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="chapter-2.html"><a href="chapter-2.html#activities-1"><i class="fa fa-check"></i><b>2.10</b> Activities 1</a></li>
@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="adding-lines-to-plots" class="section level2" number="8.1">
 <h2><span class="header-section-number">B.1</span> Adding lines to plots</h2>
 <p><strong>Vertical Lines - geom_vline()</strong></p>
-<p>Often it can be useful to put a marker into our plots to highlight a certain criterion value. For example, if you were working with a scale that has a cut-off, perhaps the Austim Spectrum Quotient 10 (<!-- Ref -->), then you might want to put a line at a score of 7; the point at which the researchers suggest the participant is referred further. Alternatively, thinking about the Stroop test we have looked at in this paper, perhaps you had a level of accuracy that you wanted to make sure was reached - let’s say 80%. If we refer back to Figure <a href="#fig:histogram-acc"><strong>??</strong></a>, which used the code below:</p>
+<p>Often it can be useful to put a marker into our plots to highlight a certain criterion value. For example, if you were working with a scale that has a cut-off, perhaps the Austim Spectrum Quotient 10 <span class="citation">(<a href="additional-advanced-plots-and-customisation-options.html#ref-allison2012toward" role="doc-biblioref">Allison, Auyeung, and Baron-Cohen 2012</a>)</span>, then you might want to put a line at a score of 7; the point at which the researchers suggest the participant is referred further. Alternatively, thinking about the Stroop test we have looked at in this paper, perhaps you had a level of accuracy that you wanted to make sure was reached - let’s say 80%. If we refer back to Figure <a href="#fig:histogram-acc"><strong>??</strong></a>, which used the code below:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="additional-advanced-plots-and-customisation-options.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> acc)) <span class="sc">+</span></span>
 <span id="cb75-2"><a href="additional-advanced-plots-and-customisation-options.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
 <span id="cb75-3"><a href="additional-advanced-plots-and-customisation-options.html#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">&quot;Accuracy (0-100)&quot;</span>)</span></code></pre></div>
@@ -336,7 +336,7 @@ Figure B.4: Basic boxplot.
 Figure B.5: Basic boxplot with black solid horizontal line indicating 80% accuracy.
 </p>
 </div>
-<p>and again we can embellish the line using the same arguements as above. We will put in some different values here just to show the changes:</p>
+<p>and again we can embellish the line using the same arguments as above. We will put in some different values here just to show the changes:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="additional-advanced-plots-and-customisation-options.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> acc)) <span class="sc">+</span></span>
 <span id="cb80-2"><a href="additional-advanced-plots-and-customisation-options.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb80-3"><a href="additional-advanced-plots-and-customisation-options.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">80</span>, <span class="at">linetype =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code></pre></div>
@@ -529,7 +529,7 @@ Figure B.16: Changing the values on the axes using the seq() function
 Figure B.17: Combining scale functions and zoom functions
 </p>
 </div>
-<p>Which actually looks much like our original scatterplot but with better definition on the axes. So you can see we can actually have a lot of control over the axes and what we see. One thing to note however is that you should not use the <code>limits</code> argument within the <code>scale_*</code> functions as a zoom. It won’t work like that and instead will just disregard data. Look at this example:</p>
+<p>Which actually looks much like our original scatterplot but with better definition on the axes. So you can see we can actually have a lot of control over the axes and what we see. However, one thing to note, is that you should not use the <code>limits</code> argument within the <code>scale_*</code> functions as a zoom. It won’t work like that and instead will just disregard data. Look at this example:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="additional-advanced-plots-and-customisation-options.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_long, <span class="fu">aes</span>(<span class="at">x =</span> rt, <span class="at">y =</span> age)) <span class="sc">+</span></span>
 <span id="cb92-2"><a href="additional-advanced-plots-and-customisation-options.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb92-3"><a href="additional-advanced-plots-and-customisation-options.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
@@ -813,7 +813,7 @@ Figure B.33: Changing the line of the <code>stat_function()</code>
 </div>
 <div id="easter-egg---a-dumbbell-plot" class="section level2" number="8.7">
 <h2><span class="header-section-number">B.7</span> Easter Egg - A Dumbbell Plot</h2>
-<p>A nice way of representing a change across different conditions, within participants or across timepoints, is the dumbbell chart. These figures can do a lot of heavy lifting in conveying patterns within the data and are not as hard to create in ggplot as they might first appear. The premis is that you need the start point, in terms of x (<code>x =</code>) and y (<code>y =</code>), and the end point, again in terms of x (<code>xend =</code>) and y (<code>yend =</code>). You draw a line between those two points using <code>geom_segment()</code> and then add a data point at the both ends of the line using <code>geom_point()</code>. So for example, we will use the average accuracy scores for the word and non-word conditions, for monolingual and bilinguals, to demonstrate. We could do the same figure for all participants but as we have 100 participants it can be a bit <strong>wild</strong>. We first need to create the averages using a little bit of data wrangling we have seen:</p>
+<p>A nice way of representing a change across different conditions, within participants or across timepoints, is the dumbbell chart. These figures can do a lot of heavy lifting in conveying patterns within the data and are not as hard to create in ggplot as they might first appear. The premise is that you need the start point, in terms of x (<code>x =</code>) and y (<code>y =</code>), and the end point, again in terms of x (<code>xend =</code>) and y (<code>yend =</code>). You draw a line between those two points using <code>geom_segment()</code> and then add a data point at the both ends of the line using <code>geom_point()</code>. So for example, we will use the average accuracy scores for the word and non-word conditions, for monolingual and bilinguals, to demonstrate. We could do the same figure for all participants but as we have 100 participants it can be a bit <strong>wild</strong>. We first need to create the averages using a little bit of data wrangling we have seen:</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="additional-advanced-plots-and-customisation-options.html#cb109-1" aria-hidden="true" tabindex="-1"></a>dat_avg <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
 <span id="cb109-2"><a href="additional-advanced-plots-and-customisation-options.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(language) <span class="sc">%&gt;%</span></span>
 <span id="cb109-3"><a href="additional-advanced-plots-and-customisation-options.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_acc_nonword =</span> <span class="fu">mean</span>(acc_nonword),</span>
@@ -899,16 +899,22 @@ Figure B.36: Adding the weights to the dumbbells. Red dots are added in one laye
 Figure B.37: A pie chart of the demographics
 </p>
 </div>
-<p>The thing to note is really that this is effectively creating a stacked bar chart with no x variable (i.e. <code>x = ""</code>) and then wrapping the y-axis into a circle (i.e. <code>coord_polar("y", start = 0)</code>). That is what the first three lines of the <code>ggplot</code> code does:</p>
+<p>Note that this is effectively creating a stacked bar chart with no x variable (i.e. <code>x = ""</code>) and then wrapping the y-axis into a circle (i.e. <code>coord_polar("y", start = 0)</code>). That is what the first three lines of the <code>ggplot</code> code does:</p>
 <div class="figure" style="text-align: center"><span id="fig:pie-basic1"></span>
 <img src="appendix-0_files/figure-html/pie-basic1-1.png" alt="The basis of a pie chart" width="100%" />
 <p class="caption">
 Figure B.38: The basis of a pie chart
 </p>
 </div>
-<p>The remainder of the code is used to remove the various panel and tick lines, and text, setting them all to <code>element_blank()</code> through the <code>theme()</code> functions we saw above, and to add new labelling text on top of the piechart at specific y-values (i.e. <code>y = c(75,25)</code>). But remember, <strong>friends don’t let friends make piecharts!</strong></p>
+<p>The remainder of the code is used to remove the various panel and tick lines, and text, setting them all to <code>element_blank()</code> through the <code>theme()</code> functions we saw above, and to add new labelling text on top of the pie chart at specific y-values (i.e. <code>y = c(75,25)</code>). But remember, <strong>friends don’t let friends make pie charts!</strong></p>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-allison2012toward" class="csl-entry">
+Allison, Carrie, Bonnie Auyeung, and Simon Baron-Cohen. 2012. <span>“Toward Brief <span>‘Red Flags’</span> for Autism Screening: The Short Autism Spectrum Quotient and the Short Quantitative Checklist in 1,000 Cases and 3,000 Controls.”</span> <em>Journal of the American Academy of Child &amp; Adolescent Psychiatry</em> 51 (2): 202–12.
+</div>
+<div id="ref-barrett2019six" class="csl-entry">
+Barrett, Tyson S. 2019. <span>“Six Reasons to Consider Using r in Psychological Research.”</span>
+</div>
 <div id="ref-NYT-R" class="csl-entry">
 Bertini, Enrico, and Moritz Stefaner. 2015. <span>“Amanda Cox on Working with r, NYT Projects, Favorite Data [Podcast].”</span> <em>Data Stories</em>. <a href="https://datastori.es/ds-56-amanda-cox-nyt/">https://datastori.es/ds-56-amanda-cox-nyt/</a>.
 </div>

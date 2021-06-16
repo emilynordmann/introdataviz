@@ -48,7 +48,7 @@ The psyTeachR team at the University of Glasgow School of Psychology and Institu
 
 **Vertical Lines - geom_vline()**
 
-Often it can be useful to put a marker into our plots to highlight a certain criterion value. For example, if you were working with a scale that has a cut-off, perhaps the Austim Spectrum Quotient 10 (<!-- Ref -->), then you might want to put a line at a score of 7; the point at which the researchers suggest the participant is referred further. Alternatively, thinking about the Stroop test we have looked at in this paper, perhaps you had a level of accuracy that you wanted to make sure was reached - let's say 80%. If we refer back to Figure \@ref(fig:histogram-acc), which used the code below:
+Often it can be useful to put a marker into our plots to highlight a certain criterion value. For example, if you were working with a scale that has a cut-off, perhaps the Austim Spectrum Quotient 10 [@allison2012toward], then you might want to put a line at a score of 7; the point at which the researchers suggest the participant is referred further. Alternatively, thinking about the Stroop test we have looked at in this paper, perhaps you had a level of accuracy that you wanted to make sure was reached - let's say 80%. If we refer back to Figure \@ref(fig:histogram-acc), which used the code below:
 
 
 ```r
@@ -123,7 +123,7 @@ ggplot(dat_long, aes(x = condition, y = acc)) +
 <p class="caption">(\#fig:boxplot1-hline1)Basic boxplot with black solid horizontal line indicating 80% accuracy.</p>
 </div>
 
-and again we can embellish the line using the same arguements as above. We will put in some different values here just to show the changes:
+and again we can embellish the line using the same arguments as above. We will put in some different values here just to show the changes:
 
 
 ```r
@@ -342,7 +342,7 @@ ggplot(dat_long, aes(x = rt, y = age)) +
 <p class="caption">(\#fig:smooth-plot-scales3)Combining scale functions and zoom functions</p>
 </div>
 
-Which actually looks much like our original scatterplot but with better definition on the axes. So you can see we can actually have a lot of control over the axes and what we see. One thing to note however is that you should not use the `limits` argument within the `scale_*` functions as a zoom. It won't work like that and instead will just disregard data. Look at this example:
+Which actually looks much like our original scatterplot but with better definition on the axes. So you can see we can actually have a lot of control over the axes and what we see. However, one thing to note, is that you should not use the `limits` argument within the `scale_*` functions as a zoom. It won't work like that and instead will just disregard data. Look at this example:
 
 
 ```r
@@ -698,7 +698,7 @@ ggplot(dat_long, aes(rt)) +
 
 ## Easter Egg - A Dumbbell Plot
 
-A nice way of representing a change across different conditions, within participants or across timepoints, is the dumbbell chart. These figures can do a lot of heavy lifting in conveying patterns within the data and are not as hard to create in ggplot as they might first appear. The premis is that you need the start point, in terms of x (`x =`) and y (`y =`), and the end point, again in terms of x (`xend =`) and y (`yend =`). You draw a line between those two points using `geom_segment()` and then add a data point at the both ends of the line using `geom_point()`. So for example, we will use the average accuracy scores for the word and non-word conditions, for monolingual and bilinguals, to demonstrate. We could do the same figure for all participants but as we have 100 participants it can be a bit **wild**. We first need to create the averages using a little bit of data wrangling we have seen:
+A nice way of representing a change across different conditions, within participants or across timepoints, is the dumbbell chart. These figures can do a lot of heavy lifting in conveying patterns within the data and are not as hard to create in ggplot as they might first appear. The premise is that you need the start point, in terms of x (`x =`) and y (`y =`), and the end point, again in terms of x (`xend =`) and y (`yend =`). You draw a line between those two points using `geom_segment()` and then add a data point at the both ends of the line using `geom_point()`. So for example, we will use the average accuracy scores for the word and non-word conditions, for monolingual and bilinguals, to demonstrate. We could do the same figure for all participants but as we have 100 participants it can be a bit **wild**. We first need to create the averages using a little bit of data wrangling we have seen:
 
 
 ```r
@@ -783,12 +783,12 @@ ggplot(count_dat, aes(x = "",
 <p class="caption">(\#fig:piechart-full)A pie chart of the demographics</p>
 </div>
 
-The thing to note is really that this is effectively creating a stacked bar chart with no x variable (i.e. `x = ""`) and then wrapping the y-axis into a circle (i.e. `coord_polar("y", start = 0)`). That is what the first three lines of the `ggplot` code does:
+Note that this is effectively creating a stacked bar chart with no x variable (i.e. `x = ""`) and then wrapping the y-axis into a circle (i.e. `coord_polar("y", start = 0)`). That is what the first three lines of the `ggplot` code does:
 
 <div class="figure" style="text-align: center">
 <img src="appendix-0_files/figure-html/pie-basic1-1.png" alt="The basis of a pie chart" width="100%" />
 <p class="caption">(\#fig:pie-basic1)The basis of a pie chart</p>
 </div>
 
-The remainder of the code is used to remove the various panel and tick lines, and text, setting them all to `element_blank()` through the `theme()` functions we saw above, and to add new labelling text on top of the piechart at specific y-values (i.e. `y = c(75,25)`). But remember, **friends don't let friends make piecharts!**
+The remainder of the code is used to remove the various panel and tick lines, and text, setting them all to `element_blank()` through the `theme()` functions we saw above, and to add new labelling text on top of the pie chart at specific y-values (i.e. `y = c(75,25)`). But remember, **friends don't let friends make pie charts!**
 
