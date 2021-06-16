@@ -24,7 +24,7 @@
 <meta name="author" content="Emily Nordmann, Phil McAleer, Wilhelmiina Toivo, Helena Paterson, Lisa DeBruine" />
 
 
-<meta name="date" content="2021-06-15" />
+<meta name="date" content="2021-06-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -335,7 +335,7 @@ Figure 4.3: Violin plot.
 <h2><span class="header-section-number">4.3</span> Bar chart of means</h2>
 <p>Commonly, rather than visualising distributions of raw data researchers will wish to visualise means using a bar chart with error bars. As with SPSS and Excel, <code>ggplot</code> requires you to calculate the summary statistics and then plot the summary. There are at least two ways to do this, in the first you make a table of summary statistics as we did earlier when calculating the participant demographics and then plot that table. The second approach is to calculate the statistics within a layer of the plot. That is the approach we will use below.</p>
 <p>First we present code for making a bar chart. The code for bar charts is here because it is a common visualisation that is familiar to most researchers, however, we would urge you to use a visualisation that provides more transparency about the distribution of the raw data, such as the violin-boxplots we will present in the next section.</p>
-<p>To summarise the data into means we use a new functions <code>stat_summary</code>. Rather than calling a <code>geom_*</code> function, we call <code>stat_summary()</code> and specify how we want to summarise the data and how we want to present that summary in our figure.</p>
+<p>To summarise the data into means we use a new function <code>stat_summary</code>. Rather than calling a <code>geom_*</code> function, we call <code>stat_summary()</code> and specify how we want to summarise the data and how we want to present that summary in our figure.</p>
 <ul>
 <li><p><code>fun</code> specifies the summary function that gives us the y-value we want to plot, in this case, <code>mean</code>.</p></li>
 <li><p><code>geom</code> specifies what shape or plot we want to use to display the summary. For the first layer we will specify <code>bar</code>. As with the other geom-type functions we have shown you, this part of the <code>stat_summary()</code> function is tied to the aesthetic mapping in the first line of code. The underlying statistics for a bar chart means that we must specify and IV (x-axis) as well as the DV (y-axis).</p></li>

@@ -71,6 +71,7 @@ long <- pivot_longer(data = dat,
 -   `cols` specifies all the columns you want to transform. The easiest way to visualise this is to think about which columns would be the same in the new long-form dataset and which will change. If you refer back to Table\ \@ref(tab:wide-data), you can see that `id`, `age`, and `language` all remain, while the columns that contain the measurements of the DVs change. The colon notation `first_column:last_column` is used to select all variables from the first column specified to the second.  In our code, `cols` specifies that the columns we want to transform are `rt_word` to `acc_nonword`.
 
 -   `names_to` specifies the name of the new column that will be created. 
+
 -   Finally, `values_to` names the new column that will contain the measurements, in this case we'll call it `dv`. At this point you may find it helpful to go back and compare `dat` and `long` again to see how each argument matches up with the output of the table.
 
 ```{r long1-example, echo = FALSE}
