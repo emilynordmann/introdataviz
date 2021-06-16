@@ -68,7 +68,7 @@ One of the challenges in learning R is that many of the "helpful" examples and s
 
 ## Demographic information
 
-You can calculate and plot some basic descriptive information about the demographics of our sample using the imported dataset without any additional wrangling (or data processing). The code below uses the `%>%` operator, otherwise known as the *pipe,* and can mostly useful be translated as "*and then"*. For example, the below code can be read as:
+You can calculate and plot some basic descriptive information about the demographics of our sample using the imported dataset without any additional wrangling (or data processing). The code below uses the `%>%` operator, otherwise known as the *pipe,* and can be translated as "*and then"*. For example, the below code can be read as:
 
 -   Start with the dataset `dat` *and then;*
 
