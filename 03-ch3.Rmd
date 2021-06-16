@@ -16,7 +16,7 @@ theme_set(theme_grey())
 
 ## Data formats
 
-To visualise the experimental reaction time and accuracy data using `ggplot` we first need to reshape the data from wide-format to long-format and it is this step that can cause friction with novice users of R.. Traditionally, psychologists have been taught data skills using wide-format data. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition and where there is between groups variables, a separate column is added to encode the group to which a participant or observation belongs. 
+To visualise the experimental reaction time and accuracy data using `ggplot` we first need to reshape the data from wide-format to long-format and it is this step that can cause friction with novice users of R. Traditionally, psychologists have been taught data skills using wide-format data. Wide-format data typically has one row of data for each participant with separate columns for each score or variable. Where there are repeated-measures variables, the dependent variable is split across different columns with one measurement for each condition and where there is between groups variables, a separate column is added to encode the group to which a participant or observation belongs. 
 
 The simulated lexical decision data is currently in wide-format (see Table\ \@ref(tab:wide-data)) where each participant's aggregated [^3] reaction time and accuracy for each level of the within-subject variable is split across multiple columns.
 
