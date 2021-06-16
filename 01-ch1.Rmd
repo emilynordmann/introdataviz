@@ -35,7 +35,7 @@ theme_set(theme_grey())
 
 # Introduction
 
-Use of the programming language R for data processing and statistical analysis by researchers is increasingly common with a GET THE STATS FROM THAT THING I SAW ABOUT R ON TWITTER rise since XXXX (REF). In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means [@newman2012bar].
+Use of the programming language R for data processing and statistical analysis by researchers is increasingly common, with an average yearly growth of 87% in the number of citations of the C Core Team between 2006-2018 [@barrett2019six]. In addition to benefiting reproducibility and transparency, one of the advantages of using R is that researchers have a much larger range of fully customisable data visualisations options than are typically available in point-and-click software, due to the open-source nature of R. These visualisation options not only look attractive, but can increase transparency about the distribution of the underlying data rather than relying on commonly used visualisations of aggregations such as bar charts of means [@newman2012bar].
 
 Yet, the benefits of using R are obscured for many researchers by the perception that coding skills are difficult to learn [@robins2003learning]. Coupled with this, only a minority of psychology programmes currently teach coding skills [@rminr] with the majority of both undergraduate and postgraduate courses using proprietary and point-and-click software such as SAS, SPSS or Microsoft Excel. While the sophisticated use of proprietary software often necessitates the use of computational thinking skills akin to coding (for instance SPSS scripts or formulas in Excel), we have found that many researchers do not perceive that they already have introductory coding skills. In the following tutorial we intend to change that perception by showing how experienced researchers can redevelop their existing computational skills to utilise the powerful data visualisation tools offered by R.
 
@@ -43,7 +43,7 @@ In this tutorial, we aim to provide a practical introduction to data visualisati
 
 ## Why R for data visualisation?
 
-Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software -- reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis [e.g. @munafo2017manifesto] and we will not repeat those arguments here. However, there is an additional benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, future-you can reuse and adapt that code rather than starting from scratch each time.
+Data visualisation benefits from the same advantages as statistical analysis when writing code rather than using point-and-click software -- reproducibility and transparency. The need for psychological researchers to work in reproducible ways has been well-documented and discussed in response to the replication crisis [e.g. @munafo2017manifesto] and we will not repeat those arguments here. However, there is an additional benefit to reproducibility that is less frequently acknowledged compared to the loftier goals of improving psychological science: if you write code to produce your plots, you can reuse and adapt that code in the future rather than starting from scratch each time.
 
 In addition to the benefits of reproducibility, using R for data visualisation gives the researcher almost total control over each element of the plot. Whilst this flexibility can seem daunting at first, the ability to write reusable code recipes (and use recipes created by others) is highly advantageous. The level of customisation and the professional outputs available using R has for instance lead news outlets such as the BBC [@BBC-R] and the New York Times [@NYT-R] adopting R as their preferred data visualisation tool.
 
@@ -70,7 +70,7 @@ f <- e + theme_minimal(base_family = "Times") + labs(subtitle = "Layer 6")
 a + b + c + d + e + f + plot_layout(nrow = 2)
 ```
 
-Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (th data points) to only visualise the line of best fit, simply by removing the layer that draws the data points (Figure  \@ref(fig:remove-layer)). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
+Importantly, each layer is independent and independently customisable. For example, the size, colour and position of each component can be adjusted, or one could, for example, remove the first geom (the data points) to only visualise the line of best fit, simply by removing the layer that draws the data points (Figure  \@ref(fig:remove-layer)). The use of layers makes it easy to build up complex plots step-by-step, and to adapt or extend plots from existing code.
 
 ```{r remove-layer, message=FALSE, echo=FALSE, fig.cap="Plot with scatterplot layer removed."}
 iris %>% ggplot(aes(Sepal.Length, Sepal.Width)) + 
@@ -163,7 +163,7 @@ install.packages(package_list)
 
 The R Markdown workbook available in the [online materials](https://osf.io/bj83f/files/)contains all the code in this tutorial and there is more information and links to additional resources for how to use R Markdown for reproducible reports in the additional resources. 
 
-The reason that the above install packages code is not included in the workbook is that every time you run the install command code it will install the latest version of the package and so leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document. 
+The reason that the above install packages code is not included in the workbook is that every time you run the install command code it will install the latest version of the package. Leaving this code in your script can lead you to unintentionally install a package update you didn't want. For this reason, avoid including install code in any script or Markdown document. 
 
 ## Preparing your data
 
@@ -171,7 +171,7 @@ Before you start visualizing your data, you need to get it into an appropriate f
 
 ### Data format
 
-The simulated lexical decision data is provided in a `csv` file rather than e.g., `xslx`. Functions exist in R to read many other types of data files, however, we recommend that you convert any `xlsx` spreadsheets to `csv` by using the `Save As` function in Microsoft Excel. The `csv` file format strips all formatting and only stores data in a single sheet and so is simpler for new users to import to R. You may wish to create a `csv` file that contains only the data you want to visualise, rather than a full, larger workbook. When working with your own data, any files you import should remove summary rows or additional notes and should only contains the rows and columns of data you want to plot.
+The simulated lexical decision data is provided in a `csv` file rather than e.g., `xslx`. Functions exist in R to read many other types of data files, however, we recommend that you convert any `xlsx` spreadsheets to `csv` by using the `Save As` function in Microsoft Excel. The `csv` file format strips all formatting and only stores data in a single sheet and so is simpler for new users to import to R. You may wish to create a `csv` file that contains only the data you want to visualise, rather than a full, larger workbook. When working with your own data, remove summary rows or additional notes from any files you import. All files should only contains the rows and columns of data you want to plot.
 
 ### Variable names
 

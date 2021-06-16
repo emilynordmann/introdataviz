@@ -120,7 +120,7 @@ ggplot(dat_long, aes(x = condition, y= rt)) +
 
 ### Grouped violin-boxplots
 
-As with previous plots, another variable can be mapped to `fill` for the violin-boxplot, however, simply adding `fill` to the mapping causes the different components of the plot to become misaligned because they have different default positions:
+As with previous plots, another variable can be mapped to `fill` for the violin-boxplot. However, simply adding `fill` to the mapping causes the different components of the plot to become misaligned because they have different default positions:
 
 ```{r viobox2, fig.cap="Grouped violin-boxplots without repositioning.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
@@ -130,7 +130,7 @@ ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .1)
 ```
 
-To rectify this we need to adjust the argument `position` for each of the misaligned layers. `position_dodge()` instructs R to move (dodge) the position of the plot component by the specified value - what value you need can sometimes take trial and error.
+To rectify this we need to adjust the argument `position` for each of the misaligned layers. `position_dodge()` instructs R to move (dodge) the position of the plot component by the specified value - finding what value you need can sometimes take trial and error.
 
 ```{r viobox3, fig.cap="Grouped violin-boxplots with repositioning.", warning = FALSE}
 ggplot(dat_long, aes(x = condition, y= rt, fill = language)) +
